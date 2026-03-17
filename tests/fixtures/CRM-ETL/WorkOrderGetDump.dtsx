@@ -1,0 +1,1855 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2021 9:46:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GCNMS-DPL14"
+  DTS:CreatorName="RBEIGCN\CLM1KOR"
+  DTS:DTSID="{00B43982-C851-4FC3-A3D9-390FB4EBFA04}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="WorkOrderGetDump"
+  DTS:PackageType="5"
+  DTS:VersionBuild="213"
+  DTS:VersionGUID="{39229670-8BA2-4DEF-942B-132301BDF2EC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0F05AE45-1DE0-47EC-A4D4-64D7785899A0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">WorkOrder</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{A61AC9AD-2629-404C-81AD-F065D3957833}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{A1324C33-7E1B-499B-9A11-2534C4E2A76E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C7C7D63D-F525-4097-B885-440F022FC376}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{04698DE5-6CFF-46E5-98ED-A833A367E8B5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\WorkOrder Extraction"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{125185F9-C70B-45EB-A2DA-425079D17E84}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="WorkOrder Extraction">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\WorkOrder Extraction\Delete WorkOrder Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B484EB8A-3C31-45FC-BCE4-D0D43CC41F98}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete WorkOrder Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_WorkOrder_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{D297ABAC-5047-4E30-8771-A94CA6E93B7D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Retrieving Data From Source to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Inserting Data To Work Order"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[WorkOrder]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[ccba_comments]"
+                          cachedDataType="wstr"
+                          cachedLength="2000"
+                          cachedName="ccba_comments"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_comments]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_comments]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_address1]"
+                          cachedDataType="wstr"
+                          cachedLength="250"
+                          cachedName="msdyn_address1"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_address1]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address1]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_address2]"
+                          cachedDataType="wstr"
+                          cachedLength="250"
+                          cachedName="msdyn_address2"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_address2]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address2]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_address3]"
+                          cachedDataType="wstr"
+                          cachedLength="250"
+                          cachedName="msdyn_address3"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_address3]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address3]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_city]"
+                          cachedDataType="wstr"
+                          cachedLength="80"
+                          cachedName="msdyn_city"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_city]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_city]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_country]"
+                          cachedDataType="wstr"
+                          cachedLength="80"
+                          cachedName="msdyn_country"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_country]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_country]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_datewindowend]"
+                          cachedDataType="dbDate"
+                          cachedName="msdyn_datewindowend"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_datewindowend]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_datewindowend]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_datewindowstart]"
+                          cachedDataType="dbDate"
+                          cachedName="msdyn_datewindowstart"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_datewindowstart]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_datewindowstart]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_latitude]"
+                          cachedDataType="r8"
+                          cachedName="msdyn_latitude"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_latitude]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_latitude]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_longitude]"
+                          cachedDataType="r8"
+                          cachedName="msdyn_longitude"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_longitude]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_longitude]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_postalcode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="msdyn_postalcode"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_postalcode]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_postalcode]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_timeclosed]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="msdyn_timeclosed"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_timeclosed]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_timeclosed]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[ccba_sapid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_sapid"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_sapid]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[ccba_plannergroup]"
+                          cachedDataType="wstr"
+                          cachedLength="25"
+                          cachedName="ccba_plannergroup"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_plannergrouptext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_plannergroup]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_serviceterritory]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="msdyn_serviceterritory"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceterritorytext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceterritory]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[ccba_equipmentmodel]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_equipmentmodel"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_equipmentmodeltext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_equipmentmodel]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[ccba_subject]"
+                          cachedDataType="wstr"
+                          cachedLength="500"
+                          cachedName="ccba_subject"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_subjecttext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_subject]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_customerasset]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="msdyn_customerasset"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_customerassettext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_customerasset]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_primaryincidenttype]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_primaryincidenttype"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_primaryincidenttypetext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_primaryincidenttype]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_priority]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_priority"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_prioritytext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_priority]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_serviceaccount]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_serviceaccount"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceaccounttext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceaccount]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_substatus]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_substatus"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_substatustext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_substatus]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[ccba_type]"
+                          cachedDataType="wstr"
+                          cachedLength="19"
+                          cachedName="ccba_type"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_typetext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_workordertype]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_workordertype"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_workordertypetext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_workordertype]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[msdyn_workordersummary]"
+                          cachedDataType="nText"
+                          cachedName="msdyn_workordersummary"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_workordersummary]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_workordersummary]" />
+                        <inputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].Columns[cdm_companycode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="cdm_companycode"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_plannergrouptext]"
+                          dataType="wstr"
+                          length="25"
+                          name="ccba_plannergrouptext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_plannergroup]"
+                          dataType="guid"
+                          name="ccba_plannergroup" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceterritorytext]"
+                          dataType="wstr"
+                          length="5"
+                          name="msdyn_serviceterritorytext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceterritory]"
+                          dataType="guid"
+                          name="msdyn_serviceterritory" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_equipmentmodeltext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_equipmentmodeltext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_equipmentmodel]"
+                          dataType="guid"
+                          name="ccba_equipmentmodel" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_subjecttext]"
+                          dataType="wstr"
+                          length="500"
+                          name="ccba_subjecttext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_subject]"
+                          dataType="guid"
+                          name="ccba_subject" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_typetext]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_typetext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_type]"
+                          dataType="i4"
+                          name="ccba_type" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ccba_comments]"
+                          dataType="wstr"
+                          length="2000"
+                          name="ccba_comments" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_address1]"
+                          dataType="wstr"
+                          length="250"
+                          name="msdyn_address1" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_address2]"
+                          dataType="wstr"
+                          length="250"
+                          name="msdyn_address2" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_address3]"
+                          dataType="wstr"
+                          length="250"
+                          name="msdyn_address3" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_city]"
+                          dataType="wstr"
+                          length="80"
+                          name="msdyn_city" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_country]"
+                          dataType="wstr"
+                          length="80"
+                          name="msdyn_country" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_customerassettext]"
+                          dataType="wstr"
+                          length="30"
+                          name="msdyn_customerassettext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_customerasset]"
+                          dataType="guid"
+                          name="msdyn_customerasset" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_datewindowend]"
+                          dataType="dbDate"
+                          name="msdyn_datewindowend" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_datewindowstart]"
+                          dataType="dbDate"
+                          name="msdyn_datewindowstart" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_latitude]"
+                          dataType="r8"
+                          name="msdyn_latitude" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_longitude]"
+                          dataType="r8"
+                          name="msdyn_longitude" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_postalcode]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_postalcode" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_primaryincidenttypetext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_primaryincidenttypetext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_primaryincidenttype]"
+                          dataType="guid"
+                          name="msdyn_primaryincidenttype" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_prioritytext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_prioritytext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_priority]"
+                          dataType="guid"
+                          name="msdyn_priority" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceaccounttext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_serviceaccounttext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceaccount]"
+                          dataType="guid"
+                          name="msdyn_serviceaccount" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_substatustext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_substatustext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_substatus]"
+                          dataType="guid"
+                          name="msdyn_substatus" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_timeclosed]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_timeclosed" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_workordersummary]"
+                          dataType="nText"
+                          name="msdyn_workordersummary" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_workordertypetext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_workordertypetext" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_workordertype]"
+                          dataType="guid"
+                          name="msdyn_workordertype" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ProcessingFlag]"
+                          dataType="wstr"
+                          length="11"
+                          name="ProcessingFlag" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[Crmrecordid]"
+                          dataType="guid"
+                          name="Crmrecordid" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                          dataType="guid"
+                          name="ownerid" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_servicerequest]"
+                          dataType="guid"
+                          name="msdyn_servicerequest" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycode]"
+                          dataType="guid"
+                          name="cdm_companycode" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycodetext" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Reading Work Order Data From Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[WorkOrder]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Connections[OleDbConnection]"
+                      connectionManagerID="{9756231E-BC44-4F1E-9515-002B7C56C5C7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_SOURCE_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_type]"
+                          length="19"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]"
+                          name="ccba_type"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_comments]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_comments]"
+                          length="2000"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_comments]"
+                          name="ccba_comments"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_address1]"
+                          length="250"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address1]"
+                          name="msdyn_address1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_address2]"
+                          length="250"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address2]"
+                          name="msdyn_address2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address3]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_address3]"
+                          length="250"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_address3]"
+                          name="msdyn_address3"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_city]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_city]"
+                          length="80"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_city]"
+                          name="msdyn_city"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_country]"
+                          length="80"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_country]"
+                          name="msdyn_country"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_datewindowend]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_datewindowend]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_datewindowend]"
+                          name="msdyn_datewindowend"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_datewindowstart]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_datewindowstart]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_datewindowstart]"
+                          name="msdyn_datewindowstart"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_latitude]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_latitude]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_latitude]"
+                          name="msdyn_latitude"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_longitude]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_longitude]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_longitude]"
+                          name="msdyn_longitude"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_postalcode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_postalcode]"
+                          length="20"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_postalcode]"
+                          name="msdyn_postalcode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_timeclosed]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_timeclosed]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_timeclosed]"
+                          name="msdyn_timeclosed"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_workordersummary]"
+                          dataType="nText"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_workordersummary]"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_workordersummary]"
+                          name="msdyn_workordersummary"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_sapid]"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]"
+                          name="ccba_sapid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_plannergroup]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_plannergroup]"
+                          length="25"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_plannergroup]"
+                          name="ccba_plannergroup"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceterritory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serviceterritory]"
+                          length="5"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceterritory]"
+                          name="msdyn_serviceterritory"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_equipmentmodel]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_equipmentmodel]"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_equipmentmodel]"
+                          name="ccba_equipmentmodel"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_subject]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_subject]"
+                          length="500"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[ccba_subject]"
+                          name="ccba_subject"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_customerasset]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_customerasset]"
+                          length="30"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_customerasset]"
+                          name="msdyn_customerasset"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_primaryincidenttype]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_primaryincidenttype]"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_primaryincidenttype]"
+                          name="msdyn_primaryincidenttype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_priority]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_priority]"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_priority]"
+                          name="msdyn_priority"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceaccount]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serviceaccount]"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceaccount]"
+                          name="msdyn_serviceaccount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_substatus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_substatus]"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_substatus]"
+                          name="msdyn_substatus"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_workordertype]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_workordertype]"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_workordertype]"
+                          name="msdyn_workordertype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          length="20"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          name="cdm_companycode"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_type]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_type" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_comments]"
+                          dataType="wstr"
+                          length="2000"
+                          name="ccba_comments" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_address1]"
+                          dataType="wstr"
+                          length="250"
+                          name="msdyn_address1" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_address2]"
+                          dataType="wstr"
+                          length="250"
+                          name="msdyn_address2" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_address3]"
+                          dataType="wstr"
+                          length="250"
+                          name="msdyn_address3" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_city]"
+                          dataType="wstr"
+                          length="80"
+                          name="msdyn_city" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_country]"
+                          dataType="wstr"
+                          length="80"
+                          name="msdyn_country" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_datewindowend]"
+                          dataType="dbDate"
+                          name="msdyn_datewindowend" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_datewindowstart]"
+                          dataType="dbDate"
+                          name="msdyn_datewindowstart" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_latitude]"
+                          dataType="r8"
+                          name="msdyn_latitude" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_longitude]"
+                          dataType="r8"
+                          name="msdyn_longitude" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_postalcode]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_postalcode" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_timeclosed]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_timeclosed" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_workordersummary]"
+                          dataType="nText"
+                          name="msdyn_workordersummary" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_plannergroup]"
+                          dataType="wstr"
+                          length="25"
+                          name="ccba_plannergroup" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serviceterritory]"
+                          dataType="wstr"
+                          length="5"
+                          name="msdyn_serviceterritory" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_equipmentmodel]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_equipmentmodel" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_subject]"
+                          dataType="wstr"
+                          length="500"
+                          name="ccba_subject" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_customerasset]"
+                          dataType="wstr"
+                          length="30"
+                          name="msdyn_customerasset" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_primaryincidenttype]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_primaryincidenttype" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_priority]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_priority" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serviceaccount]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_serviceaccount" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_substatus]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_substatus" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_workordertype]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_workordertype" />
+                        <externalMetadataColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycode" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_sapid]"
+                          name="ccba_sapid" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_type]"
+                          dataType="wstr"
+                          length="19"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_type]"
+                          name="ccba_type" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_comments]"
+                          dataType="wstr"
+                          length="2000"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_comments]"
+                          name="ccba_comments" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_address1]"
+                          dataType="wstr"
+                          length="250"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_address1]"
+                          name="msdyn_address1" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_address2]"
+                          dataType="wstr"
+                          length="250"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_address2]"
+                          name="msdyn_address2" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_address3]"
+                          dataType="wstr"
+                          length="250"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_address3]"
+                          name="msdyn_address3" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_city]"
+                          dataType="wstr"
+                          length="80"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_city]"
+                          name="msdyn_city" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_country]"
+                          dataType="wstr"
+                          length="80"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_country]"
+                          name="msdyn_country" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_datewindowend]"
+                          dataType="dbDate"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_datewindowend]"
+                          name="msdyn_datewindowend" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_datewindowstart]"
+                          dataType="dbDate"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_datewindowstart]"
+                          name="msdyn_datewindowstart" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_latitude]"
+                          dataType="r8"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_latitude]"
+                          name="msdyn_latitude" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_longitude]"
+                          dataType="r8"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_longitude]"
+                          name="msdyn_longitude" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_postalcode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_postalcode]"
+                          name="msdyn_postalcode" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_timeclosed]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_timeclosed]"
+                          name="msdyn_timeclosed" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_workordersummary]"
+                          dataType="nText"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_workordersummary]"
+                          name="msdyn_workordersummary" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_plannergroup]"
+                          dataType="wstr"
+                          length="25"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_plannergroup]"
+                          name="ccba_plannergroup" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serviceterritory]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serviceterritory]"
+                          name="msdyn_serviceterritory" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_equipmentmodel]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_equipmentmodel]"
+                          name="ccba_equipmentmodel" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_subject]"
+                          dataType="wstr"
+                          length="500"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_subject]"
+                          name="ccba_subject" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_customerasset]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_customerasset]"
+                          name="msdyn_customerasset" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_primaryincidenttype]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_primaryincidenttype]"
+                          name="msdyn_primaryincidenttype" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_priority]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_priority]"
+                          name="msdyn_priority" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serviceaccount]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serviceaccount]"
+                          name="msdyn_serviceaccount" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_substatus]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_substatus]"
+                          name="msdyn_substatus" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_workordertype]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_workordertype]"
+                          name="msdyn_workordertype" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          name="cdm_companycode" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+                  endId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+                  endId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\WorkOrder Extraction\Update Processing Flag"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3BB439B1-6D63-41BB-AF6D-9903AE70A28F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Processing Flag"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_WorkOrder_SetStatus]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\WorkOrder Extraction\WorkOrder Trim"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{a7854501-3502-4907-a97b-c54f42731ba5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="WorkOrder Trim"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_WorkOrder_Trim]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\WorkOrder Extraction.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{E44827AC-2698-4FAF-B243-CCA00A0C54C5}"
+          DTS:From="Package\WorkOrder Extraction\Delete WorkOrder Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\WorkOrder Extraction\Retrieving Data From Source to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\WorkOrder Extraction.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{C9FB364B-78BE-4693-80F7-0E6DAFBCA6C7}"
+          DTS:From="Package\WorkOrder Extraction\Retrieving Data From Source to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\WorkOrder Extraction\Update Processing Flag" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\WorkOrder Extraction.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{1D7C2576-6374-4312-9CA0-9E0923E1B019}"
+          DTS:From="Package\WorkOrder Extraction\Update Processing Flag"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\WorkOrder Extraction\WorkOrder Trim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\WorkOrder Transformation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{442A2FC6-B5F1-4E5B-81D1-2117E6542D38}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="WorkOrder Transformation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\WorkOrder Transformation\WorkOrder Transformation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9A523995-DC39-4C9F-9239-AC6D138642FF}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="WorkOrder Transformation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_WorkOrder_Transformation]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{FF27DABA-C556-4CA6-90C8-C94DF6C6CFCE}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\WorkOrder Extraction" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{8815709A-0A3D-4D5B-888D-C170EC314CE0}"
+      DTS:From="Package\WorkOrder Extraction"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\WorkOrder Transformation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{912AD1B7-D201-463D-BB7F-21B2F824674A}"
+      DTS:From="Package\WorkOrder Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{15C64D0A-0D71-4C23-9371-2AFF0B4A2328}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="562.709813721546,333.02532281903" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="544.118047887149,247.572963341913" />
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="166,72"
+          Size="166,114.666666666667"
+          Id="Package\Start"
+          TopLeft="18.1800596279182,80.2353407307306" />
+        <NodeLayout
+          Size="189.333333333334,42.6666666666667"
+          Id="Package\WorkOrder Extraction\Delete WorkOrder Data"
+          TopLeft="31.2847190241638,6.72778167396618" />
+        <NodeLayout
+          Size="197.333333333334,49.3333333333334"
+          Id="Package\WorkOrder Extraction\Retrieving Data From Source to Staging"
+          TopLeft="22.3958377803987,78.0289487852352" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\WorkOrder Extraction\Update Processing Flag"
+          TopLeft="26.9340244433844,159.474287576214" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\WorkOrder Extraction\WorkOrder Trim"
+          TopLeft="49.3467223830301,224.775320066237" />
+        <EdgeLayout
+          Id="Package\WorkOrder Extraction.PrecedenceConstraints[Constraint]"
+          TopLeft="123.506945068948,49.3944483406328">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.6345004446024"
+              Start="0,0"
+              End="0,21.1345004446024">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.1345004446024" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\WorkOrder Extraction.PrecedenceConstraints[Constraint 1]"
+          TopLeft="122.331597778558,127.362282118569">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.1120054576454"
+              Start="0,0"
+              End="0,24.6120054576454">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.6120054576454" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\WorkOrder Extraction.PrecedenceConstraints[Constraint 2]"
+          TopLeft="125.473706746541,202.140954242881">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.6343658233558"
+              Start="0,0"
+              End="0,15.1343658233558">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.1343658233558" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="234.666666666667,322.666666666667"
+          Size="234.666666666667,365.333333333334"
+          Id="Package\WorkOrder Extraction"
+          TopLeft="231.543133420316,22.261278614502" />
+        <NodeLayout
+          Size="150.666666666667,62.6666666666667"
+          Id="Package\WorkOrder Transformation\WorkOrder Transformation"
+          TopLeft="23.3571425910509,22.7127814677186" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="196,128.666666666667"
+          Size="196,171.333333333334"
+          Id="Package\WorkOrder Transformation"
+          TopLeft="514.612591982576,26.653250141321" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="184.180059627918,137.568674064064">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="47.3630737923978,67.3592712171047"
+              Start="0,0"
+              End="39.8630737923978,67.3592712171047">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="19.6815368961989,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.6815368961989,0"
+                    Point2="23.6815368961989,0"
+                    Point3="23.6815368961989,4" />
+                  <mssgle:LineSegment
+                    End="23.6815368961989,63.3592712171047" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.6815368961989,63.3592712171047"
+                    Point2="23.6815368961989,67.3592712171047"
+                    Point3="27.6815368961989,67.3592712171047" />
+                  <mssgle:LineSegment
+                    End="39.8630737923978,67.3592712171047" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="466.209800086983,204.927945281169">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48.4027918955933,-92.608028473181"
+              Start="0,0"
+              End="40.9027918955933,-92.608028473181">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="20.2013959477966,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.2013959477966,0"
+                    Point2="24.2013959477966,0"
+                    Point3="24.2013959477966,-4" />
+                  <mssgle:LineSegment
+                    End="24.2013959477966,-88.608028473181" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.2013959477966,-88.608028473181"
+                    Point2="24.2013959477966,-92.608028473181"
+                    Point3="28.2013959477966,-92.608028473181" />
+                  <mssgle:LineSegment
+                    End="40.9027918955933,-92.608028473181" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="613.698653268196,197.986583474654">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.5863798672589"
+              Start="0,0"
+              End="0,42.0863798672589">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.0863798672589" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="614.784714553816,290.23963000858">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.25843250106379,42.7856928104501"
+              Start="0,0"
+              End="8.25843250106379,35.2856928104501">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.3928464052251" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.3928464052251"
+                    Point2="0,21.3928464052251"
+                    Point3="4,21.3928464052251" />
+                  <mssgle:LineSegment
+                    End="4.25843250106379,21.3928464052251" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.25843250106379,21.3928464052251"
+                    Point2="8.25843250106379,21.3928464052251"
+                    Point3="8.25843250106379,25.3928464052251" />
+                  <mssgle:LineSegment
+                    End="8.25843250106379,35.2856928104501" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\WorkOrder Extraction\Retrieving Data From Source to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="220,42.6666666666667"
+          Id="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order"
+          TopLeft="169.999997466803,203.449996362031" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Derived Column"
+          TopLeft="172.166666852931,114.67719298529" />
+        <NodeLayout
+          Size="264,42.6666666666667"
+          Id="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source"
+          TopLeft="134.999997988344,25.6236849075465" />
+        <EdgeLayout
+          Id="Package\WorkOrder Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+          TopLeft="266.999997988344,68.2903515742132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-16.833331135413,46.3868414110768"
+              Start="0,0"
+              End="-16.833331135413,38.8868414110768">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.1934207055384" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.1934207055384"
+                    Point2="0,23.1934207055384"
+                    Point3="-4,23.1934207055384" />
+                  <mssgle:LineSegment
+                    End="-12.833331135413,23.1934207055384" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-12.833331135413,23.1934207055384"
+                    Point2="-16.833331135413,23.1934207055384"
+                    Point3="-16.833331135413,27.1934207055384" />
+                  <mssgle:LineSegment
+                    End="-16.833331135413,38.8868414110768" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\WorkOrder Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+          TopLeft="250.166666852931,157.343859651957">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="29.8333306138718,46.1061367100743"
+              Start="0,0"
+              End="29.8333306138718,38.6061367100743">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.0530683550372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.0530683550372"
+                    Point2="0,23.0530683550372"
+                    Point3="4,23.0530683550372" />
+                  <mssgle:LineSegment
+                    End="25.8333306138718,23.0530683550372" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.8333306138718,23.0530683550372"
+                    Point2="29.8333306138718,23.0530683550372"
+                    Point3="29.8333306138718,27.0530683550372" />
+                  <mssgle:LineSegment
+                    End="29.8333306138718,38.6061367100743" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To Work Order">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\WorkOrder Extraction\Retrieving Data From Source to Staging\Reading Work Order Data From Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

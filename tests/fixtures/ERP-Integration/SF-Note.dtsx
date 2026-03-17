@@ -1,0 +1,2358 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/11/2018 5:34:57 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MinderVM"
+  DTS:CreatorName="MinderVM\randyminder"
+  DTS:DTSID="{52696D30-9B3B-4582-BEA0-2EA72E5BEAA8}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.106"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SF-Note"
+  DTS:PackageType="5"
+  DTS:VersionBuild="275"
+  DTS:VersionGUID="{BE10BDAD-D572-4C9C-8C11-2280638709A4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F433ED0A-E515-478A-97BF-BD6274BE14E1}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="InsertUpdateRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">-1</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6BBBD1A8-9555-44BB-989D-D5B6A1B427EE}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;[&quot; + REPLACE( @[User::OdsStagingTableName] , &quot;.&quot;, &quot;-&quot; ) + &quot;]&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastUpdateColumn">
+      <DTS:VariableValue
+        DTS:DataType="8">[SF-Note]</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{64EC510C-5A5B-4FB0-8FFC-5DEA9A1ADF8B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;IF (Select Count(*) From &quot; + @[User::OdsStagingTableName] +&quot;) &gt; 0 BEGIN &#xA;DECLARE @LastUpdateDate datetime2(7) &#xA;Set @LastUpdateDate = (Select Max(LastModifiedDate) From &quot; + @[User::OdsStagingTableName] + &quot;) &#xA;&#xA;UPDATE dbo.LastUpdate SET LastUpdate = @LastUpdateDate  &#xA;WHERE TableName = '&quot; + @[User::LastUpdateColumn] + &quot;' END&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastUpdateQuery">
+      <DTS:VariableValue
+        DTS:DataType="8">IF (Select Count(*) From SF.Note) &gt; 0 BEGIN 
+DECLARE @LastUpdateDate datetime2(7) 
+Set @LastUpdateDate = (Select Max(LastModifiedDate) From SF.Note) 
+
+UPDATE dbo.LastUpdate SET LastUpdate = @LastUpdateDate  
+WHERE TableName = '[SF-Note]' END</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3216E81D-7EFA-400A-A164-6672DEB5159E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::OdsSchemaName] + &quot;.&quot; +  @[User::OdsTableName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OdsFullTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">SF.Note</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{959BB2F4-2B91-4086-B754-80E6C159A38A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="OdsRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9F4D23CC-9273-455F-B40D-0658C96F9E91}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OdsSchemaName">
+      <DTS:VariableValue
+        DTS:DataType="8">SF</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4730355C-904F-4C4A-987A-300356A4615E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::OdsStagingTableName] + &quot;Delete&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OdsStagingDeleteTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">SF.NoteDelete</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{034329C2-E9EC-4793-9B32-A5136BEFE537}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OdsStagingTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">SF.Note</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D31F6FE6-843A-424B-94B7-66458001B66A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OdsStagingViewName">
+      <DTS:VariableValue
+        DTS:DataType="8">SF.vwNote</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{141EC9D0-7121-431E-B56A-683831B833E9}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="OdsTableName">
+      <DTS:VariableValue
+        DTS:DataType="8">Note</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D928B8E-F1A0-4D51-AC0A-DC1BDD3BA090}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceLastUpdate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C897D9FE-5513-4247-B0D5-F0A53A327C38}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="SourceRowCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Find Rows to Upsert"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CEE5D28F-6D4A-473C-849A-6B2673FE13EA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Find Rows to Upsert"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:EventHandlers>
+        <DTS:EventHandler
+          DTS:refId="Package\Find Rows to Upsert.EventHandlers[OnPostExecute]"
+          DTS:CreationName="OnPostExecute"
+          DTS:DTSID="{436E06F3-34AA-489F-9D64-547EE11D15F9}"
+          DTS:EventID="7471174"
+          DTS:EventName="OnPostExecute"
+          DTS:LocaleID="-1">
+          <DTS:Variables>
+            <DTS:Variable
+              DTS:CreationName=""
+              DTS:Description="The propagate property of the event"
+              DTS:DTSID="{084A813E-D48B-496F-8FFE-54CD88799B22}"
+              DTS:IncludeInDebugDump="6789"
+              DTS:Namespace="System"
+              DTS:ObjectName="Propagate">
+              <DTS:VariableValue
+                DTS:DataType="11">-1</DTS:VariableValue>
+            </DTS:Variable>
+          </DTS:Variables>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\Find Rows to Upsert.EventHandlers[OnPostExecute]\Log Upsert"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Log Upsert"
+              DTS:DTSID="{6A983292-56C0-4D1F-8D69-9846602DA119}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:ObjectName="Log Upsert"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{1552D940-2878-42C0-899C-3BF7562C7F12}"
+                  SQLTask:SqlStatementSource="dbo.AddImportLog ?, 'Information', ?, 'Ods Upsert Operation', ?, ?, ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="System::PackageName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="System::StartTime"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="7"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="System::SourceName"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="User::InsertUpdateRowCount"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+        </DTS:EventHandler>
+      </DTS:EventHandlers>
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Find Rows to Upsert\Row Count"
+              componentClassID="Microsoft.RowCount"
+              contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+              name="Row Count">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable to hold the row count."
+                  name="VariableName">User::InsertUpdateRowCount</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Find Rows to Upsert\Row Count.Inputs[Row Count Input 1]"
+                  hasSideEffects="true"
+                  name="Row Count Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Find Rows to Upsert\Row Count.Outputs[Row Count Output 1]"
+                  name="Row Count Output 1"
+                  synchronousInputId="Package\Find Rows to Upsert\Row Count.Inputs[Row Count Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Find Rows to Upsert\Store Data in Staging Table"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Store Data in Staging Table"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[SL].[GLTran]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable">User::OdsStagingTableName</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">4</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Find Rows to Upsert\Store Data in Staging Table.Connections[OleDbConnection]"
+                  connectionManagerID="{48D6474F-33B4-491A-AA80-968C3B109D74}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OdsStaging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="Id"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Id]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[OwnerId]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="OwnerId"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[OwnerId]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[OwnerId]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[IsDeleted]"
+                      cachedDataType="bool"
+                      cachedName="IsDeleted"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[IsDeleted]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[IsDeleted]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[CreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatedDate"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[CreatedDate]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[CreatedById]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="CreatedById"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedById]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[CreatedById]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[LastModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LastModifiedDate"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedDate]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[LastModifiedDate]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[LastModifiedById]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="LastModifiedById"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedById]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[LastModifiedById]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[SystemModstamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SystemModstamp"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[SystemModstamp]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[SystemModstamp]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[ParentId]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="ParentId"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[ParentId]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[ParentId]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[IsPrivate]"
+                      cachedDataType="bool"
+                      cachedName="IsPrivate"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[IsPrivate]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[IsPrivate]" />
+                    <inputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].Columns[Body]"
+                      cachedDataType="nText"
+                      cachedName="Body"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[Body]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Body]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[IsDeleted]"
+                      dataType="ui1"
+                      name="IsDeleted" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[CreatedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="CreatedById" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="LastModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[LastModifiedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="LastModifiedById" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      name="SystemModstamp" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[ParentId]"
+                      dataType="wstr"
+                      length="18"
+                      name="ParentId" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="80"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[IsPrivate]"
+                      dataType="ui1"
+                      name="IsPrivate" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[Body]"
+                      dataType="nText"
+                      name="Body" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input].ExternalColumns[User_Owner_UNITY_Agent_ID__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="User_Owner_UNITY_Agent_ID__c" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Find Rows to Upsert\Store Data in Staging Table.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Find Rows to Upsert\Store Data in Staging Table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\Store Data in Staging Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Find Rows to Upsert\Store Data in Staging Table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Find Rows to Upsert\TF SalesForce Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="SalesForce.com Source;Pragmatic Works, Inc; Task Factory (c) 2009 - 2016 Pragmatic Works, Inc; http://www.pragmaticworks.com;support@pragmaticworks.com"
+              description="Retrieves data from SalesForce.com objects"
+              name="TF SalesForce Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows returned in each batch from SalesForce.com"
+                  name="BatchSize">500</property>
+                <property
+                  dataType="System.String"
+                  description="The statement used to query data from SalesForce.com"
+                  expressionType="Notify"
+                  name="QueryStatement">SELECT 
+ 	Id, 
+	IsDeleted, 
+	ParentId, 
+	Title, 
+	IsPrivate, 
+	Body, 
+	OwnerId, 
+	CreatedDate, 
+	CreatedById, 
+	LastModifiedDate, 
+	LastModifiedById, 
+	SystemModstamp 
+ FROM 
+	Note
+WHERE LastModifiedDate &gt; &lt;@User::SourceLastUpdate&gt;	</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the SalesForce.com object"
+                  expressionType="Notify"
+                  name="SalesForceObjectName">Note</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Include deleted records in source data"
+                  expressionType="Notify"
+                  name="IncludeDeleted">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Set to true if a custom query is being used"
+                  expressionType="Notify"
+                  name="UseQuery">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Set to true if the local dates should be converted to UTC before being used in a where statement"
+                  expressionType="Notify"
+                  name="ConvertDatesToUTC">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">PW.TaskFactory.SalesForceSource</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Find Rows to Upsert\TF SalesForce Source.Connections[SALESFORCE]"
+                  connectionManagerID="{AAF7733F-D923-47D2-AD17-0D06B6E14E5A}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[SalesForce]"
+                  description="Connection to the SalesForce.com account"
+                  name="SALESFORCE" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data]"
+                  name="SalesForce Data">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[Id]"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[OwnerId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[OwnerId]"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[OwnerId]"
+                      name="OwnerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[IsDeleted]"
+                      dataType="bool"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[IsDeleted]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[IsDeleted]"
+                      name="IsDeleted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[CreatedDate]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[CreatedDate]"
+                      name="CreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[CreatedById]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[CreatedById]"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[CreatedById]"
+                      name="CreatedById"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[LastModifiedDate]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[LastModifiedDate]"
+                      name="LastModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[LastModifiedById]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[LastModifiedById]"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[LastModifiedById]"
+                      name="LastModifiedById"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[SystemModstamp]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[SystemModstamp]"
+                      name="SystemModstamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[ParentId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[ParentId]"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[ParentId]"
+                      name="ParentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[Title]"
+                      length="80"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[IsPrivate]"
+                      dataType="bool"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[IsPrivate]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[IsPrivate]"
+                      name="IsPrivate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Body]"
+                      dataType="nText"
+                      errorOrTruncationOperation="SalesForce"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[Body]"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].Columns[Body]"
+                      name="Body"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[IsDeleted]"
+                      dataType="bool"
+                      name="IsDeleted" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[CreatedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="CreatedById" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="LastModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[LastModifiedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="LastModifiedById" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      name="SystemModstamp" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[ParentId]"
+                      dataType="wstr"
+                      length="18"
+                      name="ParentId" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="80"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[IsPrivate]"
+                      dataType="bool"
+                      name="IsPrivate" />
+                    <externalMetadataColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data].ExternalColumns[Body]"
+                      dataType="nText"
+                      name="Body" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output]"
+                  isErrorOut="true"
+                  name="SalesForce Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ErrorDescription]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ErrorDescription]"
+                      name="ErrorDescription" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[OwnerId]"
+                      name="OwnerId" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[IsDeleted]"
+                      dataType="bool"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[IsDeleted]"
+                      name="IsDeleted" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[CreatedDate]"
+                      name="CreatedDate" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[CreatedById]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[CreatedById]"
+                      name="CreatedById" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[LastModifiedDate]"
+                      name="LastModifiedDate" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[LastModifiedById]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[LastModifiedById]"
+                      name="LastModifiedById" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[SystemModstamp]"
+                      name="SystemModstamp" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ParentId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[ParentId]"
+                      name="ParentId" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[Title]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[IsPrivate]"
+                      dataType="bool"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[IsPrivate]"
+                      name="IsPrivate" />
+                    <outputColumn
+                      refId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[Body]"
+                      dataType="nText"
+                      lineageId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Error Output].Columns[Body]"
+                      name="Body" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Find Rows to Upsert.Paths[Row Count Output 1]"
+              endId="Package\Find Rows to Upsert\Store Data in Staging Table.Inputs[OLE DB Destination Input]"
+              name="Row Count Output 1"
+              startId="Package\Find Rows to Upsert\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Find Rows to Upsert.Paths[SalesForce Data]"
+              endId="Package\Find Rows to Upsert\Row Count.Inputs[Row Count Input 1]"
+              name="SalesForce Data"
+              startId="Package\Find Rows to Upsert\TF SalesForce Source.Outputs[SalesForce Data]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Get LastUpdate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{815316F7-9F01-45D4-B5AC-ACDA78E1B9E8}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get LastUpdate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{48D6474F-33B4-491A-AA80-968C3B109D74}"
+          SQLTask:SqlStatementSource="Select LastUpdate &#xA;From dbo.LastUpdate&#xA;Where TableName = ?"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="LastUpdate"
+            SQLTask:DtsVariableName="User::SourceLastUpdate" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::LastUpdateColumn"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Log Success"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{72F78C29-7292-41B7-AF0C-D0E5F2714551}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Log Success"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{1552D940-2878-42C0-899C-3BF7562C7F12}"
+          SQLTask:SqlStatementSource="dbo.AddImportLog ?, 'Package Success', ?, 'Package Executed Successfully', ?, ?, 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::StartTime"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="7"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="3"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="System::TaskName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate Staging Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D0B74935-16BA-4D5E-95FB-EEC7042442CB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate Staging Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{48D6474F-33B4-491A-AA80-968C3B109D74}"
+          SQLTask:SqlStatementSource="Declare @SqlStatement nvarchar(100) = 'Truncate Table ' + ?&#xA;&#xA;exec sp_executesql @SqlStatement" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::OdsStagingTableName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="129"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update LastUpdate Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E2B6404D-4DAC-4830-9336-30D3BE1BE057}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update LastUpdate Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{48D6474F-33B4-491A-AA80-968C3B109D74}"
+          SQLTask:SqlStmtSourceType="Variable"
+          SQLTask:SqlStatementSource="User::LastUpdateQuery" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Upsert Ods"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{5E10C280-AA85-4A68-8091-06341AAF90A0}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Upsert Ods"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Upsert Ods\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable">User::OdsStagingViewName</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upsert Ods\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{48D6474F-33B4-491A-AA80-968C3B109D74}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OdsStaging]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[OwnerId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OwnerId]"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[OwnerId]"
+                      name="OwnerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsDeleted]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsDeleted]"
+                      name="IsDeleted"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]"
+                      name="CreatedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedDate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastModifiedDate]"
+                      name="LastModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SystemModstamp]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[SystemModstamp]"
+                      name="SystemModstamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[ParentId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ParentId]"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[ParentId]"
+                      name="ParentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      length="80"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPrivate]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPrivate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPrivate]"
+                      name="IsPrivate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Body]"
+                      dataType="nText"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Body]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Body]"
+                      name="Body"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnityAgentId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UnityAgentId]"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnityAgentId]"
+                      name="UnityAgentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastUpdate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastUpdate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastUpdate]"
+                      name="LastUpdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImportDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImportDate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImportDate]"
+                      name="ImportDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedById]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedById]"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedById]"
+                      name="CreatedById"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastModifiedById]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedById]"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastModifiedById]"
+                      name="LastModifiedById"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsDeleted]"
+                      dataType="ui1"
+                      name="IsDeleted" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="LastModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      name="SystemModstamp" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ParentId]"
+                      dataType="wstr"
+                      length="18"
+                      name="ParentId" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="80"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPrivate]"
+                      dataType="ui1"
+                      name="IsPrivate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Body]"
+                      dataType="nText"
+                      name="Body" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[UnityAgentId]"
+                      dataType="wstr"
+                      length="18"
+                      name="UnityAgentId" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastUpdate]"
+                      dataType="dbTimeStamp"
+                      name="LastUpdate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ImportDate]"
+                      dataType="dbTimeStamp"
+                      name="ImportDate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[CreatedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="CreatedById" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastModifiedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="LastModifiedById" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OwnerId]"
+                      name="OwnerId" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ParentId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ParentId]"
+                      name="ParentId" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPrivate]"
+                      dataType="ui1"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPrivate]"
+                      name="IsPrivate" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Body]"
+                      dataType="nText"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Body]"
+                      name="Body" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsDeleted]"
+                      dataType="ui1"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsDeleted]"
+                      name="IsDeleted" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedDate]"
+                      name="CreatedDate" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedById]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[CreatedById]"
+                      name="CreatedById" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastModifiedDate]"
+                      name="LastModifiedDate" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastModifiedById]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastModifiedById]"
+                      name="LastModifiedById" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SystemModstamp]"
+                      name="SystemModstamp" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UnityAgentId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[UnityAgentId]"
+                      name="UnityAgentId" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastUpdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastUpdate]"
+                      name="LastUpdate" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImportDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ImportDate]"
+                      name="ImportDate" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upsert Ods\TF Upsert Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Upsert Destinaton; Pragmatic Works, Inc; Task Factory (c) 2009 - 2016 Pragmatic Works, Inc; http://www.pragmaticworks.com;support@pragmaticworks.com"
+              description="The Upsert Destination takes input data coming from the pipeline and then conditionally inserts, updates or deletes data from the destination."
+              name="TF Upsert Destination"
+              usesDispositions="true"
+              version="13">
+              <properties>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="DESTINATION_TABLE_NAME"></property>
+                <property
+                  dataType="System.Boolean"
+                  expressionType="Notify"
+                  name="ENABLE_IDENTITY_INSERT">false</property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="INSERT_ROWS_COUNT_VARIABLE">&lt;Select Variable&gt;</property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="UPDATE_ROWS_COUNT_VARIABLE">&lt;Select Variable&gt;</property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="COMMAND_TIMEOUT">0</property>
+                <property
+                  dataType="System.Int32"
+                  expressionType="Notify"
+                  name="UPDATE_METHOD"
+                  typeConverter="PW.TaskFactory.Enums+UpsertUpdateMethod">1</property>
+                <property
+                  dataType="System.Boolean"
+                  expressionType="Notify"
+                  name="ACTION_UPDATE">true</property>
+                <property
+                  dataType="System.Boolean"
+                  expressionType="Notify"
+                  name="ACTION_INSERT">true</property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="POST_UPDATE_COLUMN"></property>
+                <property
+                  dataType="System.Boolean"
+                  expressionType="Notify"
+                  name="TURN_OFF_INTERNAL_TRANSACTION">false</property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="ROW_FLAG_COLUMN"></property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="ROW_FLAG_COLUMN_INSERT_VALUE"></property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="ROW_FLAG_COLUMN_DELETE_VALUE"></property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="ROW_FLAG_COLUMN_REJECT_VALUE"></property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="ROW_FLAG_COLUMN_UPDATE_VALUE"></property>
+                <property
+                  dataType="System.String"
+                  expressionType="Notify"
+                  name="OpenRowsetVariable">User::OdsFullTableName</property>
+                <property
+                  dataType="System.Int32"
+                  expressionType="Notify"
+                  name="AccessMode"
+                  typeConverter="PW.TaskFactory.Enums+UpsertAccessModeEnum">1</property>
+                <property
+                  dataType="System.Int32"
+                  expressionType="Notify"
+                  name="UPSERT_METHOD"
+                  typeConverter="PW.TaskFactory.Enums+UpsertMethod">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates the Upsert destination will use a custom definition for it's temp table creation"
+                  expressionType="Notify"
+                  name="Use Custom Temp Table">false</property>
+                <property
+                  dataType="System.String"
+                  description="Definition of the custom temp table script"
+                  expressionType="Notify"
+                  name="Custom Temp Table Definition"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Use a merge statement for the insert and updates instead of two seperate insert and update statements"
+                  expressionType="Notify"
+                  name="Use Merge Statement">false</property>
+                <property
+                  dataType="System.String"
+                  description="The script to run before each buffer is sent to the destination"
+                  expressionType="Notify"
+                  name="Before Script"></property>
+                <property
+                  dataType="System.String"
+                  description="The script to run after each buffer is sent to the destination"
+                  expressionType="Notify"
+                  name="After Script"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Set to true if you want the component to fail if the before script throws an exception."
+                  expressionType="Notify"
+                  name="Fail Component If Before Script Throws Exception">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Set to true if you want the component to fail if the after script throws an exception."
+                  expressionType="Notify"
+                  name="Fail Component If After Script Throws Exception">false</property>
+                <property
+                  dataType="System.String"
+                  description="Allows you to set a table hint for the destination table (e.g. NOLOCK - SNAPSHOT)."
+                  expressionType="Notify"
+                  name="Table Hint"></property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">PW.TaskFactory.UpsertDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upsert Ods\TF Upsert Destination.Connections[DestinationConnection]"
+                  connectionManagerID="{E3C25D6C-F253-41F0-83D3-0D2C191B2571}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[OdsProduction-AdoNet]"
+                  description="Connection for the destination"
+                  name="DestinationConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input]"
+                  errorOrTruncationOperation="Error or Truncation"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="Id"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[Id]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">Id</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">true</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[IsDeleted]"
+                      cachedDataType="ui1"
+                      cachedName="IsDeleted"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[IsDeleted]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsDeleted]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">IsDeleted</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[ParentId]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="ParentId"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[ParentId]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[ParentId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">ParentId</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[Title]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Title]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">Title</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[IsPrivate]"
+                      cachedDataType="ui1"
+                      cachedName="IsPrivate"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[IsPrivate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPrivate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">IsPrivate</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[Body]"
+                      cachedDataType="nText"
+                      cachedName="Body"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[Body]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[Body]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">Body</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[OwnerId]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="OwnerId"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[OwnerId]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[OwnerId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">OwnerId</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[CreatedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatedDate"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[CreatedDate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedDate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">CreatedDate</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[LastModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LastModifiedDate"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[LastModifiedDate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">LastModifiedDate</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[SystemModstamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="SystemModstamp"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[SystemModstamp]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[SystemModstamp]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">SystemModstamp</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[UnityAgentId]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="UnityAgentId"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[UnityAgentId]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[UnityAgentId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">UnityAgentId</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[LastUpdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="LastUpdate"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[LastUpdate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastUpdate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">LastUpdate</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[ImportDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ImportDate"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[ImportDate]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[ImportDate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">ImportDate</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[CreatedById]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="CreatedById"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[CreatedById]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[CreatedById]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">CreatedById</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].Columns[LastModifiedById]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="LastModifiedById"
+                      externalMetadataColumnId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[LastModifiedById]"
+                      lineageId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastModifiedById]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Mapped Column for Destination"
+                          name="DestinationColumn">LastModifiedById</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column A Key Column"
+                          name="IsKeyColumn">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Is Column An Identity Column"
+                          name="IsIdentityColumn">false</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[RowId]"
+                      dataType="i4"
+                      name="RowId" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[IsDeleted]"
+                      dataType="ui1"
+                      name="IsDeleted" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[ParentId]"
+                      dataType="wstr"
+                      length="18"
+                      name="ParentId" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="80"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[IsPrivate]"
+                      dataType="ui1"
+                      name="IsPrivate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[Body]"
+                      dataType="nText"
+                      name="Body" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      name="OwnerId" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[CreatedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="CreatedById" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[LastModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="LastModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[LastModifiedById]"
+                      dataType="wstr"
+                      length="18"
+                      name="LastModifiedById" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[SystemModstamp]"
+                      dataType="dbTimeStamp"
+                      name="SystemModstamp" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[UnityAgentId]"
+                      dataType="wstr"
+                      length="18"
+                      name="UnityAgentId" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[LastUpdate]"
+                      dataType="dbTimeStamp"
+                      name="LastUpdate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[ImportDate]"
+                      dataType="dbTimeStamp"
+                      name="ImportDate" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp"
+                      name="ValidFrom" />
+                    <externalMetadataColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input].ExternalColumns[ValidTo]"
+                      dataType="dbTimeStamp"
+                      name="ValidTo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upsert Ods\TF Upsert Destination.Outputs[Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error Output"
+                  synchronousInputId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upsert Ods\TF Upsert Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upsert Ods\TF Upsert Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Upsert Ods\TF Upsert Destination.Outputs[Error Output].Columns[ErrorDescription]"
+                      dataType="wstr"
+                      length="1024"
+                      lineageId="Package\Upsert Ods\TF Upsert Destination.Outputs[Error Output].Columns[ErrorDescription]"
+                      name="ErrorDescription" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Upsert Ods.Paths[OLE DB Source Output]"
+              endId="Package\Upsert Ods\TF Upsert Destination.Inputs[Input]"
+              name="OLE DB Source Output"
+              startId="Package\Upsert Ods\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C5CC62B2-3F72-40AF-9BA1-9DD393B3C6FF}"
+      DTS:From="Package\Get LastUpdate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Truncate Staging Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6F035BB2-4274-472B-9822-EE887D1E8374}"
+      DTS:From="Package\Truncate Staging Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Find Rows to Upsert" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{0E15A9EE-501A-4A26-9C6F-7B334B2C1FDD}"
+      DTS:From="Package\Find Rows to Upsert"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Upsert Ods" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{F01CF705-6C03-4AE2-BCD8-FB181427C6EF}"
+      DTS:From="Package\Upsert Ods"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Update LastUpdate Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{C74A641E-059F-4E68-85B0-866B234151B2}"
+      DTS:From="Package\Update LastUpdate Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Log Success" />
+  </DTS:PrecedenceConstraints>
+  <DTS:EventHandlers>
+    <DTS:EventHandler
+      DTS:refId="Package.EventHandlers[OnError]"
+      DTS:CreationName="OnError"
+      DTS:DTSID="{2C113CC0-E858-4926-BBFE-CC014B44861D}"
+      DTS:EventID="3407923"
+      DTS:EventName="OnError"
+      DTS:LocaleID="-1">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:Description="The propagate property of the event"
+          DTS:DTSID="{74DC3F08-E046-446D-AED7-B9A0D40CE20B}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="System"
+          DTS:ObjectName="Propagate">
+          <DTS:VariableValue
+            DTS:DataType="11">-1</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package.EventHandlers[OnError]\Log Error"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{AB28237B-CD4A-447A-AE2E-59825648F327}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Log Error"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{1552D940-2878-42C0-899C-3BF7562C7F12}"
+              SQLTask:SqlStatementSource="dbo.AddImportLog ?, 'Error', ?, ?, ?, ?, 0" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::ErrorDescription"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="System::SourceName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="4"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::StartTime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:EventHandler>
+  </DTS:EventHandlers>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="174,42"
+          Id="Package\Find Rows to Upsert"
+          TopLeft="44.5238095238096,251.857142857142" />
+        <NodeLayout
+          Size="152,42"
+          Id="Package\Get LastUpdate"
+          TopLeft="59.5,50.047619047619" />
+        <NodeLayout
+          Size="136,42"
+          Id="Package\Log Success"
+          TopLeft="62.5,594.5" />
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Truncate Staging Table"
+          TopLeft="45.142857142857,145.119047619048" />
+        <NodeLayout
+          Size="198,42"
+          Id="Package\Update LastUpdate Table"
+          TopLeft="33.928571428571,485.833333333333" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Upsert Ods"
+          TopLeft="63.25,370.249999999999" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="137.321428571428,92.047619047619">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.071428571429"
+              Start="0,0"
+              End="0,45.571428571429">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.571428571429" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="135.333333333333,187.119047619048">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.7380952380943"
+              Start="0,0"
+              End="0,57.2380952380943">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.2380952380943" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="130.136904761905,293.857142857142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,76.3928571428574"
+              Start="0,0"
+              End="0,68.8928571428574">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.8928571428574" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="130.839285714285,412.249999999999">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.5833333333336"
+              Start="0,0"
+              End="0,66.0833333333336">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.0833333333336" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="131.714285714285,527.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.666666666667"
+              Start="0,0"
+              End="0,59.166666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.166666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <DtsEventHandler
+    design-time-name="Package.EventHandlers[OnError]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="122.5,42"
+          Id="Package.EventHandlers[OnError]\Log Error"
+          TopLeft="328.5,80" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <TaskHost
+    design-time-name="Package\Find Rows to Upsert">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="208,42"
+          Id="Package\Find Rows to Upsert\Store Data in Staging Table"
+          TopLeft="193.5,298.833333333333" />
+        <NodeLayout
+          Size="130.5,42"
+          Id="Package\Find Rows to Upsert\Row Count"
+          TopLeft="234.166666666667,189.166666666667" />
+        <NodeLayout
+          Size="179.5,42"
+          Id="Package\Find Rows to Upsert\TF SalesForce Source"
+          TopLeft="207.125,80.75" />
+        <EdgeLayout
+          Id="Package\Find Rows to Upsert.Paths[SalesForce Data]"
+          TopLeft="298.145833333333,122.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.416666666667"
+              Start="0,0"
+              End="0,58.916666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.916666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Find Rows to Upsert.Paths[Row Count Output 1]"
+          TopLeft="298.458333333333,231.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.666666666666"
+              Start="0,0"
+              End="0,60.166666666666">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.166666666666" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <DtsEventHandler
+    design-time-name="Package\Find Rows to Upsert.EventHandlers[OnPostExecute]">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="130,42"
+          Id="Package\Find Rows to Upsert.EventHandlers[OnPostExecute]\Log Upsert"
+          TopLeft="742,174" />
+      </GraphLayout>
+    </LayoutInfo>
+  </DtsEventHandler>
+  <PipelineComponentMetadata
+    design-time-name="Package\Find Rows to Upsert\Store Data in Staging Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Upsert Ods">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="181,42"
+          Id="Package\Upsert Ods\TF Upsert Destination"
+          TopLeft="518,305" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Upsert Ods\OLE DB Source"
+          TopLeft="528.666666666667,184.5" />
+        <EdgeLayout
+          Id="Package\Upsert Ods.Paths[OLE DB Source Output]"
+          TopLeft="606.083333333333,226.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,78.5"
+              Start="0,0"
+              End="0,71">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upsert Ods\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

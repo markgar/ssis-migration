@@ -1,0 +1,2959 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/21/2022 5:13:02 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-FCCA3HG"
+  DTS:CreatorName="DESKTOP-FCCA3HG\sai shiva pothu"
+  DTS:DTSID="{03D8DA81-7F64-43A9-8C81-5C70F802E02E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{0C530FA9-3065-4B6B-AA2C-2B1894C2EE6E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{560C89C0-4546-447A-A4E7-0CB6F881D3A0}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">product</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{3dcc2f7e-2394-4e98-aecb-ac890304cc32}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{7438242a-cfeb-4a53-a110-8cc213c3f91d}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D5CA68EB-E492-45CB-AB9F-6C0591F8FACB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_ProductCategoryAssignment_Transformation]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{8dc0e2dd-f022-40ae-9e31-024eee527b30}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{0d2b5212-76d7-479c-87bf-935b90f164d2}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\UpdateProduct_ProductCategoryAssignment"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{105B0BF4-17D9-4C4C-9780-8FACAD4614FE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="UpdateProduct_ProductCategoryAssignment">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{9EF221CE-3AEF-432F-AE8C-30D21F96225D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Get Product Data"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[sp_Product_ProductCategoryAssignment_Load]</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[productid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].ExternalColumns[productid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[productid]"
+                          name="productid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[ccba_functionalproductgroup]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_functionalproductgroup]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[ccba_functionalproductgroup]"
+                          name="ccba_functionalproductgroup"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].ExternalColumns[productid]"
+                          dataType="guid"
+                          name="productid" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_functionalproductgroup]"
+                          dataType="guid"
+                          name="ccba_functionalproductgroup" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[productid]"
+                          dataType="guid"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[productid]"
+                          name="productid" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[ccba_functionalproductgroup]"
+                          dataType="guid"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[ccba_functionalproductgroup]"
+                          name="ccba_functionalproductgroup" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Product_Error"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Product_Error]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].Columns[productid]"
+                          cachedDataType="guid"
+                          cachedName="productid"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].ExternalColumns[productid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[productid]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errorcolumn]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorColumn]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].Columns[ErrorMessage]"
+                          cachedDataType="wstr"
+                          cachedLength="2048"
+                          cachedName="ErrorMessage"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errordescription]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorMessage]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].ExternalColumns[productid]"
+                          dataType="guid"
+                          name="productid" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errorcolumn]"
+                          dataType="wstr"
+                          length="300"
+                          name="Errorcolumn" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errordescription]"
+                          dataType="nText"
+                          name="Errordescription" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errordatetime]"
+                          dataType="dbTimeStamp"
+                          name="Errordatetime" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Product_Success"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Product_Success]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Inputs[OLE DB Destination Input].Columns[productid]"
+                          cachedDataType="guid"
+                          cachedName="productid"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Inputs[OLE DB Destination Input].ExternalColumns[productid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[productid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Inputs[OLE DB Destination Input].ExternalColumns[productid]"
+                          dataType="guid"
+                          name="productid" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Inputs[OLE DB Destination Input].ExternalColumns[Createddatetime]"
+                          dataType="dbTimeStamp"
+                          name="Createddatetime" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2021 KingswaySoft Inc."
+                  description="Populate data into Microsoft Dynamics 365 CE/CRM."
+                  name="Update Product"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Destination entity to write data."
+                      expressionType="Notify"
+                      name="DestinationEntity">product</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how data is written to CDS/Dynamics CRM server."
+                      name="ActionType"
+                      typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.DestinationActionType">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the values of CDS/CRM lookup fields should be removed if the reference records cannot be found. "
+                      expressionType="Notify"
+                      name="RemoveUnresolvableReferences">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether duplicate detection should be enabled when creating or updating CDS/CRM records. Duplicate records are determined by the duplicate detection rules and settings defined in CDS or Microsoft Dynamics CRM server."
+                      expressionType="Notify"
+                      name="EnableSystemDuplicateDetection">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the matching criteria to be used when performing an update or upsert. "
+                      expressionType="Notify"
+                      name="RecordMatchingCriteria"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.RecordMatchingCriteria">1</property>
+                    <property
+                      dataType="System.String"
+                      description="Specify the key fields to be used to determine the matching records that exist in CDS/CRM for either Upsert/Update action or source duplicate optimization."
+                      expressionType="Notify"
+                      name="RecordMatchingKeyFields"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to ignore those NULL-valued fields."
+                      expressionType="Notify"
+                      name="IgnoreNullValuedFields">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to ignore those fields that have no value changes in the target system. "
+                      expressionType="Notify"
+                      name="IgnoreUnchangedFields">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specify whether to remove those invalid characters before writing to CDS/CRM."
+                      expressionType="Notify"
+                      name="RemoveInvalidCharacters">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specify the flag field(s) that are used to track the source of changes. The field(s) will not posted to CDS/CRM server unless there are changes to other fields if specified. &quot;Ignore Unchange Fields&quot; option is required in order for the specified flag field(s) to work. "
+                      expressionType="Notify"
+                      name="ChangeFlagFields"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies what action will be taken when multiple matches are found with Upsert action."
+                      expressionType="Notify"
+                      name="HandlingOfMultipleMatches"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.HandlingOfMultipleMatches">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify whether to use optimizations when there are duplicate records form the source system."
+                      expressionType="Notify"
+                      name="OptimizationOnSourceDuplicates"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.OptimizationOnSourceDuplicates">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Workflow or action to be executed."
+                      expressionType="Notify"
+                      name="WorkflowAction"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of records to be sent to CDS/Dynamics CRM server in each service call."
+                      expressionType="Notify"
+                      name="BatchSize">100</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the total number or concurrent threads to write to CDS/CRM server simultaneously. "
+                      expressionType="Notify"
+                      name="ConcurrentWritingThreadsInTotal">20</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether datetime values should be sent to CDS/CRM server in UTC format."
+                      expressionType="Notify"
+                      name="SendDateTimeInUtcFormat">false</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationComponent</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Connections[DynamicsCRM]"
+                      connectionManagerID="{5EE0A524-E239-4EAD-A980-FF15089AA06D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_CONNECTION]"
+                      description="Dynamics CRM Connection Manager"
+                      name="DynamicsCRM" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="RedirectRow"
+                      hasSideEffects="true"
+                      name="Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].Columns[ccba_functionalproductgroup]"
+                          cachedDataType="guid"
+                          cachedName="ccba_functionalproductgroup"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_functionalproductgroup]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[ccba_functionalproductgroup]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].Columns[productid]"
+                          cachedDataType="guid"
+                          cachedName="productid"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[productid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output].Columns[productid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_bool_nonvaluateditem]"
+                          dataType="bool"
+                          name="ccba_bool_nonvaluateditem">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_functionalproductgroup]"
+                          dataType="guid"
+                          name="ccba_functionalproductgroup">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">ccba_functionalproductgroup</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_lkp_brandid]"
+                          dataType="guid"
+                          name="ccba_lkp_brandid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">ccba_productattributevalue</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_equipmenttype]"
+                          dataType="i4"
+                          name="ccba_os_equipmenttype">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_fieldserviceactivity]"
+                          dataType="i4"
+                          name="ccba_os_fieldserviceactivity">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_packsize]"
+                          dataType="i4"
+                          name="ccba_os_packsize">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_productlifecyclestate]"
+                          dataType="i4"
+                          name="ccba_os_productlifecyclestate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_producttype]"
+                          dataType="i4"
+                          name="ccba_os_producttype">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_redmartcategory]"
+                          dataType="i4"
+                          name="ccba_os_redmartcategory">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_redmartsubcategory]"
+                          dataType="i4"
+                          name="ccba_os_redmartsubcategory">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_retrycreatepricelistitems]"
+                          dataType="i4"
+                          name="ccba_os_retrycreatepricelistitems">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_retrysetfields]"
+                          dataType="i4"
+                          name="ccba_os_retrysetfields">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_os_retrysetfunctionalproductgroup]"
+                          dataType="i4"
+                          name="ccba_os_retrysetfunctionalproductgroup">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_retrycreatepricelistitemstimestamp]"
+                          dataType="dbTimeStamp"
+                          name="ccba_retrycreatepricelistitemstimestamp">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_retrysetfieldstimestamp]"
+                          dataType="dbTimeStamp"
+                          name="ccba_retrysetfieldstimestamp">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[ccba_retrysetfunctionalproductgrouptimestamp]"
+                          dataType="dbTimeStamp"
+                          name="ccba_retrysetfunctionalproductgrouptimestamp">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[currentcost]"
+                          dataType="numeric"
+                          name="currentcost"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Money</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[defaultuomid]"
+                          dataType="guid"
+                          name="defaultuomid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">uom</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[defaultuomscheduleid]"
+                          dataType="guid"
+                          name="defaultuomscheduleid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">uomschedule</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[description]"
+                          dataType="nText"
+                          name="description">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Memo</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[dmtimportstate]"
+                          dataType="i4"
+                          name="dmtimportstate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[entityimage]"
+                          dataType="image"
+                          name="entityimage">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Image</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[entityimageid]"
+                          dataType="guid"
+                          name="entityimageid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Uniqueidentifier</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[iskit]"
+                          dataType="bool"
+                          name="iskit">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[isreparented]"
+                          dataType="bool"
+                          name="isreparented">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[isstockitem]"
+                          dataType="bool"
+                          name="isstockitem">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[modifiedby]"
+                          dataType="guid"
+                          name="modifiedby">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">systemuser</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_companyid]"
+                          dataType="guid"
+                          name="msdyn_companyid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">cdm_company</property>
+                            <property
+                              dataType="System.String"
+                              name="NavigationProperty">msdyn_CompanyId</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_converttocustomerasset]"
+                          dataType="bool"
+                          name="msdyn_converttocustomerasset">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_defaultvendor]"
+                          dataType="guid"
+                          name="msdyn_defaultvendor">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">account</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_fieldserviceproducttype]"
+                          dataType="i4"
+                          name="msdyn_fieldserviceproducttype">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_gdproptout]"
+                          dataType="bool"
+                          name="msdyn_gdproptout">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_iscatchweight]"
+                          dataType="bool"
+                          name="msdyn_iscatchweight">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_isstockedproduct]"
+                          dataType="bool"
+                          name="msdyn_isstockedproduct">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_itemnumber]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_itemnumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_productcolor]"
+                          dataType="guid"
+                          name="msdyn_productcolor">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">msdyn_productcolor</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_productconfiguration]"
+                          dataType="guid"
+                          name="msdyn_productconfiguration">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">msdyn_productconfiguration</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_productnumber]"
+                          dataType="wstr"
+                          length="70"
+                          name="msdyn_productnumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_productsize]"
+                          dataType="guid"
+                          name="msdyn_productsize">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">msdyn_productsize</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_productstyle]"
+                          dataType="guid"
+                          name="msdyn_productstyle">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">msdyn_productstyle</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_purchasename]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_purchasename">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_sharedproductdetailid]"
+                          dataType="guid"
+                          name="msdyn_sharedproductdetailid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">msdyn_sharedproductdetail</property>
+                            <property
+                              dataType="System.String"
+                              name="NavigationProperty">msdyn_SharedProductDetailId</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_taxable]"
+                          dataType="bool"
+                          name="msdyn_taxable">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[msdyn_upccode]"
+                          dataType="wstr"
+                          length="50"
+                          name="msdyn_upccode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="100"
+                          name="name">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[parentproductid]"
+                          dataType="guid"
+                          name="parentproductid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">product</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[price]"
+                          dataType="numeric"
+                          name="price"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Money</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[pricelevelid]"
+                          dataType="guid"
+                          name="pricelevelid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">pricelevel</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[processid]"
+                          dataType="guid"
+                          name="processid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Uniqueidentifier</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[productid]"
+                          dataType="guid"
+                          name="productid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Uniqueidentifier</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">product</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[productnumber]"
+                          dataType="wstr"
+                          length="100"
+                          name="productnumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[producttypecode]"
+                          dataType="i4"
+                          name="producttypecode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[producturl]"
+                          dataType="wstr"
+                          length="255"
+                          name="producturl">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[quantitydecimal]"
+                          dataType="i4"
+                          name="quantitydecimal">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[quantityonhand]"
+                          dataType="numeric"
+                          name="quantityonhand"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Decimal</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[size]"
+                          dataType="wstr"
+                          length="200"
+                          name="size">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[stageid]"
+                          dataType="guid"
+                          name="stageid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Uniqueidentifier</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[standardcost]"
+                          dataType="numeric"
+                          name="standardcost"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Money</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[statecode]"
+                          dataType="i4"
+                          name="statecode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">State</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[statuscode]"
+                          dataType="i4"
+                          name="statuscode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Status</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[stockvolume]"
+                          dataType="numeric"
+                          name="stockvolume"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Decimal</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[stockweight]"
+                          dataType="numeric"
+                          name="stockweight"
+                          precision="38"
+                          scale="2">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Decimal</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[subjectid]"
+                          dataType="guid"
+                          name="subjectid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">subject</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[suppliername]"
+                          dataType="wstr"
+                          length="100"
+                          name="suppliername">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[timezoneruleversionnumber]"
+                          dataType="i4"
+                          name="timezoneruleversionnumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[transactioncurrencyid]"
+                          dataType="guid"
+                          name="transactioncurrencyid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">transactioncurrency</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[traversedpath]"
+                          dataType="wstr"
+                          length="1250"
+                          name="traversedpath">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[utcconversiontimezonecode]"
+                          dataType="i4"
+                          name="utcconversiontimezonecode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[validfromdate]"
+                          dataType="dbDate"
+                          name="validfromdate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[validtodate]"
+                          dataType="dbDate"
+                          name="validtodate">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">DateTime</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[vendorid]"
+                          dataType="wstr"
+                          length="100"
+                          name="vendorid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[vendorname]"
+                          dataType="wstr"
+                          length="100"
+                          name="vendorname">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input].ExternalColumns[vendorpartnumber]"
+                          dataType="wstr"
+                          length="100"
+                          name="vendorpartnumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Default Output]"
+                      exclusionGroup="1"
+                      name="Default Output"
+                      synchronousInputId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Default Output].Columns[SavedRecordId]"
+                          dataType="guid"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Default Output].Columns[SavedRecordId]"
+                          name="SavedRecordId" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Default Output].Columns[IsNew]"
+                          dataType="bool"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Default Output].Columns[IsNew]"
+                          name="IsNew" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Error Output"
+                      synchronousInputId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorMessage]"
+                          dataType="wstr"
+                          length="2048"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output].Columns[ErrorMessage]"
+                          name="ErrorMessage" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task.Paths[Default Output]"
+                  endId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success.Inputs[OLE DB Destination Input]"
+                  name="Default Output"
+                  startId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Default Output]" />
+                <path
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task.Paths[Error Output]"
+                  endId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error.Inputs[OLE DB Destination Input]"
+                  name="Error Output"
+                  startId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Outputs[Error Output]" />
+                <path
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task.Paths[OLE DB Source Output]"
+                  endId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product.Inputs[Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\UpdateProduct_ProductCategoryAssignment\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{ED042125-B00A-484D-80CD-297CBFA2010B}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_ProductCategoryAssignment_Delete]&#xA;&#xA;EXEC [dbo].[sp_Product_Delete]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{C9B8A24D-D3C3-45B6-8660-BD4AB20E5569}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Product Assignment"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2021 KingswaySoft Inc."
+                  description="Extract data from Microsoft Dynamics 365 CE/CRM."
+                  name="Dynamics CRM Source"
+                  usesDispositions="true"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of source data from Microsoft Dynamics CRM."
+                      expressionType="Notify"
+                      name="SourceType"
+                      typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.SourceType">1</property>
+                    <property
+                      dataType="System.String"
+                      description="Dynamics CRM entity to retrieve data from."
+                      expressionType="Notify"
+                      name="SourceEntity"></property>
+                    <property
+                      dataType="System.String"
+                      description="FetchXML statement."
+                      expressionType="Notify"
+                      name="FetchXML">&lt;fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false" &gt;
+&lt;entity name="msdyn_productcategoryassignment" &gt;
+&lt;attribute name="msdyn_productcategoryassignmentid" /&gt;
+&lt;attribute name="msdyn_globalproduct" /&gt;
+&lt;attribute name="ccba_functionalproductgroupid" /&gt;
+&lt;filter type="and" &gt;
+&lt;condition attribute="msdyn_globalproduct" operator="not-null" /&gt;
+&lt;condition attribute="ccba_functionalproductgroupid" operator="not-null" /&gt;
+&lt;/filter&gt;
+&lt;/entity&gt;
+&lt;/fetch&gt;</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the batch size of the query."
+                      expressionType="Notify"
+                      name="BatchSize">2000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the maximum number of rows to be returned from the Dynamics 365/CRM server (Specify 0 to read all satisfying records)."
+                      expressionType="Notify"
+                      name="MaxRowsReturned">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="The caller to be used for CRM impersonation when reading from CRM server."
+                      expressionType="Notify"
+                      name="ImpersonateAs" />
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the output timezone for CRM datetime fields."
+                      expressionType="Notify"
+                      name="OutputTimezone"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.SourceOutputTimezone" />
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmSourceComponent</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Connections[DynamicsCRM]"
+                      connectionManagerID="{5EE0A524-E239-4EAD-A980-FF15089AA06D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_CONNECTION]"
+                      description="Dynamics CRM Connection Manager"
+                      name="DynamicsCRM" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output]"
+                      name="Primary Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroupid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroupid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroupid]"
+                          name="ccba_functionalproductgroupid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroupidname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroupidname]"
+                          length="100"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroupidname]"
+                          name="ccba_functionalproductgroupidname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_globalproduct]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[msdyn_globalproduct]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_globalproduct]"
+                          name="msdyn_globalproduct"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_globalproductname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[msdyn_globalproductname]"
+                          length="60"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_globalproductname]"
+                          name="msdyn_globalproductname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_productcategoryassignmentid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[msdyn_productcategoryassignmentid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_productcategoryassignmentid]"
+                          name="msdyn_productcategoryassignmentid"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroupid]"
+                          dataType="guid"
+                          name="ccba_functionalproductgroupid" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroupidname]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_functionalproductgroupidname" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[msdyn_globalproduct]"
+                          dataType="guid"
+                          name="msdyn_globalproduct" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[msdyn_globalproductname]"
+                          dataType="wstr"
+                          length="60"
+                          name="msdyn_globalproductname" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[msdyn_productcategoryassignmentid]"
+                          dataType="guid"
+                          name="msdyn_productcategoryassignmentid" />
+                      </externalMetadataColumns>
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[ProductCategoryAssignment]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ccba_functionalproductgroupid]"
+                          cachedDataType="guid"
+                          cachedName="ccba_functionalproductgroupid"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ccba_functionalproductgroupid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroupid]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[msdyn_globalproduct]"
+                          cachedDataType="guid"
+                          cachedName="msdyn_globalproduct"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_globalproduct]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_globalproduct]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[msdyn_productcategoryassignmentid]"
+                          cachedDataType="guid"
+                          cachedName="msdyn_productcategoryassignmentid"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_productcategoryassignmentid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output].Columns[msdyn_productcategoryassignmentid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_productcategoryassignmentid]"
+                          dataType="guid"
+                          name="msdyn_productcategoryassignmentid" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_globalproduct]"
+                          dataType="guid"
+                          name="msdyn_globalproduct" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ccba_functionalproductgroupid]"
+                          dataType="guid"
+                          name="ccba_functionalproductgroupid" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment.Paths[Primary Output]"
+                  endId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Primary Output"
+                  startId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source.Outputs[Primary Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{317E6436-A03A-45C2-8916-ED8C301D04A0}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Product Data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2021 KingswaySoft Inc."
+                  description="Extract data from Microsoft Dynamics 365 CE/CRM."
+                  name="Dynamics CRM Source"
+                  usesDispositions="true"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of source data from Microsoft Dynamics CRM."
+                      expressionType="Notify"
+                      name="SourceType"
+                      typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.SourceType">1</property>
+                    <property
+                      dataType="System.String"
+                      description="Dynamics CRM entity to retrieve data from."
+                      expressionType="Notify"
+                      name="SourceEntity"></property>
+                    <property
+                      dataType="System.String"
+                      description="FetchXML statement."
+                      expressionType="Notify"
+                      name="FetchXML">&lt;fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false"&gt;
+&lt;entity name="product"&gt;
+&lt;attribute name="productid" /&gt;
+&lt;attribute name="ccba_functionalproductgroup" /&gt;
+&lt;link-entity name="msdyn_sharedproductdetail" from="msdyn_sharedproductdetailid" to="msdyn_sharedproductdetailid" visible="false" link-type="outer" alias="SPD"&gt;
+&lt;attribute name="msdyn_globalproduct" /&gt;
+&lt;/link-entity&gt;
+&lt;link-entity name="cdm_company" from="cdm_companyid" to="msdyn_companyid" visible="false" link-type="outer" alias="DP"&gt;
+&lt;attribute name="ccba_defaultpricelist" /&gt;
+&lt;/link-entity&gt;
+&lt;/entity&gt;
+&lt;/fetch&gt;</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the batch size of the query."
+                      expressionType="Notify"
+                      name="BatchSize">2000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the maximum number of rows to be returned from the Dynamics 365/CRM server (Specify 0 to read all satisfying records)."
+                      expressionType="Notify"
+                      name="MaxRowsReturned">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="The caller to be used for CRM impersonation when reading from CRM server."
+                      expressionType="Notify"
+                      name="ImpersonateAs" />
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the output timezone for CRM datetime fields."
+                      expressionType="Notify"
+                      name="OutputTimezone"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.SourceOutputTimezone" />
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmSourceComponent</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Connections[DynamicsCRM]"
+                      connectionManagerID="{5EE0A524-E239-4EAD-A980-FF15089AA06D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_CONNECTION]"
+                      description="Dynamics CRM Connection Manager"
+                      name="DynamicsCRM" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output]"
+                      name="Primary Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[productid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[productid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[productid]"
+                          name="productid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[SPD.msdyn_globalproduct]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[SPD.msdyn_globalproduct]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[SPD.msdyn_globalproduct]"
+                          name="SPD.msdyn_globalproduct"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[SPD.msdyn_globalproductname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[SPD.msdyn_globalproductname]"
+                          length="60"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[SPD.msdyn_globalproductname]"
+                          name="SPD.msdyn_globalproductname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroup]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroup]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroup]"
+                          name="ccba_functionalproductgroup"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroupname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroupname]"
+                          length="100"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroupname]"
+                          name="ccba_functionalproductgroupname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[DP.ccba_defaultpricelist]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[DP.ccba_defaultpricelist]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[DP.ccba_defaultpricelist]"
+                          name="DP.ccba_defaultpricelist"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[DP.ccba_defaultpricelistname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[DP.ccba_defaultpricelistname]"
+                          length="100"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[DP.ccba_defaultpricelistname]"
+                          name="DP.ccba_defaultpricelistname"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[productid]"
+                          dataType="guid"
+                          name="productid" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[SPD.msdyn_globalproduct]"
+                          dataType="guid"
+                          name="SPD.msdyn_globalproduct" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[SPD.msdyn_globalproductname]"
+                          dataType="wstr"
+                          length="60"
+                          name="SPD.msdyn_globalproductname" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroup]"
+                          dataType="guid"
+                          name="ccba_functionalproductgroup" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[ccba_functionalproductgroupname]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_functionalproductgroupname" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[DP.ccba_defaultpricelist]"
+                          dataType="guid"
+                          name="DP.ccba_defaultpricelist" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].ExternalColumns[DP.ccba_defaultpricelistname]"
+                          dataType="wstr"
+                          length="100"
+                          name="DP.ccba_defaultpricelistname" />
+                      </externalMetadataColumns>
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Product]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SPD.msdyn_globalproduct]"
+                          cachedDataType="guid"
+                          cachedName="SPD.msdyn_globalproduct"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_globalproduct]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[SPD.msdyn_globalproduct]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ccba_functionalproductgroup]"
+                          cachedDataType="guid"
+                          cachedName="ccba_functionalproductgroup"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ccba_functionalproductgroup]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[ccba_functionalproductgroup]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[productid]"
+                          cachedDataType="guid"
+                          cachedName="productid"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productid]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[productid]" />
+                        <inputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DP.ccba_defaultpricelist]"
+                          cachedDataType="guid"
+                          cachedName="DP.ccba_defaultpricelist"
+                          externalMetadataColumnId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ccba_defaultpricelist]"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output].Columns[DP.ccba_defaultpricelist]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_globalproduct]"
+                          dataType="guid"
+                          name="msdyn_globalproduct" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ccba_functionalproductgroup]"
+                          dataType="guid"
+                          name="ccba_functionalproductgroup" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[productid]"
+                          dataType="guid"
+                          name="productid" />
+                        <externalMetadataColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ccba_defaultpricelist]"
+                          dataType="guid"
+                          name="ccba_defaultpricelist" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data.Paths[Primary Output]"
+                  endId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Primary Output"
+                  startId="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source.Outputs[Primary Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\UpdateProduct_ProductCategoryAssignment.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{80B68CEA-47C6-4EBD-B549-654FA8C0F604}"
+          DTS:From="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\UpdateProduct_ProductCategoryAssignment.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{3B81C017-FB70-48DA-9A4F-26B44F2ED921}"
+          DTS:From="Package\UpdateProduct_ProductCategoryAssignment\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\UpdateProduct_ProductCategoryAssignment.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{ECADF4F3-7D7C-486D-9318-7DE3881E2BB1}"
+          DTS:From="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2AA47A30-C69A-450B-B459-9BAFB29E41C1}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\UpdateProduct_ProductCategoryAssignment" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{5C6EB815-4BA2-4016-95A0-B83C161D1373}"
+      DTS:From="Package\UpdateProduct_ProductCategoryAssignment"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{8BF87FBD-53D0-4EAB-BFAB-274862FD5596}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\Execute SQL Task"
+          TopLeft="259.374996135011,247.614039698246" />
+        <NodeLayout
+          Size="161.333333333334,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data"
+          TopLeft="53.3333319922288,99.1403556293838" />
+        <NodeLayout
+          Size="194.666666666667,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment"
+          TopLeft="38.0833294776578,169.017548032305" />
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment.PrecedenceConstraints[Constraint]"
+          TopLeft="134.708330734943,141.80702229605">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.2105257362541"
+              Start="0,0"
+              End="0,19.7105257362541">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.7105257362541" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Execute SQL Task"
+          TopLeft="47.4583293379595,25.3421056366363" />
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment.PrecedenceConstraints[Constraint 1]"
+          TopLeft="132.729163998428,68.008772303303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.1315833260809"
+              Start="0,0"
+              End="0,23.6315833260809">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.6315833260809" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task"
+          TopLeft="63.7083290958156,241.543865186906" />
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment.PrecedenceConstraints[Constraint 2]"
+          TopLeft="137.895829286737,211.684214698971">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.8596504879349"
+              Start="0,0"
+              End="0,22.3596504879349">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.3596504879349" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="283.333333333334,339.333333333334"
+          Size="283.333333333334,382"
+          Id="Package\UpdateProduct_ProductCategoryAssignment"
+          TopLeft="220.624996712431,12.929824754582" />
+        <NodeLayout
+          Size="136.666666666667,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="150,82.6666666666667"
+          Size="150,125.333333333334"
+          Id="Package\Start"
+          TopLeft="22.4999996647239,152.578950240341" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="172.499999664724,215.245616907008">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="48.1249970477075,-11.315792152426"
+              Start="0,0"
+              End="40.6249970477075,-11.315792152426">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="20.0624985238538,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.0624985238538,0"
+                    Point2="24.0624985238538,0"
+                    Point3="24.0624985238538,-4" />
+                  <mssgle:LineSegment
+                    End="24.0624985238538,-7.31579215242598" />
+                  <mssgle:CubicBezierSegment
+                    Point1="24.0624985238538,-7.31579215242598"
+                    Point2="24.0624985238538,-11.315792152426"
+                    Point3="28.0624985238538,-11.315792152426" />
+                  <mssgle:LineSegment
+                    End="40.6249970477075,-11.315792152426" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="626.249990668148,155.929819126649" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="646.874990360811,256.508768388219" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="503.958330045765,203.929824754582">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="122.291660622383,-26.6666722946"
+              Start="0,0"
+              End="114.791660622383,-26.6666722946">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="57.1458303111916,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="57.1458303111916,0"
+                    Point2="61.1458303111916,0"
+                    Point3="61.1458303111916,-4" />
+                  <mssgle:LineSegment
+                    End="61.1458303111916,-22.6666722946" />
+                  <mssgle:CubicBezierSegment
+                    Point1="61.1458303111916,-22.6666722946"
+                    Point2="61.1458303111916,-26.6666722946"
+                    Point3="65.1458303111916,-26.6666722946" />
+                  <mssgle:LineSegment
+                    End="114.791660622383,-26.6666722946" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="696.916657334814,198.596485793315">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.2916663593304,57.9122825949036"
+              Start="0,0"
+              End="10.2916663593304,50.4122825949036">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.9561412974518" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,24.9561412974518"
+                    Point2="0,28.9561412974518"
+                    Point3="4,28.9561412974518" />
+                  <mssgle:LineSegment
+                    End="6.29166635933041,28.9561412974518" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.29166635933041,28.9561412974518"
+                    Point2="10.2916663593304,28.9561412974518"
+                    Point3="10.2916663593304,32.9561412974518" />
+                  <mssgle:LineSegment
+                    End="10.2916663593304,50.4122825949036" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\Dynamics CRM Source"
+          TopLeft="253.74999621883,45.1578955868275" />
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination"
+          TopLeft="264.374996060506,138.21052891726" />
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data.Paths[Primary Output]"
+          TopLeft="350.395829473001,87.8245622534942">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.3859666637657"
+              Start="0,0"
+              End="0,42.8859666637657">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.8859666637657" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Get Product Data\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\Dynamics CRM Source"
+          TopLeft="444,75" />
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination"
+          TopLeft="460,194" />
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment.Paths[Primary Output]"
+          TopLeft="539.333333333333,117.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8,76.3333333333333"
+              Start="0,0"
+              End="8,68.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.1666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,34.1666666666667"
+                    Point2="0,38.1666666666667"
+                    Point3="4,38.1666666666667" />
+                  <mssgle:LineSegment
+                    End="4,38.1666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4,38.1666666666667"
+                    Point2="8,38.1666666666667"
+                    Point3="8,42.1666666666667" />
+                  <mssgle:LineSegment
+                    End="8,68.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Get Product Assignment\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="161.333333333334,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data"
+          TopLeft="423,29" />
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Update Product"
+          TopLeft="396,115" />
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="503.666666666667,71.6666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-31,43.3333333333334"
+              Start="0,0"
+              End="-31,35.8333333333334">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.6666666666667"
+                    Point2="0,21.6666666666667"
+                    Point3="-4,21.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-27,21.6666666666667" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-27,21.6666666666667"
+                    Point2="-31,21.6666666666667"
+                    Point3="-31,25.6666666666667" />
+                  <mssgle:LineSegment
+                    End="-31,35.8333333333334" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162.666666666667,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success"
+          TopLeft="241,242" />
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error"
+          TopLeft="611,241" />
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task.Paths[Default Output]"
+          TopLeft="448.444444444444,157.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-126.111111111111,84.3333333333333"
+              Start="0,0"
+              End="-126.111111111111,76.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.2558806655192" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.2558806655192"
+                    Point2="0,34.2558806655192"
+                    Point3="-4,34.2558806655192" />
+                  <mssgle:LineSegment
+                    End="-122.111111111111,34.2558806655192" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-122.111111111111,34.2558806655192"
+                    Point2="-126.111111111111,34.2558806655192"
+                    Point3="-126.111111111111,38.2558806655192" />
+                  <mssgle:LineSegment
+                    End="-126.111111111111,76.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task.Paths[Error Output]"
+          TopLeft="496.888888888889,157.666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="187.444444444444,83.3333333333333"
+              Start="0,0"
+              End="187.444444444444,75.8333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.8496844520941" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.8496844520941"
+                    Point2="0,33.8496844520941"
+                    Point3="4,33.8496844520941" />
+                  <mssgle:LineSegment
+                    End="183.444444444444,33.8496844520941" />
+                  <mssgle:CubicBezierSegment
+                    Point1="183.444444444444,33.8496844520941"
+                    Point2="187.444444444444,33.8496844520941"
+                    Point3="187.444444444444,37.8496844520941" />
+                  <mssgle:LineSegment
+                    End="187.444444444444,75.8333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="65.3858355034722,38.8496844520941,56.6727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Get Product Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Success">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\UpdateProduct_ProductCategoryAssignment\Data Flow Task\Product_Error">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

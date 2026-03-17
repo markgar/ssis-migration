@@ -1,0 +1,589 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/4/2022 10:12:54 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-FCCA3HG"
+  DTS:CreatorName="DESKTOP-FCCA3HG\sai shiva pothu"
+  DTS:DTSID="{0B025E55-5331-4507-B9FC-850501F641CA}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{F52BDADD-C8BA-4DAE-A06A-BFF92A829ACA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{02363093-66A9-4191-B2D3-C2641C83FAE4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">ProductMasaterPackage</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5f08bfef-2d51-48af-b597-323284eaa4d0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\GetDW_Mapping and UnitUpdate"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{53d54cf5-52a6-49b9-9aab-c956d996c573}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="GetDW_Mapping and UnitUpdate">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\GetDW_Mapping and UnitUpdate\GetDW_Mapping"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Getting DW Mapping Data"
+          DTS:DTSID="{6d96c6df-8851-481e-baaf-e1ec82ff7894}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="GetDW_Mapping"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>GetDW_Mapping.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\GetDW_Mapping and UnitUpdate\UnitUpdate"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Unit Update"
+          DTS:DTSID="{098da432-274b-425c-af11-f4bbc71536b4}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="UnitUpdate"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>UnitUpdate.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\GetDW_Mapping and UnitUpdate.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6E02B5FF-5E81-41D9-A422-D37D1DE38C75}"
+          DTS:From="Package\GetDW_Mapping and UnitUpdate\GetDW_Mapping"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\GetDW_Mapping and UnitUpdate\UnitUpdate" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Initial Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{b636f8f2-731a-4001-b4bf-44e2109d2880}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Initial Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{b7431495-1331-4a88-b86d-358084ee6b89}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductAttributeUpdate"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{195b2152-d5e6-45f6-8e57-310f23ae7e8f}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ProductAttributeUpdate"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ProductAttributeUpdate.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductAttributeValueUpdate"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{d65c7bc7-c740-47e7-89e7-c2341c9ea02f}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ProductAttributeValueUpdate"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ProductAttributeValueUpdate.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductUpdate"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{bac5aaf3-3aa5-45df-aa87-26cf7c0dd483}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ProductUpdate"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>ProductUpdate.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{d728e385-7c0b-4746-92a3-7f0bf7ccc937}"
+          DTS:From="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductUpdate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductAttributeUpdate" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{855F2BD3-32E0-4A58-BFFE-168535F8A7E8}"
+          DTS:From="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductAttributeUpdate"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductAttributeValueUpdate" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Product_Update_FGP and PriceListItemCreate"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{e13e7113-f6f7-42c7-986b-05dbe49d5b8d}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Product_Update_FGP and PriceListItemCreate">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Product_Update_FGP and PriceListItemCreate\PriceListItemCreate"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{a75af346-a482-4076-8db9-3064b7e7a6d0}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="PriceListItemCreate"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>PricelistItemCreate.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Product_Update_FGP and PriceListItemCreate\Product_Update_FGP"
+          DTS:CreationName="Microsoft.ExecutePackageTask"
+          DTS:Description="Execute Package Task"
+          DTS:DTSID="{bf3f6859-e921-40f1-a7f4-74b7d4dbef1e}"
+          DTS:ExecutableType="Microsoft.ExecutePackageTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Product_Update_FGP"
+          DTS:TaskContact="Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ExecutePackageTask>
+              <UseProjectReference>True</UseProjectReference>
+              <PackageName>Product_Update_FunctionalGroup.dtsx</PackageName>
+            </ExecutePackageTask>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Product_Update_FGP and PriceListItemCreate.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{b4aac7ac-10cd-46ab-9a20-4bf7107d3bf1}"
+          DTS:From="Package\Product_Update_FGP and PriceListItemCreate\Product_Update_FGP"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Product_Update_FGP and PriceListItemCreate\PriceListItemCreate" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{890EED5E-A73F-4F0F-8778-FD7033678382}"
+      DTS:From="Package\Initial Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\GetDW_Mapping and UnitUpdate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{4A42D780-D127-4C1F-86D4-F1008720458F}"
+      DTS:From="Package\GetDW_Mapping and UnitUpdate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Product_Update_FGP and PriceListItemCreate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{DFCDA3ED-6100-4E99-9BD4-09A0C189303E}"
+      DTS:From="Package\Product_Update_FGP and PriceListItemCreate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{287798A1-F878-43CC-9154-C0A193410583}"
+      DTS:From="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\End Runtime" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\Initial Runtime"
+          TopLeft="77.9687497322448,26.6447362142752" />
+        <NodeLayout
+          Size="196.666666666667,42"
+          Id="Package\GetDW_Mapping and UnitUpdate\UnitUpdate"
+          TopLeft="15.7499993480742,102.052636022053" />
+        <NodeLayout
+          Size="188,42.6666666666667"
+          Id="Package\GetDW_Mapping and UnitUpdate\GetDW_Mapping"
+          TopLeft="16.7916659992188,27.9298276093308" />
+        <EdgeLayout
+          Id="Package\GetDW_Mapping and UnitUpdate.PrecedenceConstraints[Constraint]"
+          TopLeft="112.437499340313,70.5964942759975">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.4561417460555"
+              Start="0,0"
+              End="0,23.9561417460555">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.9561417460555" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="230.666666666667,204"
+          Size="230.666666666667,246.666666666667"
+          Id="Package\GetDW_Mapping and UnitUpdate"
+          TopLeft="38.3125034226104,125.855264397457" />
+        <NodeLayout
+          Size="191.333333333334,42.6666666666667"
+          Id="Package\Product_Update_FGP and PriceListItemCreate\Product_Update_FGP"
+          TopLeft="18.8749981094152,10.6500004685864" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\Product_Update_FGP and PriceListItemCreate\PriceListItemCreate"
+          TopLeft="20.7916659495481,91.1592106288131" />
+        <EdgeLayout
+          Id="Package\Product_Update_FGP and PriceListItemCreate.PrecedenceConstraints[Constraint]"
+          TopLeft="114.333332029482,53.3166671352531">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.84254349356"
+              Start="0,0"
+              End="0,30.34254349356">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.34254349356" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="222,201.333333333334"
+          Size="222,244.666666666667"
+          Id="Package\Product_Update_FGP and PriceListItemCreate"
+          TopLeft="322.343753690366,119.013159005513" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="897.499987520278,320.785086705111" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="152.807293244094,69.3114028809418">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.5438615165149"
+              Start="0,0"
+              End="0,49.0438615165149">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.0438615165149" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="268.979170089277,245.267545034818">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="53.3645836010888,0"
+              Start="0,0"
+              End="45.8645836010888,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="45.8645836010888,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="186,42.6666666666667"
+          Id="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductUpdate"
+          TopLeft="17.3124981326985,9.79473729459355" />
+        <NodeLayout
+          Size="190.666666666667,42.6666666666667"
+          Id="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductAttributeUpdate"
+          TopLeft="10.6354161008881,90.3039474548201" />
+        <EdgeLayout
+          Id="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate.PrecedenceConstraints[Constraint]"
+          TopLeft="108.14062378346,52.4614039612602">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8425434935599"
+              Start="0,0"
+              End="0,30.3425434935599">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.3425434935599" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="191.333333333334,42.6666666666667"
+          Id="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate\ProductAttributeValueUpdate"
+          TopLeft="12.6249982025477,169.878508423677" />
+        <EdgeLayout
+          Id="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate.PrecedenceConstraints[Constraint 1]"
+          TopLeft="107.130207151718,132.970614121487">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.9078943021904"
+              Start="0,0"
+              End="0,29.4078943021904">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.4078943021904" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="235.333333333334,266.666666666667"
+          Size="235.333333333334,310"
+          Id="Package\ProductUpdate, ProductAttributeUpdate and ProductAttributeValueUpdate"
+          TopLeft="621.874990733341,85.5263173992945" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="544.343753690366,240.93640486907">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="77.5312370429748,0"
+              Start="0,0"
+              End="70.0312370429748,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="70.0312370429748,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="857.208324066674,240.526317399294">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="40.2916634536035,101.59210263915"
+              Start="0,0"
+              End="32.7916634536035,101.59210263915">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="16.1458317268018,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="16.1458317268018,0"
+                    Point2="20.1458317268018,0"
+                    Point3="20.1458317268018,4" />
+                  <mssgle:LineSegment
+                    End="20.1458317268018,97.5921026391499" />
+                  <mssgle:CubicBezierSegment
+                    Point1="20.1458317268018,97.5921026391499"
+                    Point2="20.1458317268018,101.59210263915"
+                    Point3="24.1458317268018,101.59210263915" />
+                  <mssgle:LineSegment
+                    End="32.7916634536035,101.59210263915" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

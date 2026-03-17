@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2021 9:46:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GCNMS-DPL14"
+  DTS:CreatorName="RBEIGCN\CLM1KOR"
+  DTS:DTSID="{3CC4772C-8BC0-405A-AE38-D5168775145C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="AgreementBookingProductGetDump"
+  DTS:PackageType="5"
+  DTS:VersionBuild="220"
+  DTS:VersionGUID="{F2F6BF26-256E-446A-977D-446A5C975A31}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BD6C11FA-EF9F-4076-B580-3A4521DBD0B3}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">AgreementBookingProduct</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\AgreementBookingProduct Extraction"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{FD685F83-A1E2-472D-B5CA-D7B85A276841}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AgreementBookingProduct Extraction">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\AgreementBookingProduct Extraction\AgreementBookingProduct Trim"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2203c99c-dac8-4708-881b-ffd26357cf58}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="AgreementBookingProduct Trim"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_AgreementBookingProduct_Trim]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\AgreementBookingProduct Extraction\Delete AgreementBookingProduct Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{EDE01A0F-3C5D-4ACE-AABF-1210495FC4FB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete AgreementBookingProduct Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_AgreementBookingProduct_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{1BC121D0-0A38-4BF7-BCA6-23DACE0B12B5}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Retrieving Data From Source to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Inserting Data To Agreements"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[AgreementBookingProduct]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].Columns[msdyn_CustomerAsset]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_CustomerAsset"
+                          externalMetadataColumnId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_customerassettext]"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_CustomerAsset]" />
+                        <inputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].Columns[msdyn_Product]"
+                          cachedDataType="wstr"
+                          cachedLength="70"
+                          cachedName="msdyn_Product"
+                          externalMetadataColumnId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_producttext]"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_Product]" />
+                        <inputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].Columns[msdyn_Agreement]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_Agreement"
+                          externalMetadataColumnId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_agreementtext]"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_Agreement]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_name]"
+                          dataType="wstr"
+                          length="200"
+                          name="msdyn_name" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_agreementtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_agreementtext" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_agreement]"
+                          dataType="guid"
+                          name="msdyn_agreement" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_agreementbookingsetuptext]"
+                          dataType="wstr"
+                          length="11"
+                          name="msdyn_agreementbookingsetuptext" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_agreementbookingsetup]"
+                          dataType="guid"
+                          name="msdyn_agreementbookingsetup" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_customerassettext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_customerassettext" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_customerasset]"
+                          dataType="guid"
+                          name="msdyn_customerasset" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_pricelisttext]"
+                          dataType="wstr"
+                          length="18"
+                          name="msdyn_pricelisttext" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_pricelist]"
+                          dataType="guid"
+                          name="msdyn_pricelist" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_producttext]"
+                          dataType="wstr"
+                          length="70"
+                          name="msdyn_producttext" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_product]"
+                          dataType="guid"
+                          name="msdyn_product" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_quantity]"
+                          dataType="r8"
+                          name="msdyn_quantity" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_unittext]"
+                          dataType="wstr"
+                          length="11"
+                          name="msdyn_unittext" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_unit]"
+                          dataType="guid"
+                          name="msdyn_unit" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[ProcessingFlag]"
+                          dataType="wstr"
+                          length="11"
+                          name="ProcessingFlag" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[Crmrecordid]"
+                          dataType="guid"
+                          name="Crmrecordid" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                          dataType="guid"
+                          name="ownerid" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Reading Agreements Data From Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[AgreementBookingProduct]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Connections[OleDbConnection]"
+                      connectionManagerID="{9756231E-BC44-4F1E-9515-002B7C56C5C7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_SOURCE_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_Product]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_Product]"
+                          length="70"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_Product]"
+                          name="msdyn_Product"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_CustomerAsset]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_CustomerAsset]"
+                          length="100"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_CustomerAsset]"
+                          name="msdyn_CustomerAsset"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_Agreement]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_Agreement]"
+                          length="100"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_Agreement]"
+                          name="msdyn_Agreement"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_Product]"
+                          dataType="wstr"
+                          length="70"
+                          name="msdyn_Product" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_CustomerAsset]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_CustomerAsset" />
+                        <externalMetadataColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_Agreement]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_Agreement" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_Agreement]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_Agreement]"
+                          name="msdyn_Agreement" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_Product]"
+                          dataType="wstr"
+                          length="70"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_Product]"
+                          name="msdyn_Product" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_CustomerAsset]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_CustomerAsset]"
+                          name="msdyn_CustomerAsset" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+                  endId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+                  endId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\AgreementBookingProduct Extraction\Update Processing Flag"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1E316F42-4D3F-47F3-8B8F-58B8444A3D19}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Processing Flag"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_AgreementBookingProduct_SetStatus]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\AgreementBookingProduct Extraction.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{268016F4-BDE1-4939-9856-4F23302F1EC3}"
+          DTS:From="Package\AgreementBookingProduct Extraction\Delete AgreementBookingProduct Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\AgreementBookingProduct Extraction.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{F7B4005A-96B3-4C75-97DD-AF027F7C062E}"
+          DTS:From="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\AgreementBookingProduct Extraction\Update Processing Flag" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\AgreementBookingProduct Extraction.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{56A01965-DB88-429C-9522-56349C8ADF1E}"
+          DTS:From="Package\AgreementBookingProduct Extraction\Update Processing Flag"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\AgreementBookingProduct Extraction\AgreementBookingProduct Trim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\AgreementBookingProduct Transformation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{280EACE9-B529-4C82-8B76-4DAA05397D44}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="AgreementBookingProduct Transformation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\AgreementBookingProduct Transformation\AgreementBookingProduct Transformation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2838E156-0D82-4D5F-A55E-CFEDF22B6D6C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="AgreementBookingProduct Transformation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_AgreementBookingProduct_Transformation]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{33D8449D-7147-4454-9418-56A276F35EE2}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{EE947129-C5B7-455B-B191-3E90B6F4B391}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{AFD3A7D4-EA18-4640-9690-D45D8F366DE4}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3DDA2556-74FA-4EF6-9BC1-B7FD3D6F0789}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1BD6B35E-2004-4945-8985-3B54D2809BFE}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\AgreementBookingProduct Extraction" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{CF76E778-1851-4AAB-9501-0B7FC1FBF775}"
+      DTS:From="Package\AgreementBookingProduct Extraction"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\AgreementBookingProduct Transformation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{90774DF0-CE4F-49DD-9532-9DAD2A479143}"
+      DTS:From="Package\AgreementBookingProduct Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{A91D22C2-BDAD-4A3F-882A-0218329E1E8F}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="221.333333333334,42.6666666666667"
+          Id="Package\AgreementBookingProduct Extraction\AgreementBookingProduct Trim"
+          TopLeft="22.8333296825488,258.272808368473" />
+        <NodeLayout
+          Size="211.333333333334,62"
+          Id="Package\AgreementBookingProduct Extraction\Delete AgreementBookingProduct Data"
+          TopLeft="23.0416665642215,8.56428565949208" />
+        <NodeLayout
+          Size="197.333333333334,49.3333333333334"
+          Id="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging"
+          TopLeft="37.4047614293443,99.2393482710572" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\AgreementBookingProduct Extraction\Update Processing Flag"
+          TopLeft="37.3809519356916,186.401001614165" />
+        <EdgeLayout
+          Id="Package\AgreementBookingProduct Extraction.PrecedenceConstraints[Constraint]"
+          TopLeft="132.38988066345,70.5642856594921">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.6750626115651"
+              Start="0,0"
+              End="0,21.1750626115651">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.1750626115651" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\AgreementBookingProduct Extraction.PrecedenceConstraints[Constraint 1]"
+          TopLeft="135.059523349185,148.572681604391">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.8283200097743"
+              Start="0,0"
+              End="0,30.3283200097743">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.3283200097743" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\AgreementBookingProduct Extraction.PrecedenceConstraints[Constraint 2]"
+          TopLeft="133.773807475787,229.067668280831">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.2051400876416"
+              Start="0,0"
+              End="0,21.7051400876416">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.7051400876416" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="256.666666666667,354.666666666667"
+          Size="256.666666666667,397.333333333334"
+          Id="Package\AgreementBookingProduct Extraction"
+          TopLeft="252.791662981734,1.41316155092946" />
+        <NodeLayout
+          Size="226,44.6666666666667"
+          Id="Package\AgreementBookingProduct Transformation\AgreementBookingProduct Transformation"
+          TopLeft="21.8392854708113,19.9857140266896" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="253.333333333334,118.666666666667"
+          Size="253.333333333334,161.333333333334"
+          Id="Package\AgreementBookingProduct Transformation"
+          TopLeft="589.910705631954,12.8047716824513" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="670.779752646977,316.633096630941" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="654.357133700021,222.282847189057" />
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.50000000000004" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="158.666666666667,103.333333333334"
+          Size="158.666666666667,146"
+          Id="Package\Start"
+          TopLeft="30.5,55.5842101330045" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="189.166666666667,128.584210133004">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="63.6249963150669,71.4956180845916"
+              Start="0,0"
+              End="56.1249963150669,71.4956180845916">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="27.8124981575335,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="27.8124981575335,0"
+                    Point2="31.8124981575335,0"
+                    Point3="31.8124981575335,4" />
+                  <mssgle:LineSegment
+                    End="31.8124981575335,67.4956180845916" />
+                  <mssgle:CubicBezierSegment
+                    Point1="31.8124981575335,67.4956180845916"
+                    Point2="31.8124981575335,71.4956180845916"
+                    Point3="35.8124981575335,71.4956180845916" />
+                  <mssgle:LineSegment
+                    End="56.1249963150669,71.4956180845916" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="509.4583296484,200.079828217596">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="80.4523759835537,-106.608389868478"
+              Start="0,0"
+              End="72.9523759835537,-106.608389868478">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="36.2261879917768,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="36.2261879917768,0"
+                    Point2="40.2261879917768,0"
+                    Point3="40.2261879917768,-4" />
+                  <mssgle:LineSegment
+                    End="40.2261879917768,-102.608389868478" />
+                  <mssgle:CubicBezierSegment
+                    Point1="40.2261879917768,-102.608389868478"
+                    Point2="40.2261879917768,-106.608389868478"
+                    Point3="44.2261879917768,-106.608389868478" />
+                  <mssgle:LineSegment
+                    End="72.9523759835537,-106.608389868478" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="720.467252999321,174.138105015785">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.1447421732724"
+              Start="0,0"
+              End="0,40.6447421732724">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.6447421732724" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="727.735109840166,264.949513855724">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.6835827752178"
+              Start="0,0"
+              End="0,44.1835827752178">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.1835827752178" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="265.333333333334,42.6666666666667"
+          Id="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source"
+          TopLeft="99.2499986030161,11.3499998953939" />
+        <NodeLayout
+          Size="221.333333333334,42.6666666666667"
+          Id="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements"
+          TopLeft="108.124998388812,183.983330067297" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Derived Column"
+          TopLeft="139.541665483887,98.4166668410107" />
+        <EdgeLayout
+          Id="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+          TopLeft="231.916665269683,54.0166665620606">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.3749997857958,44.4000002789501"
+              Start="0,0"
+              End="-14.3749997857958,36.9000002789501">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.2000001394751" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.2000001394751"
+                    Point2="0,22.2000001394751"
+                    Point3="-4,22.2000001394751" />
+                  <mssgle:LineSegment
+                    End="-10.3749997857958,22.2000001394751" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.3749997857958,22.2000001394751"
+                    Point2="-14.3749997857958,22.2000001394751"
+                    Point3="-14.3749997857958,26.2000001394751" />
+                  <mssgle:LineSegment
+                    End="-14.3749997857958,36.9000002789501" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+          TopLeft="218.166665269683,141.083333507677">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.8999965596196"
+              Start="0,0"
+              End="0,35.3999965596196">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.3999965596196" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Reading Agreements Data From Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\AgreementBookingProduct Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreements">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

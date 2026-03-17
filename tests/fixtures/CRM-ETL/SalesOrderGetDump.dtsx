@@ -1,0 +1,2285 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2021 9:46:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GCNMS-DPL14"
+  DTS:CreatorName="RBEIGCN\CLM1KOR"
+  DTS:DTSID="{23E219BB-25C7-425B-A3CE-09FB7BF6D2BC}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="SalesOrderGetDump"
+  DTS:PackageType="5"
+  DTS:VersionBuild="212"
+  DTS:VersionGUID="{281369C8-33C7-4241-BB65-FC6BA5A15FAB}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F948D85A-4D40-4F5D-9D12-C70D55F9E0CD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">SalesOrder</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{3270C33C-222D-4A8A-8FB3-E6C30CF43B43}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{ABD9EF25-A3FF-45A1-AEE8-C2AEF086A054}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SalesOrder Extraction"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{AB5778BB-D08C-4C9C-ADDF-A63B4A7DD475}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SalesOrder Extraction">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SalesOrder Extraction\Delete SalesOrder Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{11C368A3-DE5E-421D-87E4-8FFFD6A1759F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete SalesOrder Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_SalesOrder_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{1685BF58-0553-48ED-BA48-1715E165465E}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Retrieving Data From Source to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Inserting Data To SalesOrder"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SalesOrder]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[requestdeliveryby]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="requestdeliveryby"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[requestdeliveryby]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[requestdeliveryby]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_slot_sfaorderid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_slot_sfaorderid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_sfaorderid]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_sfaorderid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[shipto_city]"
+                          cachedDataType="wstr"
+                          cachedLength="80"
+                          cachedName="shipto_city"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_city]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_city]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[shipto_country]"
+                          cachedDataType="wstr"
+                          cachedLength="80"
+                          cachedName="shipto_country"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_country]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_country]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[shipto_stateorprovince]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="shipto_stateorprovince"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_stateorprovince]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_stateorprovince]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[shipto_line1]"
+                          cachedDataType="wstr"
+                          cachedLength="250"
+                          cachedName="shipto_line1"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_line1]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_line1]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[shipto_line2]"
+                          cachedDataType="wstr"
+                          cachedLength="250"
+                          cachedName="shipto_line2"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_line2]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_line2]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[shipto_postalcode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="shipto_postalcode"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_postalcode]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_postalcode]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[totallineitemamount]"
+                          cachedDataType="cy"
+                          cachedName="totallineitemamount"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totallineitemamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totallineitemamount]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[totalamount]"
+                          cachedDataType="cy"
+                          cachedName="totalamount"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totalamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totalamount]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[totaldiscountamount]"
+                          cachedDataType="cy"
+                          cachedName="totaldiscountamount"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totaldiscountamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totaldiscountamount]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[totaltax]"
+                          cachedDataType="cy"
+                          cachedName="totaltax"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totaltax]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totaltax]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[freightamount]"
+                          cachedDataType="cy"
+                          cachedName="freightamount"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[freightamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[freightamount]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ordernumber]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ordernumber"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ordernumber]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ordernumber]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_int_orderquantity]"
+                          cachedDataType="i4"
+                          cachedName="ccba_int_orderquantity"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_int_orderquantity]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_int_orderquantity]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_dec_orderquantitycases]"
+                          cachedDataType="r8"
+                          cachedName="ccba_dec_orderquantitycases"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_dec_orderquantitycases]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_dec_orderquantitycases]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_dec_orderquantitylayers]"
+                          cachedDataType="r8"
+                          cachedName="ccba_dec_orderquantitylayers"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_dec_orderquantitylayers]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_dec_orderquantitylayers]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[msdyn_confirmedshippingdate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="msdyn_confirmedshippingdate"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_confirmedshippingdate]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_confirmedshippingdate]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_slot_ponumber]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_slot_ponumber"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_ponumber]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_ponumber]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_slot_sapid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_slot_sapid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_sapid]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_sapid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_slot_customerblockmessage]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_slot_customerblockmessage"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_customerblockmessage]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_customerblockmessage]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_lkp_accountmanagerid]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="ccba_lkp_accountmanagerid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_accountmanageridtext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_accountmanagerid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[transactioncurrencyid]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="transactioncurrencyid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[transactioncurrencyidtext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[customerid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="customerid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[customeridtext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[customerid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[msdyn_defaultshippingwarehouse]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_defaultshippingwarehouse"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_defaultshippingwarehousetext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_defaultshippingwarehouse]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_os_equipmentmovementtype]"
+                          cachedDataType="wstr"
+                          cachedLength="18"
+                          cachedName="ccba_os_equipmentmovementtype"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_equipmentmovementtypetext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_equipmentmovementtype]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_bool_equipmentrescheduled]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="ccba_bool_equipmentrescheduled"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_bool_equipmentrescheduledtext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_bool_equipmentrescheduled]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_os_equipmenttype]"
+                          cachedDataType="wstr"
+                          cachedLength="19"
+                          cachedName="ccba_os_equipmenttype"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_equipmenttypetext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_equipmenttype]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_bool_ooddorder]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="ccba_bool_ooddorder"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_bool_ooddordertext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_bool_ooddorder]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[msdyn_defaultshippingsite]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="msdyn_defaultshippingsite"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_defaultshippingsitetext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_defaultshippingsite]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_os_ordercategory]"
+                          cachedDataType="wstr"
+                          cachedLength="24"
+                          cachedName="ccba_os_ordercategory"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_ordercategorytext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_ordercategory]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_lkp_contactfororders]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_lkp_contactfororders"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_contactfororderstext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_contactfororders]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_lkp_payeraccountid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_lkp_payeraccountid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_payeraccountidtext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_payeraccountid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[msdyn_paymentterms]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_paymentterms"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_paymenttermstext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_paymentterms]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_lkp_salesagentid]"
+                          cachedDataType="wstr"
+                          cachedLength="128"
+                          cachedName="ccba_lkp_salesagentid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_salesagentidtext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_salesagentid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_os_sourcechannel]"
+                          cachedDataType="wstr"
+                          cachedLength="12"
+                          cachedName="ccba_os_sourcechannel"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_sourcechanneltext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_sourcechannel]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[statecode]"
+                          cachedDataType="wstr"
+                          cachedLength="9"
+                          cachedName="statecode"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[statecodetext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[statecode]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[statuscode]"
+                          cachedDataType="wstr"
+                          cachedLength="22"
+                          cachedName="statuscode"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[statuscodetext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[statuscode]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[ccba_lkp_costcenterid]"
+                          cachedDataType="wstr"
+                          cachedLength="11"
+                          cachedName="ccba_lkp_costcenterid"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_costcenteridtext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_costcenterid]" />
+                        <inputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].Columns[cdm_companycode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="cdm_companycode"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_accountmanagerid]"
+                          dataType="guid"
+                          name="ccba_lkp_accountmanagerid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_costcenterid]"
+                          dataType="guid"
+                          name="ccba_lkp_costcenterid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[transactioncurrencyid]"
+                          dataType="guid"
+                          name="transactioncurrencyid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[customerid]"
+                          dataType="guid"
+                          name="customerid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_customerblockmessage]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_customerblockmessage" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_defaultshippingwarehouse]"
+                          dataType="guid"
+                          name="msdyn_defaultshippingwarehouse" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_equipmentmovementtype]"
+                          dataType="i4"
+                          name="ccba_os_equipmentmovementtype" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_bool_equipmentrescheduled]"
+                          dataType="i4"
+                          name="ccba_bool_equipmentrescheduled" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_equipmenttype]"
+                          dataType="i4"
+                          name="ccba_os_equipmenttype" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_bool_ooddorder]"
+                          dataType="i4"
+                          name="ccba_bool_ooddorder" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_defaultshippingsite]"
+                          dataType="guid"
+                          name="msdyn_defaultshippingsite" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_ordercategory]"
+                          dataType="i4"
+                          name="ccba_os_ordercategory" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_contactfororders]"
+                          dataType="guid"
+                          name="ccba_lkp_contactfororders" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_int_orderquantity]"
+                          dataType="i4"
+                          name="ccba_int_orderquantity" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_dec_orderquantitycases]"
+                          dataType="r8"
+                          name="ccba_dec_orderquantitycases" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_dec_orderquantitylayers]"
+                          dataType="r8"
+                          name="ccba_dec_orderquantitylayers" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_payeraccountid]"
+                          dataType="guid"
+                          name="ccba_lkp_payeraccountid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_confirmedshippingdate]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_confirmedshippingdate" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_ponumber]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_ponumber" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[requestdeliveryby]"
+                          dataType="dbTimeStamp"
+                          name="requestdeliveryby" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_salesagentid]"
+                          dataType="guid"
+                          name="ccba_lkp_salesagentid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_sfaorderid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_sfaorderid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_city]"
+                          dataType="wstr"
+                          length="80"
+                          name="shipto_city" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_country]"
+                          dataType="wstr"
+                          length="80"
+                          name="shipto_country" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_stateorprovince]"
+                          dataType="wstr"
+                          length="50"
+                          name="shipto_stateorprovince" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_line1]"
+                          dataType="wstr"
+                          length="250"
+                          name="shipto_line1" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_line2]"
+                          dataType="wstr"
+                          length="250"
+                          name="shipto_line2" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[shipto_postalcode]"
+                          dataType="wstr"
+                          length="20"
+                          name="shipto_postalcode" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_sourcechannel]"
+                          dataType="i4"
+                          name="ccba_os_sourcechannel" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[statecode]"
+                          dataType="i4"
+                          name="statecode" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[statuscode]"
+                          dataType="i4"
+                          name="statuscode" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totalamount]"
+                          dataType="cy"
+                          name="totalamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[freightamount]"
+                          dataType="cy"
+                          name="freightamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totallineitemamount]"
+                          dataType="cy"
+                          name="totallineitemamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totaldiscountamount]"
+                          dataType="cy"
+                          name="totaldiscountamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[totaltax]"
+                          dataType="cy"
+                          name="totaltax" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ordernumber]"
+                          dataType="wstr"
+                          length="100"
+                          name="ordernumber" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_paymentterms]"
+                          dataType="guid"
+                          name="msdyn_paymentterms" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_accountmanageridtext]"
+                          dataType="wstr"
+                          length="128"
+                          name="ccba_lkp_accountmanageridtext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_costcenteridtext]"
+                          dataType="wstr"
+                          length="11"
+                          name="ccba_lkp_costcenteridtext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[transactioncurrencyidtext]"
+                          dataType="wstr"
+                          length="5"
+                          name="transactioncurrencyidtext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[customeridtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="customeridtext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_defaultshippingwarehousetext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_defaultshippingwarehousetext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_equipmentmovementtypetext]"
+                          dataType="wstr"
+                          length="18"
+                          name="ccba_os_equipmentmovementtypetext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_bool_equipmentrescheduledtext]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_bool_equipmentrescheduledtext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_equipmenttypetext]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_os_equipmenttypetext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_bool_ooddordertext]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_bool_ooddordertext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_defaultshippingsitetext]"
+                          dataType="wstr"
+                          length="10"
+                          name="msdyn_defaultshippingsitetext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_ordercategorytext]"
+                          dataType="wstr"
+                          length="24"
+                          name="ccba_os_ordercategorytext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_contactfororderstext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lkp_contactfororderstext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_payeraccountidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lkp_payeraccountidtext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_paymenttermstext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_paymenttermstext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_salesagentidtext]"
+                          dataType="wstr"
+                          length="128"
+                          name="ccba_lkp_salesagentidtext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_sourcechanneltext]"
+                          dataType="wstr"
+                          length="12"
+                          name="ccba_os_sourcechanneltext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[statecodetext]"
+                          dataType="wstr"
+                          length="9"
+                          name="statecodetext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[statuscodetext]"
+                          dataType="wstr"
+                          length="22"
+                          name="statuscodetext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[Processingflag]"
+                          dataType="wstr"
+                          length="11"
+                          name="Processingflag" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[Crmrecordid]"
+                          dataType="guid"
+                          name="Crmrecordid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                          dataType="guid"
+                          name="ownerid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycodetext" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycode]"
+                          dataType="guid"
+                          name="cdm_companycode" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Reading SalesOrder Data From Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SalesOrder]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Connections[OleDbConnection]"
+                      connectionManagerID="{9756231E-BC44-4F1E-9515-002B7C56C5C7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_SOURCE_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[requestdeliveryby]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[requestdeliveryby]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[requestdeliveryby]"
+                          name="requestdeliveryby"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_sfaorderid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_sfaorderid]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_sfaorderid]"
+                          name="ccba_slot_sfaorderid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_city]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_city]"
+                          length="80"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_city]"
+                          name="shipto_city"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_country]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_country]"
+                          length="80"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_country]"
+                          name="shipto_country"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_stateorprovince]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_stateorprovince]"
+                          length="50"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_stateorprovince]"
+                          name="shipto_stateorprovince"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_line1]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_line1]"
+                          length="250"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_line1]"
+                          name="shipto_line1"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_line2]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_line2]"
+                          length="250"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_line2]"
+                          name="shipto_line2"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_postalcode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_postalcode]"
+                          length="20"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[shipto_postalcode]"
+                          name="shipto_postalcode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_sourcechannel]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_sourcechannel]"
+                          length="12"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_sourcechannel]"
+                          name="ccba_os_sourcechannel"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[statecode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[statecode]"
+                          length="9"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[statecode]"
+                          name="statecode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[statuscode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[statuscode]"
+                          length="22"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[statuscode]"
+                          name="statuscode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totallineitemamount]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totallineitemamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totallineitemamount]"
+                          name="totallineitemamount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totalamount]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totalamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totalamount]"
+                          name="totalamount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totaldiscountamount]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totaldiscountamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totaldiscountamount]"
+                          name="totaldiscountamount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totaltax]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totaltax]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[totaltax]"
+                          name="totaltax"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[freightamount]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[freightamount]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[freightamount]"
+                          name="freightamount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ordernumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ordernumber]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ordernumber]"
+                          name="ordernumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[transactioncurrencyid]"
+                          length="5"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[transactioncurrencyid]"
+                          name="transactioncurrencyid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[customerid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[customerid]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[customerid]"
+                          name="customerid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_customerblockmessage]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_customerblockmessage]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_customerblockmessage]"
+                          name="ccba_slot_customerblockmessage"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_defaultshippingwarehouse]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_defaultshippingwarehouse]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_defaultshippingwarehouse]"
+                          name="msdyn_defaultshippingwarehouse"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_equipmentmovementtype]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_equipmentmovementtype]"
+                          length="18"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_equipmentmovementtype]"
+                          name="ccba_os_equipmentmovementtype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_equipmenttype]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_equipmenttype]"
+                          length="19"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_equipmenttype]"
+                          name="ccba_os_equipmenttype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_defaultshippingsite]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_defaultshippingsite]"
+                          length="10"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_defaultshippingsite]"
+                          name="msdyn_defaultshippingsite"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_ordercategory]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_ordercategory]"
+                          length="24"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_ordercategory]"
+                          name="ccba_os_ordercategory"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_contactfororders]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_contactfororders]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_contactfororders]"
+                          name="ccba_lkp_contactfororders"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_int_orderquantity]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_int_orderquantity]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_int_orderquantity]"
+                          name="ccba_int_orderquantity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_dec_orderquantitycases]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_dec_orderquantitycases]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_dec_orderquantitycases]"
+                          name="ccba_dec_orderquantitycases"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_dec_orderquantitylayers]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_dec_orderquantitylayers]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_dec_orderquantitylayers]"
+                          name="ccba_dec_orderquantitylayers"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_confirmedshippingdate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_confirmedshippingdate]"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_confirmedshippingdate]"
+                          name="msdyn_confirmedshippingdate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_ponumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_ponumber]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_ponumber]"
+                          name="ccba_slot_ponumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_accountmanagerid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_accountmanagerid]"
+                          length="128"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_accountmanagerid]"
+                          name="ccba_lkp_accountmanagerid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_costcenterid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_costcenterid]"
+                          length="11"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_costcenterid]"
+                          name="ccba_lkp_costcenterid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_bool_equipmentrescheduled]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_bool_equipmentrescheduled]"
+                          length="3"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_bool_equipmentrescheduled]"
+                          name="ccba_bool_equipmentrescheduled"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_bool_ooddorder]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_bool_ooddorder]"
+                          length="3"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_bool_ooddorder]"
+                          name="ccba_bool_ooddorder"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_salesagentid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_salesagentid]"
+                          length="128"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_salesagentid]"
+                          name="ccba_lkp_salesagentid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_sapid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_sapid]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_slot_sapid]"
+                          name="ccba_slot_sapid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_payeraccountid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_payeraccountid]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_payeraccountid]"
+                          name="ccba_lkp_payeraccountid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_paymentterms]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_paymentterms]"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_paymentterms]"
+                          name="msdyn_paymentterms"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          length="20"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          name="cdm_companycode"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[requestdeliveryby]"
+                          dataType="dbTimeStamp"
+                          name="requestdeliveryby" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_sfaorderid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_sfaorderid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_city]"
+                          dataType="wstr"
+                          length="80"
+                          name="shipto_city" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_country]"
+                          dataType="wstr"
+                          length="80"
+                          name="shipto_country" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_stateorprovince]"
+                          dataType="wstr"
+                          length="50"
+                          name="shipto_stateorprovince" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_line1]"
+                          dataType="wstr"
+                          length="250"
+                          name="shipto_line1" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_line2]"
+                          dataType="wstr"
+                          length="250"
+                          name="shipto_line2" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[shipto_postalcode]"
+                          dataType="wstr"
+                          length="20"
+                          name="shipto_postalcode" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_sourcechannel]"
+                          dataType="wstr"
+                          length="12"
+                          name="ccba_os_sourcechannel" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[statecode]"
+                          dataType="wstr"
+                          length="9"
+                          name="statecode" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[statuscode]"
+                          dataType="wstr"
+                          length="22"
+                          name="statuscode" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totallineitemamount]"
+                          dataType="cy"
+                          name="totallineitemamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totalamount]"
+                          dataType="cy"
+                          name="totalamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totaldiscountamount]"
+                          dataType="cy"
+                          name="totaldiscountamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[totaltax]"
+                          dataType="cy"
+                          name="totaltax" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[freightamount]"
+                          dataType="cy"
+                          name="freightamount" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ordernumber]"
+                          dataType="wstr"
+                          length="100"
+                          name="ordernumber" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[transactioncurrencyid]"
+                          dataType="wstr"
+                          length="5"
+                          name="transactioncurrencyid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[customerid]"
+                          dataType="wstr"
+                          length="100"
+                          name="customerid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_customerblockmessage]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_customerblockmessage" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_defaultshippingwarehouse]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_defaultshippingwarehouse" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_equipmentmovementtype]"
+                          dataType="wstr"
+                          length="18"
+                          name="ccba_os_equipmentmovementtype" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_equipmenttype]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_os_equipmenttype" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_defaultshippingsite]"
+                          dataType="wstr"
+                          length="10"
+                          name="msdyn_defaultshippingsite" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_ordercategory]"
+                          dataType="wstr"
+                          length="24"
+                          name="ccba_os_ordercategory" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_contactfororders]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lkp_contactfororders" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_int_orderquantity]"
+                          dataType="i4"
+                          name="ccba_int_orderquantity" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_dec_orderquantitycases]"
+                          dataType="r8"
+                          name="ccba_dec_orderquantitycases" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_dec_orderquantitylayers]"
+                          dataType="r8"
+                          name="ccba_dec_orderquantitylayers" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_confirmedshippingdate]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_confirmedshippingdate" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_ponumber]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_ponumber" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_accountmanagerid]"
+                          dataType="wstr"
+                          length="128"
+                          name="ccba_lkp_accountmanagerid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_costcenterid]"
+                          dataType="wstr"
+                          length="11"
+                          name="ccba_lkp_costcenterid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_bool_equipmentrescheduled]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_bool_equipmentrescheduled" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_bool_ooddorder]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_bool_ooddorder" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_salesagentid]"
+                          dataType="wstr"
+                          length="128"
+                          name="ccba_lkp_salesagentid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_payeraccountid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lkp_payeraccountid" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_paymentterms]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_paymentterms" />
+                        <externalMetadataColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycode" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_accountmanagerid]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_accountmanagerid]"
+                          name="ccba_lkp_accountmanagerid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_costcenterid]"
+                          dataType="wstr"
+                          length="11"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_costcenterid]"
+                          name="ccba_lkp_costcenterid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[requestdeliveryby]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[requestdeliveryby]"
+                          name="requestdeliveryby" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_sfaorderid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_sfaorderid]"
+                          name="ccba_slot_sfaorderid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_city]"
+                          dataType="wstr"
+                          length="80"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_city]"
+                          name="shipto_city" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_country]"
+                          dataType="wstr"
+                          length="80"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_country]"
+                          name="shipto_country" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_stateorprovince]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_stateorprovince]"
+                          name="shipto_stateorprovince" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_bool_equipmentrescheduled]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_bool_equipmentrescheduled]"
+                          name="ccba_bool_equipmentrescheduled" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_line1]"
+                          dataType="wstr"
+                          length="250"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_line1]"
+                          name="shipto_line1" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_bool_ooddorder]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_bool_ooddorder]"
+                          name="ccba_bool_ooddorder" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_line2]"
+                          dataType="wstr"
+                          length="250"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_line2]"
+                          name="shipto_line2" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_postalcode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[shipto_postalcode]"
+                          name="shipto_postalcode" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_sourcechannel]"
+                          dataType="wstr"
+                          length="12"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_sourcechannel]"
+                          name="ccba_os_sourcechannel" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[statecode]"
+                          dataType="wstr"
+                          length="9"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[statecode]"
+                          name="statecode" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[statuscode]"
+                          dataType="wstr"
+                          length="22"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[statuscode]"
+                          name="statuscode" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totallineitemamount]"
+                          dataType="cy"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totallineitemamount]"
+                          name="totallineitemamount" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_payeraccountid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_payeraccountid]"
+                          name="ccba_lkp_payeraccountid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_paymentterms]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_paymentterms]"
+                          name="msdyn_paymentterms" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totalamount]"
+                          dataType="cy"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totalamount]"
+                          name="totalamount" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totaldiscountamount]"
+                          dataType="cy"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totaldiscountamount]"
+                          name="totaldiscountamount" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totaltax]"
+                          dataType="cy"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[totaltax]"
+                          name="totaltax" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_salesagentid]"
+                          dataType="wstr"
+                          length="128"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_salesagentid]"
+                          name="ccba_lkp_salesagentid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_sapid]"
+                          name="ccba_slot_sapid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[freightamount]"
+                          dataType="cy"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[freightamount]"
+                          name="freightamount" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ordernumber]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ordernumber]"
+                          name="ordernumber" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[transactioncurrencyid]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[transactioncurrencyid]"
+                          name="transactioncurrencyid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[customerid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[customerid]"
+                          name="customerid" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_customerblockmessage]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_customerblockmessage]"
+                          name="ccba_slot_customerblockmessage" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_defaultshippingwarehouse]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_defaultshippingwarehouse]"
+                          name="msdyn_defaultshippingwarehouse" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_equipmentmovementtype]"
+                          dataType="wstr"
+                          length="18"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_equipmentmovementtype]"
+                          name="ccba_os_equipmentmovementtype" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_equipmenttype]"
+                          dataType="wstr"
+                          length="19"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_equipmenttype]"
+                          name="ccba_os_equipmenttype" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_defaultshippingsite]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_defaultshippingsite]"
+                          name="msdyn_defaultshippingsite" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_ordercategory]"
+                          dataType="wstr"
+                          length="24"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_ordercategory]"
+                          name="ccba_os_ordercategory" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_contactfororders]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_contactfororders]"
+                          name="ccba_lkp_contactfororders" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_int_orderquantity]"
+                          dataType="i4"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_int_orderquantity]"
+                          name="ccba_int_orderquantity" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_dec_orderquantitycases]"
+                          dataType="r8"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_dec_orderquantitycases]"
+                          name="ccba_dec_orderquantitycases" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_dec_orderquantitylayers]"
+                          dataType="r8"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_dec_orderquantitylayers]"
+                          name="ccba_dec_orderquantitylayers" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_confirmedshippingdate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_confirmedshippingdate]"
+                          name="msdyn_confirmedshippingdate" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_ponumber]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_slot_ponumber]"
+                          name="ccba_slot_ponumber" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          name="cdm_companycode" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+                  endId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+                  endId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SalesOrder Extraction\SalesOrder Trim"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8a6ec38e-bf85-4145-b4e1-9c544c6e819c}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SalesOrder Trim"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC   [dbo].[sp_SalesOrder_Trim]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\SalesOrder Extraction\Update Processing Flag"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9D4257BE-5222-423D-938C-CCBA8CA937B8}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Processing Flag"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_SalesOrder_SetStatus]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SalesOrder Extraction.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{A39D56B5-60F9-458D-B094-DE709C1F3EA9}"
+          DTS:From="Package\SalesOrder Extraction\Delete SalesOrder Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\SalesOrder Extraction\Retrieving Data From Source to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SalesOrder Extraction.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{A79A3B38-EB1F-4601-9E56-0380F078638A}"
+          DTS:From="Package\SalesOrder Extraction\Retrieving Data From Source to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\SalesOrder Extraction\Update Processing Flag" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\SalesOrder Extraction.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{2DEBF511-7430-49EF-8A64-559B17359D68}"
+          DTS:From="Package\SalesOrder Extraction\Update Processing Flag"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\SalesOrder Extraction\SalesOrder Trim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SalesOrder Transformation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{63D807B1-7F63-4A2E-8C3E-0DE4E7B05EFE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SalesOrder Transformation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SalesOrder Transformation\SalesOrder Transformation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{ECF8C22C-49F3-4A3F-A47B-4FD244ADD88C}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SalesOrder Transformation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_SalesOrder_Transformation]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{BCC567A5-22D6-4739-80AD-FDC73B01E7DE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{FA988E0C-CD96-4234-994B-247D20C958E9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1668AF9D-8EC3-481A-B1F9-21465B5AC008}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SalesOrder Extraction" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{3B2225E1-A9F3-4658-A786-151C2E3FFAA1}"
+      DTS:From="Package\SalesOrder Extraction"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SalesOrder Transformation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{A838BA63-0243-441C-BEFA-339E56C2E7FB}"
+      DTS:From="Package\SalesOrder Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{FB96D74B-F6E5-4523-A205-14348B586486}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="544.718742561061,302.19797540009" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="536.866063868229,227.454868168804" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\SalesOrder Extraction\Delete SalesOrder Data"
+          TopLeft="27.6041635234528,2.25000397625729" />
+        <NodeLayout
+          Size="197.333333333334,49.3333333333334"
+          Id="Package\SalesOrder Extraction\Retrieving Data From Source to Staging"
+          TopLeft="19.2708378269647,67.8114050831768" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\SalesOrder Extraction\SalesOrder Trim"
+          TopLeft="40.4895797174736,214.268148932659" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\SalesOrder Extraction\Update Processing Flag"
+          TopLeft="25.8229133488301,141.057621238863" />
+        <EdgeLayout
+          Id="Package\SalesOrder Extraction.PrecedenceConstraints[Constraint]"
+          TopLeft="121.104167341875,44.916670642924">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,22.8947344402528"
+              Start="0,0"
+              End="0,15.3947344402528">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.3947344402528" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SalesOrder Extraction.PrecedenceConstraints[Constraint 1]"
+          TopLeft="120.213542254564,117.14473841651">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.9128828223529"
+              Start="0,0"
+              End="0,16.4128828223529">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4128828223529" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SalesOrder Extraction.PrecedenceConstraints[Constraint 2]"
+          TopLeft="120.822913199819,183.72428790553">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.5438610271294"
+              Start="0,0"
+              End="0,23.0438610271294">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.0438610271294" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="235.333333333334,312"
+          Size="235.333333333334,354.666666666667"
+          Id="Package\SalesOrder Extraction"
+          TopLeft="233.239561966465,46.6973693000147" />
+        <NodeLayout
+          Size="168.666666666667,42.6666666666667"
+          Id="Package\SalesOrder Transformation\SalesOrder Transformation"
+          TopLeft="14.8749998603016,10.9736843135548" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="189.333333333334,82.6666666666667"
+          Size="189.333333333334,126"
+          Id="Package\SalesOrder Transformation"
+          TopLeft="511.38243341976,48.3671600620345" />
+        <NodeLayout
+          Size="136.666666666667,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="8.62499995343389,19.8684213230815" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="153.333333333334,90"
+          Size="153.333333333334,132.666666666667"
+          Id="Package\Start"
+          TopLeft="13.4479168412897,133.96052873374" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="166.781250174623,200.293862067073">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="66.4583117918419,23.7368405662747"
+              Start="0,0"
+              End="58.9583117918419,23.7368405662747">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.229155895921,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.229155895921,0"
+                    Point2="33.229155895921,0"
+                    Point3="33.229155895921,4" />
+                  <mssgle:LineSegment
+                    End="33.229155895921,19.7368405662747" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.229155895921,19.7368405662747"
+                    Point2="33.229155895921,23.7368405662747"
+                    Point3="37.229155895921,23.7368405662747" />
+                  <mssgle:LineSegment
+                    End="58.9583117918419,23.7368405662747" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="468.572895299798,224.030702633348">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="42.8095381199616,-112.663542571314"
+              Start="0,0"
+              End="35.3095381199616,-112.663542571314">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="17.4047690599808,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.4047690599808,0"
+                    Point2="21.4047690599808,0"
+                    Point3="21.4047690599808,-4" />
+                  <mssgle:LineSegment
+                    End="21.4047690599808,-108.663542571314" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.4047690599808,-108.663542571314"
+                    Point2="21.4047690599808,-112.663542571314"
+                    Point3="25.4047690599808,-112.663542571314" />
+                  <mssgle:LineSegment
+                    End="35.3095381199616,-112.663542571314" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="606.790915310661,174.367160062035">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.0877081067694"
+              Start="0,0"
+              End="0,45.5877081067694">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.5877081067694" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="606.292403214645,270.121534835471">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.0764405646197"
+              Start="0,0"
+              End="0,24.5764405646197">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5764405646197" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\SalesOrder Extraction\Retrieving Data From Source to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="266.666666666667,42.6666666666667"
+          Id="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source"
+          TopLeft="131.249998044223,31.4736848029404" />
+        <NodeLayout
+          Size="218.666666666667,42.6666666666667"
+          Id="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder"
+          TopLeft="156.874997662381,213.47368822864" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Derived Column"
+          TopLeft="181.541666713233,121.245613970696" />
+        <EdgeLayout
+          Id="Package\SalesOrder Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+          TopLeft="262.062499045395,74.1403514696071">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.1052625010886"
+              Start="0,0"
+              End="0,39.6052625010886">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.6052625010886" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SalesOrder Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+          TopLeft="262.874998854474,163.912280637363">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.561407591277"
+              Start="0,0"
+              End="0,42.061407591277">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.061407591277" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Reading SalesOrder Data From Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\SalesOrder Extraction\Retrieving Data From Source to Staging\Inserting Data To SalesOrder">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

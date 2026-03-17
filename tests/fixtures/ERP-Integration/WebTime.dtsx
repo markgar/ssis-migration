@@ -1,0 +1,3106 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/10/2018 1:08:21 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MinderVM"
+  DTS:CreatorName="MinderVM\randyminder"
+  DTS:DTSID="{F90B3DC6-FF53-4B4C-A8EA-000A3CAC84A9}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.106"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="WebTime"
+  DTS:PackageType="5"
+  DTS:VersionBuild="95"
+  DTS:VersionGUID="{3E13D540-0441-4C99-887A-81AEF5322264}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Paylocity FTP Connection]"
+      DTS:CreationName="FTP"
+      DTS:DTSID="{0809FA4A-9307-41A5-A631-CC2066643FCF}"
+      DTS:ObjectName="Paylocity FTP Connection">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="ftp.paylocity.com:21">
+          <DTS:FtpConnection
+            DTS:ServerName="ftp.paylocity.com"
+            DTS:ServerUserName="CS0012901">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA72tg5mwUi0e0vAhG3ZPKPAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAADHTsdYPu51KDa0YEYj04/T/m37wcmP73fXkGDPa7nkAwAAAAAOgAAAAAIAACAAAAAZh3+DkCj2iE+Lv4kCnEQ5nbuojnWr7AVJ7Yh7p64METAAAACtVO0LlS42Qh5gULurmyhpfkSBkJwB2Z0g/olDJyG8SrG/fqfdXpKdWJ6P4w7p9+RAAAAAIRHGZd9H3NUxAmwrPBBII/3oX2EgRH/cXnsXRP7jf17Mf0yru70U5JDY/r+XdQdcA81jJTerQwmfHBsrXnjAyQ</DTS:Property>
+          </DTS:FtpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[WebTime Files]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{6EC35D49-6768-4091-A138-1797C0CE83BE}"
+      DTS:ObjectName="WebTime Files">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::FileName]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x0022_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Temp\Filename.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Web Pay Employee ID&quot;"
+              DTS:DTSID="{93198CE5-7099-487C-95F8-DEEFBAE237ED}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Web Pay Company ID&quot;"
+              DTS:DTSID="{1C6AF541-D63D-4A7C-966D-2696C56268E3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Badge Number&quot;"
+              DTS:DTSID="{0947FB18-D299-4F5B-96FA-332ACE907B44}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Last Name&quot;"
+              DTS:DTSID="{EA9BD450-B778-4479-8986-707F167D0769}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;First Name&quot;"
+              DTS:DTSID="{8E88938A-4345-47D7-AF88-9728ECC2DC56}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;MI&quot;"
+              DTS:DTSID="{0292EDCD-BF98-4FB5-A7B4-BA67595366A6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Title&quot;"
+              DTS:DTSID="{49D2D2C4-3B6F-4DDE-9D9E-43C47D52AC51}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Personal Email&quot;"
+              DTS:DTSID="{D690D5CC-2824-40CE-8088-6ECC5B3AD169}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Work Email&quot;"
+              DTS:DTSID="{66E6A746-8720-426B-B06D-21C45E2F6239}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Mobile Number&quot;"
+              DTS:DTSID="{06CE1CF0-CFDE-4BC4-A0DA-A83B2088A5D4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Pay Description&quot;"
+              DTS:DTSID="{A1F0F0C2-BC85-441E-BEB7-5620559C1798}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Pay Type&quot;"
+              DTS:DTSID="{7017E7E2-A72C-4719-AC53-CCCEAB647169}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Date&quot;"
+              DTS:DTSID="{3B323509-F73B-4658-8AB7-45B836336AEE}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Rounded Time In&quot;"
+              DTS:DTSID="{7A7BE7A6-A9E3-4DF3-B526-BA10CF44A4F4}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Rounded Time Out&quot;"
+              DTS:DTSID="{86D1E1F1-BF66-41FB-8DE7-403065C057FF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Actual Time In&quot;"
+              DTS:DTSID="{67C3F399-0157-472D-BAD1-0542D2328425}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Actual Time Out&quot;"
+              DTS:DTSID="{20855EE6-13F3-4185-87C0-17B7FE395FC2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Hours&quot;"
+              DTS:DTSID="{F91D43CA-8FAA-4E36-8E6F-AB2ABA453946}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Punch Type&quot;"
+              DTS:DTSID="{46BD1F72-7952-44D2-829F-741E5E5A8818}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 1 Code&quot;"
+              DTS:DTSID="{86FD4DE3-B624-443C-B9C2-1B755C50C297}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 1 Description&quot;"
+              DTS:DTSID="{4EBE5321-1685-4314-83DD-C3EB39168F7D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 2 Code&quot;"
+              DTS:DTSID="{03C65517-0219-4B5F-BE14-42833D6DF265}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 2 Description&quot;"
+              DTS:DTSID="{5C6F7D40-0123-44C8-B919-FB6B9387B844}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 3 Code&quot;"
+              DTS:DTSID="{01B7C558-797E-4427-B6D3-3D66A2F5930A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 3 Description&quot;"
+              DTS:DTSID="{31E6029A-1FD5-4580-BA7D-8E319158BA81}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 4 Code&quot;"
+              DTS:DTSID="{316814C7-BE68-49C7-B90F-CA07553DF1F7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 4 Description&quot;"
+              DTS:DTSID="{8B4BCED6-6F5F-461C-8B18-CF22CB624BD5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 5 Code&quot;"
+              DTS:DTSID="{8F98E5F7-5E6A-4720-8CB9-06B17AA37E6C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;Labor Level 5 Description&quot;"
+              DTS:DTSID="{516743EB-119C-4EF4-BBC1-728A6F3665DA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="&quot;PunchID&quot;"
+              DTS:DTSID="{000CC3CA-F067-42DA-925C-5F1A68B36A9B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A273C623-ED99-4A48-871B-17068D1ADA54}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileDate">
+      <DTS:VariableValue
+        DTS:DataType="7">10/16/2018 1:28:32 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{664D18FC-BD07-4846-86F6-37D39899A483}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileHasBeenProcessed">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2217CA23-2145-465D-ABFE-74E0DF536ECD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileName">
+      <DTS:VariableValue
+        DTS:DataType="8">C:\Temp\Filename.csv</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{3672F2A4-3FBA-4F48-8F9A-D277C6B9245D}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileSpec">
+      <DTS:VariableValue
+        DTS:DataType="8">*.csv</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Delete each File"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{49eb08c4-bf8c-41ca-82fc-54f4168066a8}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:MaxErrorCount="0"
+      DTS:ObjectName="Delete each File">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{68a4f2bc-dd86-47a7-a90a-fb62602e77fe}"
+        DTS:ObjectName="{9787EFC3-7B22-4177-90B7-11F56B82DFC6}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Project::LocalFolder]</DTS:PropertyExpression>
+        <DTS:PropertyExpression
+          DTS:Name="FileSpec">@[User::FileSpec]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\Temp" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Delete each File\Delete Local File"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{700a0c31-aa4f-4d94-b3f8-7a96ded741dd}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete Local File"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="DeleteFile"
+              TaskSourcePath="User::FileName"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{3E336EA5-778C-4E57-89DA-D986629F015C}"
+          DTS:ObjectName="{3E336EA5-778C-4E57-89DA-D986629F015C}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Download all Files"
+      DTS:CreationName="Microsoft.FtpTask"
+      DTS:Description="FTP Task"
+      DTS:DTSID="{E548639F-4168-4FF1-8108-4607F3AFF211}"
+      DTS:ExecutableType="Microsoft.FtpTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Download all Files"
+      DTS:TaskContact="FTP Task; Microsoft Corporation; SQL Server 2017 RC1; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FtpData
+          ConnectionName="{0809FA4A-9307-41A5-A631-CC2066643FCF}"
+          TaskOperationType="Receive"
+          TaskIsLocalPathVar="True"
+          TaskLocalPath="$Project::LocalFolder"
+          TaskRemotePath="/WebTime/*.csv"
+          TaskOverwriteDest="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Process each File"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{3A4E6BFD-C39A-47F8-914B-B7FE54BFF6E9}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:MaxErrorCount="0"
+      DTS:ObjectName="Process each File">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{9787EFC3-7B22-4177-90B7-11F56B82DFC6}"
+        DTS:ObjectName="{9787EFC3-7B22-4177-90B7-11F56B82DFC6}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Project::LocalFolder]</DTS:PropertyExpression>
+        <DTS:PropertyExpression
+          DTS:Name="FileSpec">@[User::FileSpec]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="C:\Temp" />
+            <FEFEProperty
+              FileSpec="*.csv" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Process each File\Check if Processed File"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{7FF9B58D-252A-4D32-A701-EC7870EE2134}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Check if Processed File"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{4B3DCDC5-10BB-412B-9D61-6EAC8D1E9F56}"
+              SQLTask:SqlStatementSource="SELECT IIF(EXISTS (SELECT * FROM Pay.WebTime WHERE ImportFileName = ?), 1, 0) as FileExists"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="FileExists"
+                SQLTask:DtsVariableName="User::FileHasBeenProcessed" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::FileName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process each File\Get File Date"
+          DTS:CreationName="Microsoft.ScriptTask"
+          DTS:Description="Script Task"
+          DTS:DTSID="{4DC4DA99-DA82-4E87-B701-64F45DBA1DD7}"
+          DTS:ExecutableType="Microsoft.ScriptTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get File Date"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_364cebb1ff0c4ae4bb191e441993201c"
+              VSTAMajorVersion="15"
+              VSTAMinorVersion="0"
+              Language="CSharp"
+              ReadOnlyVariables="User::FileName"
+              ReadWriteVariables="User::FileDate">
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="ST_364cebb1ff0c4ae4bb191e441993201c.csproj"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{e8091ab6-17fd-4838-9bdc-a5bd895026d9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_364cebb1ff0c4ae4bb191e441993201c</RootNamespace>
+    <AssemblyName>ST_364cebb1ff0c4ae4bb191e441993201c</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptTask" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptTask" GeneratedNamespace="$safeprojectname" IconIndex=""></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+#endregion
+
+namespace ST_364cebb1ff0c4ae4bb191e441993201c
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+        /// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+        public void Main()
+        {
+            string fileName = Dts.Variables["User::FileName"].Value.ToString();
+            int position = fileName.IndexOf("_WebTime_");
+
+            try
+            {
+                // If "position" is >= 0, the file name has a date and time component.
+                if (position >= 0)
+                {
+                    // The date embedded in the file name is in the form of mmddyyyy and starts nine characters after the start of "_WebTime_"
+                    string datePortion = fileName.Substring(position + 9, 8);
+                    int month = Int32.Parse(datePortion.Substring(0, 2));
+                    int day = Int32.Parse(datePortion.Substring(2, 2));
+                    int year = Int32.Parse(datePortion.Substring(4, 4));
+
+                    Dts.Variables["User::FileDate"].Value = new System.DateTime(year, month, day);
+                }
+                else
+                {
+                    // If the file name doesn't have a date and time componenet, use the current date.
+                    Dts.Variables["User::FileDate"].Value = System.DateTime.Now.Date;
+                }
+            } catch
+            {
+                // Something is wrong with the file name so just use the current date.
+                Dts.Variables["User::FileDate"].Value = System.DateTime.Now.Date;
+            }
+
+            Dts.TaskResult = (int)ScriptResults.Success;
+        }
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+  <msb:PropertyGroup>
+    <msb:CodeName>ST_364cebb1ff0c4ae4bb191e441993201c</msb:CodeName>
+    <msb:Language>msBuild</msb:Language>
+    <msb:DisplayName>ST_364cebb1ff0c4ae4bb191e441993201c</msb:DisplayName>
+    <msb:ProjectId>{58889E2B-E18C-4D97-A2B1-92DCD30EEBA2}</msb:ProjectId>
+  </msb:PropertyGroup>
+  <msb:ItemGroup>
+    <msb:Project Include="ST_364cebb1ff0c4ae4bb191e441993201c.csproj" />
+    <msb:File Include="Properties\Resources.Designer.cs" />
+    <msb:File Include="Properties\Settings.settings" />
+    <msb:File Include="Properties\AssemblyInfo.cs" />
+    <msb:File Include="Properties\Resources.resx" />
+    <msb:File Include="Properties\Settings.Designer.cs" />
+    <msb:File Include="ScriptMain.cs" />
+  </msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_364cebb1ff0c4ae4bb191e441993201c.Properties.Settings.get_Default():ST_364cebb1ff0c4ae4bb191e441993201c.Properties.Sett" +
+    "ings")]
+
+namespace ST_364cebb1ff0c4ae4bb191e441993201c.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_364cebb1ff0c4ae4bb191e441993201c")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_364cebb1ff0c4ae4bb191e441993201c")]
+[assembly: AssemblyCopyright("Copyright @  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_364cebb1ff0c4ae4bb191e441993201c.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_364cebb1ff0c4ae4bb191e441993201c.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_364cebb1ff0c4ae4bb191e441993201c.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_364cebb1ff0c4ae4bb191e441993201c.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_364cebb1ff0c4ae4bb191e441993201c.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_364cebb1ff0c4ae4bb191e441993201c.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAHosxlsAAAAAAAAAAOAAIiALATAAABAAAAAIAAAAAAAAQi8A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAPAuAABPAAAAAEAAAHgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAASA8AAAAgAAAAEAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAHgEAAAAQAAAAAYAAAASAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAk
+LwAAAAAAAEgAAAACAAUA0CEAAGgMAAABAAAAAAAAADguAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABswBAD7AAAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKbxQAAAoKBnIfAABwbxUAAAoLBxYyXwYHHwlYHm8WAAAKJRYYbxYAAAooFwAACgwlGBhvFgAA
+CigXAAAKDRoabxYAAAooFwAAChMEAigQAAAKbxEAAApyMwAAcG8SAAAKEQQICXMYAAAKjA8AAAFv
+GQAACistAigQAAAKbxEAAApyMwAAcG8SAAAKKBoAAAoTBRIFKBsAAAqMDwAAAW8ZAAAK3jAmAigQ
+AAAKbxEAAApyMwAAcG8SAAAKKBoAAAoTBRIFKBsAAAqMDwAAAW8ZAAAK3gACKBAAAAoWbxwAAAoq
+AAEQAAAAACwAkr4AMBAAAAEeAigdAAAKKh4CKB4AAAoqrn4BAAAELR5yUQAAcNADAAACKB8AAApv
+IAAACnMhAAAKgAEAAAR+AQAABCoafgIAAAQqHgKAAgAABCoafgMAAAQqHgIoIgAACioucwgAAAaA
+AwAABCoAAEJTSkIBAAEAAAAAAAwAAAB2NC4wLjMwMzE5AAAAAAUAbAAAAPgDAAAjfgAAZAQAAKAF
+AAAjU3RyaW5ncwAAAAAECgAAxAAAACNVUwDICgAAEAAAACNHVUlEAAAA2AoAAJABAAAjQmxvYgAA
+AAAAAAACAAABVx2iAQkDAAAA+gEzABYAAAEAAAAgAAAABQAAAAYAAAAJAAAAAQAAACIAAAACAAAA
+EAAAAAEAAAACAAAAAwAAAAQAAAABAAAABAAAAAEAAAABAAAAAACvAwEAAAAAAAYAQwJ/BAYA0gJ/
+BAYAjwFsBA8A8wQAAAYAvAEtBAYAJgItBAYABwItBAYAuQItBAYAYwItBAYAfAItBAYA0wEtBAYA
+7gESAwoAlwJeAwoA/wBeAwYAoQDgAwYAZgXgAwYA5wPgAwYAcgFsBAYATwSfBAYAPwQYBA4AQgGZ
+Aw4AowGZAw4AGwEDBAYAVwF/BAoAhwNeAxIANQWqABIAdACqAAYALgPgAwYAAQDgAwYAygDgAwYA
+fQDgAwYAlAUtBAAAAAAHAAAAAAABAAEAAQAQAPgDQAA5AAEAAQAAABAApgQCBUEAAQADAAABEAA/
+BQIFXQADAAcAAwEAAFgFAABFAAQACgARAOwDlAARAO8AmAARAGQAnAAGBi8AoABWgEgFowBWgM8A
+owBQIAAAAACGAP4DBgABAGghAAAAAIYYXwQGAAEAcCEAAAAAgxhfBAYAAQB4IQAAAACTCEsEpwAB
+AKQhAAAAAJMI1wCsAAEAqyEAAAAAkwjjALEAAQCzIQAAAACWCG0FtwACALohAAAAAIYYXwQGAAIA
+wiEAAAAAkRhlBLwAAgAAAAEABAMJAF8EAQARAF8EBgAZAF8ECgApAF8EEAAxAF8EEAA5AF8EEABB
+AF8EEABJAF8EEABRAF8EEABZAF8EEABhAF8EEABpAF8EBgCRAF8EBgCxAF8EFQDBAF8EBgBxAFAF
+JQDJADEFKgDRANcDLwDZAPACNQCBACwDOQDhAAoDPQDhADUDQgDpADMBSAB5AF8ETQDZAPoCVAB5
+AIgFWQB5ADkBXgDJAHkFAQBxAF8EBgCBAF8EBgDxAI8AYwDxAJAFagCZAF8EcAC5AF8EBgAIABQA
+igAIABgAjwApAHMA9wAuAAsAzwAuABMA2AAuABsA9wAuACMAAAEuACsAKQEuADMAKQEuADsAKQEu
+AEMAAAEuAEsALwEuAFMAKQEuAFsARgFDAGMAjwBJAHMA9wBhAHsAjwBjAGsAjwAbAAMAAQAEAAMA
+AABPBMAAAAD3AMUAAABxBcoAAgAEAAMAAgAFAAUAAQAGAAUAAgAHAAcABIAAAAEAAADPGh1lAAAA
+AAAAQAAAAAQAAAAAAAAAAAAAAHgANwAAAAAADgAAAAAAAAAAAAAAgQA/AwAAAAAEAAAAAAAAAAAA
+AAB4AOADAAAAAA4AAAAAAAAAAAAAAIEAEAAAAAAAAAAAAAEAAACwBAAABQACAAAAAEludDMyADxN
+b2R1bGU+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuTWFuYWdlZERUUwB2YWx1ZV9fAG1zY29ybGliAFNU
+XzM2NGNlYmIxZmYwYzRhZTRiYjE5MWU0NDE5OTMyMDFjAGRlZmF1bHRJbnN0YW5jZQBWYXJpYWJs
+ZQBSdW50aW1lVHlwZUhhbmRsZQBHZXRUeXBlRnJvbUhhbmRsZQBEYXRlVGltZQBNaWNyb3NvZnQu
+U3FsU2VydmVyLkR0cy5SdW50aW1lAFR5cGUARmFpbHVyZQBnZXRfQ3VsdHVyZQBzZXRfQ3VsdHVy
+ZQByZXNvdXJjZUN1bHR1cmUAVlNUQVJUU2NyaXB0T2JqZWN0TW9kZWxCYXNlAEFwcGxpY2F0aW9u
+U2V0dGluZ3NCYXNlAFBhcnNlAGdldF9EYXRlAEVkaXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVy
+R2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9uVXNlckNvZGVBdHRyaWJ1dGUARGVidWdnYWJs
+ZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRyaWJ1dGUAQXNzZW1ibHlUaXRsZUF0dHJpYnV0
+ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNz
+ZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFzc2VtYmx5RGVzY3JpcHRpb25BdHRyaWJ1dGUA
+Q29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0ZQBBc3NlbWJseVByb2R1Y3RBdHRyaWJ1dGUA
+QXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJU1NjcmlwdFRhc2tFbnRyeVBvaW50QXR0cmli
+dXRlAEFzc2VtYmx5Q29tcGFueUF0dHJpYnV0ZQBSdW50aW1lQ29tcGF0aWJpbGl0eUF0dHJpYnV0
+ZQBnZXRfVmFsdWUAc2V0X1ZhbHVlAHZhbHVlAEluZGV4T2YAU3lzdGVtLlJ1bnRpbWUuVmVyc2lv
+bmluZwBUb1N0cmluZwBTdWJzdHJpbmcATWljcm9zb2Z0LlNxbFNlcnZlci5TY3JpcHRUYXNrAE1p
+Y3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlRhc2tzLlNjcmlwdFRhc2sAU2NyaXB0T2JqZWN0TW9kZWwA
+U3lzdGVtLkNvbXBvbmVudE1vZGVsAFNUXzM2NGNlYmIxZmYwYzRhZTRiYjE5MWU0NDE5OTMyMDFj
+LmRsbABnZXRfSXRlbQBTeXN0ZW0ARW51bQByZXNvdXJjZU1hbgBTY3JpcHRNYWluAFN5c3RlbS5D
+b25maWd1cmF0aW9uAFN5c3RlbS5HbG9iYWxpemF0aW9uAFN5c3RlbS5SZWZsZWN0aW9uAEN1bHR1
+cmVJbmZvAGdldF9SZXNvdXJjZU1hbmFnZXIALmN0b3IALmNjdG9yAFN5c3RlbS5EaWFnbm9zdGlj
+cwBTeXN0ZW0uUnVudGltZS5Db21waWxlclNlcnZpY2VzAFN5c3RlbS5SZXNvdXJjZXMAU1RfMzY0
+Y2ViYjFmZjBjNGFlNGJiMTkxZTQ0MTk5MzIwMWMuUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3Vy
+Y2VzAERlYnVnZ2luZ01vZGVzAFNUXzM2NGNlYmIxZmYwYzRhZTRiYjE5MWU0NDE5OTMyMDFjLlBy
+b3BlcnRpZXMAZ2V0X1ZhcmlhYmxlcwBTZXR0aW5ncwBTdWNjZXNzAGdldF9EdHMAU2NyaXB0UmVz
+dWx0cwBPYmplY3QAZ2V0X0RlZmF1bHQAc2V0X1Rhc2tSZXN1bHQAZ2V0X05vdwBnZXRfQXNzZW1i
+bHkAAAAAAB1VAHMAZQByADoAOgBGAGkAbABlAE4AYQBtAGUAABNfAFcAZQBiAFQAaQBtAGUAXwAA
+HVUAcwBlAHIAOgA6AEYAaQBsAGUARABhAHQAZQAAcVMAVABfADMANgA0AGMAZQBiAGIAMQBmAGYA
+MABjADQAYQBlADQAYgBiADEAOQAxAGUANAA0ADEAOQA5ADMAMgAwADEAYwAuAFAAcgBvAHAAZQBy
+AHQAaQBlAHMALgBSAGUAcwBvAHUAcgBjAGUAcwAAALjkp1nunD5Lm4+P4CYi/mUABCABAQgDIAAB
+BSABARERBCABAQ4FIAEBEVUJBwYOCAgICBE9BCAAEmUEIAASaQUgARJtHAMgABwDIAAOBCABCA4F
+IAIOCAgEAAEIDgYgAwEICAgEIAEBHAQAABE9BCAAET0GAAESeRF9BSAAEoCBByACAQ4SgIEIt3pc
+Vhk04IkIiYRdzYCAzJEEAAAAAAQBAAAAAwYSTQMGElEDBhIQAgYIAwYRFAQAABJNBAAAElEFAAEB
+ElEEAAASEAMAAAEECAASTQQIABJRBAgAEhAIAQAIAAAAAAAeAQABAFQCFldyYXBOb25FeGNlcHRp
+b25UaHJvd3MBCAEAAgAAAAAAKAEAI1NUXzM2NGNlYmIxZmYwYzRhZTRiYjE5MWU0NDE5OTMyMDFj
+AAAFAQAAAAAWAQARQ29weXJpZ2h0IEAgIDIwMTgAAEkBABouTkVURnJhbWV3b3JrLFZlcnNpb249
+djQuNQEAVA4URnJhbWV3b3JrRGlzcGxheU5hbWUSLk5FVCBGcmFtZXdvcmsgNC41tAAAAM7K774B
+AAAAkQAAAGxTeXN0ZW0uUmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lv
+bj00LjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUw
+ODkjU3lzdGVtLlJlc291cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQ
+tAAAABgvAAAAAAAAAAAAADIvAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkLwAAAAAAAAAAAAAA
+AF9Db3JEbGxNYWluAG1zY29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAA
+AABIAAAAWEAAABoEAAAAAAAAAAAAABoENAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBP
+AAAAAAC9BO/+AAABAAAAAQAdZc8aAAABAB1lzxo/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
+RAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBv
+AG4AAAAAAAAAsAR6AwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAABWAwAAAQAwADAA
+MAAwADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABh
+AG4AeQBOAGEAbQBlAAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4A
+AAAAAFMAVABfADMANgA0AGMAZQBiAGIAMQBmAGYAMABjADQAYQBlADQAYgBiADEAOQAxAGUANAA0
+ADEAOQA5ADMAMgAwADEAYwAAAD4ADwABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAA
+LgA2ADgANgAzAC4AMgA1ADgAOAA1AAAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAA
+AFMAVABfADMANgA0AGMAZQBiAGIAMQBmAGYAMABjADQAYQBlADQAYgBiADEAOQAxAGUANAA0ADEA
+OQA5ADMAMgAwADEAYwAuAGQAbABsAAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0
+AAAAQwBvAHAAeQByAGkAZwBoAHQAIABAACAAIAAyADAAMQA4AAAAKgABAAEATABlAGcAYQBsAFQA
+cgBhAGQAZQBtAGEAcgBrAHMAAAAAAAAAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBu
+AGEAbQBlAAAAUwBUAF8AMwA2ADQAYwBlAGIAYgAxAGYAZgAwAGMANABhAGUANABiAGIAMQA5ADEA
+ZQA0ADQAMQA5ADkAMwAyADAAMQBjAC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBt
+AGUAAAAAAFMAVABfADMANgA0AGMAZQBiAGIAMQBmAGYAMABjADQAYQBlADQAYgBiADEAOQAxAGUA
+NAA0ADEAOQA5ADMAMgAwADEAYwAAAEIADwABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAA
+ADEALgAwAC4ANgA4ADYAMwAuADIANQA4ADgANQAAAAAARgAPAAEAQQBzAHMAZQBtAGIAbAB5ACAA
+VgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANgA4ADYAMwAuADIANQA4ADgANQAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAABEPwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process each File\Import Into Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{EB1DFE6D-2D93-462A-B5B8-91979392117A}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Import Into Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Process each File\Import Into Staging\Add FileName Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Add FileName Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Process each File\Import Into Staging\Add FileName Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Process each File\Import Into Staging\Add FileName Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output].Columns[FileName]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output].Columns[FileName]"
+                          name="FileName"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::FileName]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::FileName]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output].Columns[FileDate]"
+                          dataType="date"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output].Columns[FileDate]"
+                          name="FileDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::FileDate]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::FileDate]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Process each File\Import Into Staging\Add FileName Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process each File\Import Into Staging\Flat File Source"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="1033"
+                  name="Flat File Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process each File\Import Into Staging\Flat File Source.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[WebTime Files]"
+                      connectionManagerRefId="Package.ConnectionManagers[WebTime Files]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Web Pay Employee ID&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Web Pay Employee ID&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Web Pay Employee ID&quot;]"
+                          name="&quot;Web Pay Employee ID&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Web Pay Company ID&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Web Pay Company ID&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Web Pay Company ID&quot;]"
+                          name="&quot;Web Pay Company ID&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Badge Number&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Badge Number&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Badge Number&quot;]"
+                          name="&quot;Badge Number&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Last Name&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Last Name&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Last Name&quot;]"
+                          name="&quot;Last Name&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;First Name&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;First Name&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;First Name&quot;]"
+                          name="&quot;First Name&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;MI&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;MI&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;MI&quot;]"
+                          name="&quot;MI&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Title&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Title&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Title&quot;]"
+                          name="&quot;Title&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Personal Email&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Personal Email&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Personal Email&quot;]"
+                          name="&quot;Personal Email&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Work Email&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Work Email&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Work Email&quot;]"
+                          name="&quot;Work Email&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Mobile Number&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Mobile Number&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Mobile Number&quot;]"
+                          name="&quot;Mobile Number&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Pay Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Pay Description&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Pay Description&quot;]"
+                          name="&quot;Pay Description&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Pay Type&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Pay Type&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Pay Type&quot;]"
+                          name="&quot;Pay Type&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Date&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Date&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Date&quot;]"
+                          name="&quot;Date&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Rounded Time In&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Rounded Time In&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Rounded Time In&quot;]"
+                          name="&quot;Rounded Time In&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Rounded Time Out&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Rounded Time Out&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Rounded Time Out&quot;]"
+                          name="&quot;Rounded Time Out&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Actual Time In&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Actual Time In&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Actual Time In&quot;]"
+                          name="&quot;Actual Time In&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Actual Time Out&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Actual Time Out&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Actual Time Out&quot;]"
+                          name="&quot;Actual Time Out&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Hours&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Hours&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Hours&quot;]"
+                          name="&quot;Hours&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Punch Type&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Punch Type&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Punch Type&quot;]"
+                          name="&quot;Punch Type&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 1 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 1 Code&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 1 Code&quot;]"
+                          name="&quot;Labor Level 1 Code&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 1 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 1 Description&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 1 Description&quot;]"
+                          name="&quot;Labor Level 1 Description&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 2 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 2 Code&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 2 Code&quot;]"
+                          name="&quot;Labor Level 2 Code&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 2 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 2 Description&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 2 Description&quot;]"
+                          name="&quot;Labor Level 2 Description&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 3 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 3 Code&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 3 Code&quot;]"
+                          name="&quot;Labor Level 3 Code&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 3 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 3 Description&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 3 Description&quot;]"
+                          name="&quot;Labor Level 3 Description&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 4 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 4 Code&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 4 Code&quot;]"
+                          name="&quot;Labor Level 4 Code&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 4 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 4 Description&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 4 Description&quot;]"
+                          name="&quot;Labor Level 4 Description&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 5 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 5 Code&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 5 Code&quot;]"
+                          name="&quot;Labor Level 5 Code&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 5 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 5 Description&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 5 Description&quot;]"
+                          name="&quot;Labor Level 5 Description&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;PunchID&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;PunchID&quot;]"
+                          length="50"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;PunchID&quot;]"
+                          name="&quot;PunchID&quot;"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Web Pay Employee ID&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Web Pay Employee ID&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Web Pay Company ID&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Web Pay Company ID&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Badge Number&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Badge Number&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Last Name&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Last Name&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;First Name&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;First Name&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;MI&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;MI&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Title&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Title&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Personal Email&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Personal Email&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Work Email&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Work Email&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Mobile Number&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Mobile Number&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Pay Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Pay Description&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Pay Type&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Pay Type&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Date&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Date&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Rounded Time In&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Rounded Time In&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Rounded Time Out&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Rounded Time Out&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Actual Time In&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Actual Time In&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Actual Time Out&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Actual Time Out&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Hours&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Hours&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Punch Type&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Punch Type&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 1 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 1 Code&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 1 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 1 Description&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 2 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 2 Code&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 2 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 2 Description&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 3 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 3 Code&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 3 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 3 Description&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 4 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 4 Code&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 4 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 4 Description&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 5 Code&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 5 Code&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;Labor Level 5 Description&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;Labor Level 5 Description&quot;" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[&quot;PunchID&quot;]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="&quot;PunchID&quot;" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Process each File\Import Into Staging\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Pay].[WebTime]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS,FIRE_TRIGGERS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Process each File\Import Into Staging\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{F87D2CAB-5765-46D0-AE02-E94B4A87E780}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[ODSStaging]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Web Pay Company ID&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Web Pay Company ID&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyId]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Web Pay Company ID&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Web Pay Employee ID&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Web Pay Employee ID&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeId]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Web Pay Employee ID&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Badge Number&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Badge Number&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BadgeNumber]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Badge Number&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Last Name&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Last Name&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Last Name&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;First Name&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;First Name&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;First Name&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;MI&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;MI&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MiddleInitial]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;MI&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Title&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Title&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Title&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Personal Email&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Personal Email&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PersonalEmail]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Personal Email&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Work Email&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Work Email&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkEmail]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Work Email&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Mobile Number&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Mobile Number&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MobileNumber]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Mobile Number&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Pay Description&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Pay Description&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayDescription]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Pay Description&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Pay Type&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Pay Type&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayType]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Pay Type&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Date&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Date&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Date&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Rounded Time In&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Rounded Time In&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoundedTimeIn]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Rounded Time In&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Rounded Time Out&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Rounded Time Out&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoundedTimeOut]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Rounded Time Out&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Actual Time In&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Actual Time In&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ActualTimeIn]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Actual Time In&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Actual Time Out&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Actual Time Out&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ActualTimeOut]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Actual Time Out&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Hours&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Hours&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Hours]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Hours&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Punch Type&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Punch Type&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PunchType]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Punch Type&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 1 Code&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 1 Code&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel1Code]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 1 Code&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 2 Code&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 2 Code&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel2Code]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 2 Code&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 2 Description&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 2 Description&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel2Description]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 2 Description&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 3 Code&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 3 Code&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel3Code]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 3 Code&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 3 Description&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 3 Description&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel3Description]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 3 Description&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 4 Code&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 4 Code&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel4Code]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 4 Code&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 4 Description&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 4 Description&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel4Description]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 4 Description&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 5 Code&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 5 Code&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel5Code]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 5 Code&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 5 Description&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 5 Description&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel5Description]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 5 Description&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;PunchID&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;PunchID&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PunchId]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;PunchID&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[&quot;Labor Level 1 Description&quot;]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="&quot;Labor Level 1 Description&quot;"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel1Description]"
+                          lineageId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output].Columns[&quot;Labor Level 1 Description&quot;]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FileName]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="FileName"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileName]"
+                          lineageId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output].Columns[FileName]" />
+                        <inputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FileDate]"
+                          cachedDataType="date"
+                          cachedName="FileDate"
+                          externalMetadataColumnId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileDate]"
+                          lineageId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output].Columns[FileDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RowId]"
+                          dataType="i4"
+                          name="RowId" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CompanyId]"
+                          dataType="i4"
+                          name="CompanyId" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeId]"
+                          dataType="i4"
+                          name="EmployeeId" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[BadgeNumber]"
+                          dataType="i8"
+                          name="BadgeNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LastName" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="FirstName" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MiddleInitial]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="MiddleInitial" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Title" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PersonalEmail]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PersonalEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[WorkEmail]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="WorkEmail" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MobileNumber]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="MobileNumber" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayDescription]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PayDescription" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="PayType" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Date]"
+                          dataType="dbDate"
+                          name="Date" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoundedTimeIn]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="RoundedTimeIn" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RoundedTimeOut]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="RoundedTimeOut" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ActualTimeIn]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="ActualTimeIn" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ActualTimeOut]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="ActualTimeOut" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Hours]"
+                          dataType="numeric"
+                          name="Hours"
+                          precision="5"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PunchType]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="PunchType" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel1Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="LaborLevel1Code" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel2Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="LaborLevel2Code" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel2Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LaborLevel2Description" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel3Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="LaborLevel3Code" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel3Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LaborLevel3Description" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel4Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="LaborLevel4Code" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel4Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LaborLevel4Description" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel5Code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="LaborLevel5Code" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel5Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LaborLevel5Description" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PunchId]"
+                          dataType="i4"
+                          name="PunchId" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LaborLevel1Description]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="LaborLevel1Description" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="FileName" />
+                        <externalMetadataColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FileDate]"
+                          dataType="dbDate"
+                          name="FileDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Process each File\Import Into Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Process each File\Import Into Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Process each File\Import Into Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Process each File\Import Into Staging\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Process each File\Import Into Staging.Paths[Derived Column Output]"
+                  endId="Package\Process each File\Import Into Staging\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Process each File\Import Into Staging\Add FileName Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Process each File\Import Into Staging.Paths[Flat File Source Output]"
+                  endId="Package\Process each File\Import Into Staging\Add FileName Column.Inputs[Derived Column Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Process each File\Import Into Staging\Flat File Source.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process each File\Merge to Ods"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A92B35EF-A429-4075-80E9-7A8B23A077F1}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge to Ods"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F87D2CAB-5765-46D0-AE02-E94B4A87E780}"
+              SQLTask:SqlStatementSource="Exec Pay.UpdateWebTime" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Process each File\Truncate Staging Table"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{955A069A-6C73-4A24-AD39-D91B41AF5441}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Staging Table"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F87D2CAB-5765-46D0-AE02-E94B4A87E780}"
+              SQLTask:SqlStatementSource="Truncate Table Pay.WebTime" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process each File.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{F1D3563A-AB39-40D5-A7BD-69B71244D828}"
+          DTS:EvalOp="1"
+          DTS:Expression="@[User::FileHasBeenProcessed] == 0"
+          DTS:From="Package\Process each File\Check if Processed File"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Process each File\Truncate Staging Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process each File.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{E4E66F17-B1B3-40CC-BDF9-523252419259}"
+          DTS:From="Package\Process each File\Truncate Staging Table"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Process each File\Get File Date" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process each File.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{B3B423B4-F519-4475-8D27-C1CD902CC169}"
+          DTS:From="Package\Process each File\Import Into Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Process each File\Merge to Ods" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Process each File.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{92EC3117-5103-4679-9AE7-FD66F0481183}"
+          DTS:From="Package\Process each File\Get File Date"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Process each File\Import Into Staging" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{42D44FB3-FB24-489C-B843-7F82C91A80EE}"
+          DTS:ObjectName="{42D44FB3-FB24-489C-B843-7F82C91A80EE}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::FileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C52AF1E9-AF52-4436-BA11-398983ABA6F3}"
+      DTS:From="Package\Download all Files"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Process each File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{24333BDE-1EE6-4868-8925-F06E291F8295}"
+      DTS:From="Package\Process each File"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Delete each File"
+      DTS:Value="2" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Delete each File\Delete Local File"
+          TopLeft="45.666666666667,51.261904761905" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="269,186"
+          Size="269,229"
+          Id="Package\Delete each File"
+          TopLeft="573.25,193.583333333333" />
+        <NodeLayout
+          Size="163.5,42"
+          Id="Package\Download all Files"
+          TopLeft="247.797619047619,57.273809523809" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Process each File\Check if Processed File"
+          TopLeft="34.5833333333333,27.6666666666667" />
+        <NodeLayout
+          Size="140,42"
+          Id="Package\Process each File\Get File Date"
+          TopLeft="50.0833333333333,172.166666666667" />
+        <NodeLayout
+          Size="172.5,42"
+          Id="Package\Process each File\Import Into Staging"
+          TopLeft="30.4047619047619,248.083333333334" />
+        <NodeLayout
+          Size="142.5,42"
+          Id="Package\Process each File\Merge to Ods"
+          TopLeft="43.8809523809527,316.630952380952" />
+        <NodeLayout
+          Size="188.5,42"
+          Id="Package\Process each File\Truncate Staging Table"
+          TopLeft="33.154761904762,105.023809523809" />
+        <EdgeLayout
+          Id="Package\Process each File.PrecedenceConstraints[Constraint]"
+          TopLeft="127.494047619048,69.6666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.3571428571428"
+              Start="0,0"
+              End="0,27.8571428571428">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.8571428571428" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,5.92857142857139,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process each File.PrecedenceConstraints[Constraint 1]"
+          TopLeft="123.744047619048,147.023809523809">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,25.1428571428572"
+              Start="0,0"
+              End="0,17.6428571428572">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.6428571428572" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process each File.PrecedenceConstraints[Constraint 2]"
+          TopLeft="115.892857142857,290.083333333334">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26.5476190476181"
+              Start="0,0"
+              End="0,19.0476190476181">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.0476190476181" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process each File.PrecedenceConstraints[Constraint 3]"
+          TopLeft="118.369047619048,214.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.916666666667"
+              Start="0,0"
+              End="0,26.416666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.416666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="256,414.5"
+          Size="256,457.5"
+          Id="Package\Process each File"
+          TopLeft="205.291666666667,157.428571428572" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="331.419642857143,99.273809523809">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.154761904763"
+              Start="0,0"
+              End="0,50.654761904763">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.654761904763" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="461.291666666667,386.178571428572">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="111.958333333333,-78.0952380952386"
+              Start="0,0"
+              End="104.458333333333,-78.0952380952386">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="51.9791666666667,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="51.9791666666667,0"
+                    Point2="55.9791666666667,0"
+                    Point3="55.9791666666667,-4" />
+                  <mssgle:LineSegment
+                    End="55.9791666666667,-74.0952380952386" />
+                  <mssgle:CubicBezierSegment
+                    Point1="55.9791666666667,-74.0952380952386"
+                    Point2="55.9791666666667,-78.0952380952386"
+                    Point3="59.9791666666667,-78.0952380952386" />
+                  <mssgle:LineSegment
+                    End="104.458333333333,-78.0952380952386" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="30.6747135416667,1,50.60890625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Process each File\Import Into Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Process each File\Import Into Staging\OLE DB Destination"
+          TopLeft="206.5625,226.5625" />
+        <NodeLayout
+          Size="182.5,42"
+          Id="Package\Process each File\Import Into Staging\Add FileName Column"
+          TopLeft="197.1875,133.4375" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Process each File\Import Into Staging\Flat File Source"
+          TopLeft="206.9375,35.0625" />
+        <EdgeLayout
+          Id="Package\Process each File\Import Into Staging.Paths[Flat File Source Output]"
+          TopLeft="285.4375,77.0625">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.375"
+              Start="0,0"
+              End="0,48.875">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.875" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Process each File\Import Into Staging.Paths[Derived Column Output]"
+          TopLeft="290.25,175.4375">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.125"
+              Start="0,0"
+              End="0,43.625">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.625" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Process each File\Import Into Staging\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

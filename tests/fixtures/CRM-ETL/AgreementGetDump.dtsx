@@ -1,0 +1,1296 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2021 9:46:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GCNMS-DPL14"
+  DTS:CreatorName="RBEIGCN\CLM1KOR"
+  DTS:DTSID="{28696670-1032-463D-AAC8-BDC93A36DA98}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="AgreementGetDump"
+  DTS:PackageType="5"
+  DTS:VersionBuild="236"
+  DTS:VersionGUID="{5E7D715F-A70B-4FF9-BC65-A13CCB235416}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{8801737E-0AAE-486B-B895-0FDFBBB98762}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\CCBA\B2B Product Mapping.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A74AE69C-AAC5-49E0-AB59-CB1D8C83FF60}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">Agreement</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Agreement Extraction"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{E1723583-F896-4887-9093-C0387E3B7B0B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Agreement Extraction">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Agreement Extraction\Agreement Trim"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{64FDB443-28CB-4AA5-8CD3-450839DC6F2E}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Agreement Trim"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC   [dbo].[sp_Agreement_Trim]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Agreement Extraction\Delete Agreement Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{382707F0-EBF4-49E2-94B5-39B060F4DB05}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete Agreement Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_Agreement_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Agreement Extraction\Retrieving Data From Source to Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{19D07C3A-816D-4EF1-9932-2374D3444BA4}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Retrieving Data From Source to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Inserting Data To Agreement"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Agreement]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[msdyn_description]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="msdyn_description"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_description]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_description]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[ccba_mon_rentalfee]"
+                          cachedDataType="cy"
+                          cachedName="ccba_mon_rentalfee"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_mon_rentalfee]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_mon_rentalfee]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[msdyn_startdate]"
+                          cachedDataType="dbDate"
+                          cachedName="msdyn_startdate"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_startdate]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_startdate]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[ccba_sapid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_sapid"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_sapid]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[ccba_os_agreementtype]"
+                          cachedDataType="wstr"
+                          cachedLength="17"
+                          cachedName="ccba_os_agreementtype"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_agreementtypetext]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_agreementtype]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[msdyn_serviceaccount]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_serviceaccount"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceAccounttext]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceaccount]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[msdyn_substatus]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_substatus"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_SubStatustext]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_substatus]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[ccba_lastservicedate]"
+                          cachedDataType="dbDate"
+                          cachedName="ccba_lastservicedate"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lastservicedate]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lastservicedate]" />
+                        <inputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].Columns[cdm_companycode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="cdm_companycode"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_name]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_name" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_agreementtypetext]"
+                          dataType="wstr"
+                          length="17"
+                          name="ccba_os_agreementtypetext" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_agreementtype]"
+                          dataType="i4"
+                          name="ccba_os_agreementtype" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_description]"
+                          dataType="wstr"
+                          length="200"
+                          name="msdyn_description" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_enddate]"
+                          dataType="dbDate"
+                          name="msdyn_enddate" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_pricelistext]"
+                          dataType="wstr"
+                          length="50"
+                          name="msdyn_pricelistext" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_pricelist]"
+                          dataType="guid"
+                          name="msdyn_pricelist" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_productpolicyidtext]"
+                          dataType="wstr"
+                          length="50"
+                          name="ccba_lkp_productpolicyidtext" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_productpolicyid]"
+                          dataType="guid"
+                          name="ccba_lkp_productpolicyid" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_mon_rentalfee]"
+                          dataType="cy"
+                          name="ccba_mon_rentalfee" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceAccounttext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_serviceAccounttext" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serviceAccount]"
+                          dataType="guid"
+                          name="msdyn_serviceAccount" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_startdate]"
+                          dataType="dbDate"
+                          name="msdyn_startdate" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_taxabletext]"
+                          dataType="wstr"
+                          length="3"
+                          name="msdyn_taxabletext" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_taxable]"
+                          dataType="bool"
+                          name="msdyn_taxable" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_SubStatustext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_SubStatustext" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_SubStatus]"
+                          dataType="guid"
+                          name="msdyn_SubStatus" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_systemStatustext]"
+                          dataType="wstr"
+                          length="8"
+                          name="msdyn_systemStatustext" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_systemStatus]"
+                          dataType="i4"
+                          name="msdyn_systemStatus" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ProcessingFlag]"
+                          dataType="wstr"
+                          length="11"
+                          name="ProcessingFlag" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[Crmrecordid]"
+                          dataType="guid"
+                          name="Crmrecordid" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lastservicedate]"
+                          dataType="dbDate"
+                          name="ccba_lastservicedate" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                          dataType="guid"
+                          name="ownerid" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycode]"
+                          dataType="guid"
+                          name="cdm_companycode" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycodetext" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Reading Agreement Data From Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Agreement]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Connections[OleDbConnection]"
+                      connectionManagerID="{9756231E-BC44-4F1E-9515-002B7C56C5C7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_SOURCE_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_sapid]"
+                          length="100"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]"
+                          name="ccba_sapid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_agreementtype]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_agreementtype]"
+                          length="17"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_os_agreementtype]"
+                          name="ccba_os_agreementtype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_description]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_description]"
+                          length="200"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_description]"
+                          name="msdyn_description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_mon_rentalfee]"
+                          dataType="cy"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_mon_rentalfee]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_mon_rentalfee]"
+                          name="ccba_mon_rentalfee"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceaccount]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serviceaccount]"
+                          length="100"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serviceaccount]"
+                          name="msdyn_serviceaccount"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_startdate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_startdate]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_startdate]"
+                          name="msdyn_startdate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_substatus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_substatus]"
+                          length="100"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_substatus]"
+                          name="msdyn_substatus"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lastservicedate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lastservicedate]"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lastservicedate]"
+                          name="ccba_lastservicedate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          length="20"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          name="cdm_companycode"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_agreementtype]"
+                          dataType="wstr"
+                          length="17"
+                          name="ccba_os_agreementtype" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_description]"
+                          dataType="wstr"
+                          length="200"
+                          name="msdyn_description" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_mon_rentalfee]"
+                          dataType="cy"
+                          name="ccba_mon_rentalfee" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serviceaccount]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_serviceaccount" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_startdate]"
+                          dataType="dbDate"
+                          name="msdyn_startdate" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_substatus]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_substatus" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lastservicedate]"
+                          dataType="dbDate"
+                          name="ccba_lastservicedate" />
+                        <externalMetadataColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycode" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_sapid]"
+                          name="ccba_sapid" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_agreementtype]"
+                          dataType="wstr"
+                          length="17"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_os_agreementtype]"
+                          name="ccba_os_agreementtype" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_description]"
+                          dataType="wstr"
+                          length="200"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_description]"
+                          name="msdyn_description" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_mon_rentalfee]"
+                          dataType="cy"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_mon_rentalfee]"
+                          name="ccba_mon_rentalfee" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serviceaccount]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serviceaccount]"
+                          name="msdyn_serviceaccount" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_startdate]"
+                          dataType="dbDate"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_startdate]"
+                          name="msdyn_startdate" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_substatus]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_substatus]"
+                          name="msdyn_substatus" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          name="cdm_companycode" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lastservicedate]"
+                          dataType="dbDate"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lastservicedate]"
+                          name="ccba_lastservicedate" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Agreement Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+                  endId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Agreement Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+                  endId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Agreement Extraction\Update Processing Flag"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{9DF43C3D-4BD1-432B-A2B7-E8AA7A0F21C5}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Processing Flag"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_Agreement_SetStatus]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Agreement Extraction.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{20138A1A-5B7E-418C-8F06-F17046B79B9A}"
+          DTS:From="Package\Agreement Extraction\Delete Agreement Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Agreement Extraction\Retrieving Data From Source to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Agreement Extraction.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{BBFAACC7-135D-41E3-AA07-0BF800F8C681}"
+          DTS:From="Package\Agreement Extraction\Retrieving Data From Source to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Agreement Extraction\Update Processing Flag" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Agreement Extraction.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{0829F45F-461B-4F50-9D49-AD9E92E52A4B}"
+          DTS:From="Package\Agreement Extraction\Update Processing Flag"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Agreement Extraction\Agreement Trim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Agreement Transformation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6B95BB3C-E247-476B-86B4-87998B732312}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Agreement Transformation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Agreement Transformation\Agreement Transformation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C571118C-300E-413D-BADC-FC2CF571C973}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Agreement Transformation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_Agreement_Transformation]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2DB9523B-0713-4859-B7E6-41FC8528F998}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{88956BE6-B1B2-41E2-8F5C-2C4C8263DC77}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{7950DB8C-FDFC-4427-94C6-353CC262C74A}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8D69C336-59DD-4A8F-9C39-F647CB3BEE26}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E46EE122-846E-4FF4-9E13-89B17E8E9D6A}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Agreement Extraction" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{1431F458-B88E-4210-B836-9750A4FA276A}"
+      DTS:From="Package\Agreement Extraction"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Agreement Transformation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{7E2817E8-33FE-4FDB-AC60-47E4EBCB7902}"
+      DTS:From="Package\Agreement Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{773EA506-3CAC-4619-8E6C-547E47CAE42C}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Agreement Extraction\Agreement Trim"
+          TopLeft="37.3333294590316,240.350882833794" />
+        <NodeLayout
+          Size="189.333333333334,42.6666666666667"
+          Id="Package\Agreement Extraction\Delete Agreement Data"
+          TopLeft="26.3229165153268,8.09999995350843" />
+        <NodeLayout
+          Size="194,55.3333333333334"
+          Id="Package\Agreement Extraction\Retrieving Data From Source to Staging"
+          TopLeft="21.4722219842177,82.4810773164238" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\Agreement Extraction\Update Processing Flag"
+          TopLeft="22.1254958138092,167.900845395451" />
+        <EdgeLayout
+          Id="Package\Agreement Extraction.PrecedenceConstraints[Constraint]"
+          TopLeft="119.730902583106,50.7666666201751">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.7144106962487"
+              Start="0,0"
+              End="0,24.2144106962487">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.2144106962487" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Agreement Extraction.PrecedenceConstraints[Constraint 1]"
+          TopLeft="118.632192232347,137.814410649757">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.0864347456939"
+              Start="0,0"
+              End="0,22.5864347456939">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5864347456939" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Agreement Extraction.PrecedenceConstraints[Constraint 2]"
+          TopLeft="117.062745969754,210.567512062118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29.7833707716766"
+              Start="0,0"
+              End="0,22.2833707716766">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.2833707716766" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="224,338.666666666667"
+          Size="224,381.333333333334"
+          Id="Package\Agreement Extraction"
+          TopLeft="218.912695232601,26.5568126372114" />
+        <NodeLayout
+          Size="169.333333333334,43.3333333333334"
+          Id="Package\Agreement Transformation\Agreement Transformation"
+          TopLeft="7.37499997206027,21.7499997094274" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="183.333333333334,91.3333333333334"
+          Size="183.333333333334,134.666666666667"
+          Id="Package\Agreement Transformation"
+          TopLeft="486.349199238633,61.2414486215984" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="519.212294588044,331.695498846443" />
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="512.055548518897,246.030921429422" />
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.50000000000004" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="158.666666666667,80.6666666666667"
+          Size="158.666666666667,123.333333333334"
+          Id="Package\Start"
+          TopLeft="13.9722224685053,125.464914538744" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="172.638889135172,187.131581205411">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="46.273806097429,30.0918980984674"
+              Start="0,0"
+              End="38.773806097429,30.0918980984674">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="19.1369030487145,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.1369030487145,0"
+                    Point2="23.1369030487145,0"
+                    Point3="23.1369030487145,4" />
+                  <mssgle:LineSegment
+                    End="23.1369030487145,26.0918980984674" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.1369030487145,26.0918980984674"
+                    Point2="23.1369030487145,30.0918980984674"
+                    Point3="27.1369030487145,30.0918980984674" />
+                  <mssgle:LineSegment
+                    End="38.773806097429,30.0918980984674" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="442.912695232601,217.223479303878">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="43.436504006032,-88.6486973489463"
+              Start="0,0"
+              End="35.936504006032,-88.6486973489463">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="17.718252003016,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.718252003016,0"
+                    Point2="21.718252003016,0"
+                    Point3="21.718252003016,-4" />
+                  <mssgle:LineSegment
+                    End="21.718252003016,-84.6486973489463" />
+                  <mssgle:CubicBezierSegment
+                    Point1="21.718252003016,-84.6486973489463"
+                    Point2="21.718252003016,-88.6486973489463"
+                    Point3="25.718252003016,-88.6486973489463" />
+                  <mssgle:LineSegment
+                    End="35.936504006032,-88.6486973489463" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="580.035707212098,195.908115288265">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.1228061411569"
+              Start="0,0"
+              End="0,42.6228061411569">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.6228061411569" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="580.800588220137,288.697588096089">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.997910750354"
+              Start="0,0"
+              End="0,35.497910750354">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.497910750354" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Agreement Extraction\Retrieving Data From Source to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="261.333333333334,42.6666666666667"
+          Id="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source"
+          TopLeft="101.874998481944,13.649999755919" />
+        <NodeLayout
+          Size="217.333333333334,42.6666666666667"
+          Id="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement"
+          TopLeft="119.374998221174,204.099996350407" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Agreement Extraction\Retrieving Data From Source to Staging\Derived Column"
+          TopLeft="149.541665334875,122.021929727489" />
+        <EdgeLayout
+          Id="Package\Agreement Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+          TopLeft="230.041665241743,56.3166664225857">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.7052633049035"
+              Start="0,0"
+              End="0,58.2052633049035">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.2052633049035" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Agreement Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+          TopLeft="227.791665111358,164.688596394156">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.4113999562512"
+              Start="0,0"
+              End="0,31.9113999562512">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.9113999562512" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Agreement Extraction\Retrieving Data From Source to Staging\Reading Agreement Data From Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Agreement Extraction\Retrieving Data From Source to Staging\Inserting Data To Agreement">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

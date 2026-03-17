@@ -1,0 +1,13 @@
+{
+  "name": "ssis-analyzer-marketplace",
+  "owner": {
+    "name": "Mark Garner"
+  },
+  "plugins": [
+    {
+      "name": "ssis-analyzer",
+      "source": "./",
+      "description": "Analyze SSIS .dtsx packages — extract control flow, data flows, connections, variables, SQL, scripts, column lineage, and migration assessment."
+    }
+  ]
+}

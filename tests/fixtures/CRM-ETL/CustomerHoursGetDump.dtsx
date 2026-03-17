@@ -1,0 +1,1297 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2021 9:46:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GCNMS-DPL14"
+  DTS:CreatorName="RBEIGCN\CLM1KOR"
+  DTS:DTSID="{98D577FA-2256-4810-9453-8E93FE50740F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="CustomerHoursGetDump"
+  DTS:PackageType="5"
+  DTS:VersionBuild="249"
+  DTS:VersionGUID="{BE5AD64E-6321-4964-949C-30BABCC5735C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5A44EF8A-5C48-4BC6-9547-24F919CA9851}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">CustomerHours</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CustomerHours Extraction"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{A02BE333-0947-43EA-9001-47B11EBC57CE}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CustomerHours Extraction">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\CustomerHours Extraction\CustomerHours Trim"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3AA08282-0CE7-4DB1-A61E-5D723E028E62}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CustomerHours Trim"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_CustomerHours_Trim]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\CustomerHours Extraction\Delete CustomerHours Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{30057A2D-D776-4EA3-BFE6-826567BDE829}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete CustomerHours Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_CustomerHours_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{83AA8397-EE62-4906-867B-F1FC66AD17E7}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Retrieving Data From Source to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Inserting Data To CustomerHours"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[CustomerHours]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">true</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_maxtruckloads]"
+                          cachedDataType="i4"
+                          cachedName="ccba_maxtruckloads"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_maxtruckloads]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_maxtruckloads]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_mintruckloads]"
+                          cachedDataType="i4"
+                          cachedName="ccba_mintruckloads"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_mintruckloads]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_mintruckloads]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_afternoonclosetime]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="ccba_afternoonclosetime"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_afternoonclosetime]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_afternoonclosetime]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_afternoonopentime]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="ccba_afternoonopentime"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_afternoonopentime]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_afternoonopentime]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_morningclosetime]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="ccba_morningclosetime"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_morningclosetime]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_morningclosetime]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_morningopentime]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="ccba_morningopentime"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_morningopentime]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_morningopentime]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_day]"
+                          cachedDataType="wstr"
+                          cachedLength="9"
+                          cachedName="ccba_day"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_daytext]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_day]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_type]"
+                          cachedDataType="wstr"
+                          cachedLength="19"
+                          cachedName="ccba_type"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_typetext]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_productpolicyid]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="ccba_productpolicyid"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_productpolicyidtext]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_productpolicyid]" />
+                        <inputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].Columns[ccba_accountid]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="ccba_accountid"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_accountidtext]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_accountid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[Crmrecordid]"
+                          dataType="guid"
+                          name="Crmrecordid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_typetext]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_typetext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_type]"
+                          dataType="i4"
+                          name="ccba_type" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_accountidtext]"
+                          dataType="wstr"
+                          length="20"
+                          name="ccba_accountidtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_accountid]"
+                          dataType="guid"
+                          name="ccba_accountid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_daytext]"
+                          dataType="wstr"
+                          length="9"
+                          name="ccba_daytext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_day]"
+                          dataType="i4"
+                          name="ccba_day" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_morningopentime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_morningopentime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_morningclosetime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_morningclosetime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_afternoonopentime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_afternoonopentime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_afternoonclosetime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_afternoonclosetime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_mintruckloads]"
+                          dataType="i4"
+                          name="ccba_mintruckloads" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_maxtruckloads]"
+                          dataType="i4"
+                          name="ccba_maxtruckloads" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_productpolicyidtext]"
+                          dataType="wstr"
+                          length="10"
+                          name="ccba_productpolicyidtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_productpolicyid]"
+                          dataType="guid"
+                          name="ccba_productpolicyid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ProcessingFlag]"
+                          dataType="wstr"
+                          length="11"
+                          name="ProcessingFlag" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_companyidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_companyidtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ccba_companyid]"
+                          dataType="guid"
+                          name="ccba_companyid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                          dataType="wstr"
+                          length="200"
+                          name="ownerid" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Reading CustomerHours Data From Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[CustomerHours]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Connections[OleDbConnection]"
+                      connectionManagerID="{9756231E-BC44-4F1E-9515-002B7C56C5C7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_SOURCE_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_type]"
+                          length="19"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]"
+                          name="ccba_type"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_day]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_day]"
+                          length="9"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_day]"
+                          name="ccba_day"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_morningopentime]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_morningopentime]"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_morningopentime]"
+                          name="ccba_morningopentime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_morningclosetime]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_morningclosetime]"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_morningclosetime]"
+                          name="ccba_morningclosetime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_afternoonopentime]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_afternoonopentime]"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_afternoonopentime]"
+                          name="ccba_afternoonopentime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_afternoonclosetime]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_afternoonclosetime]"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_afternoonclosetime]"
+                          name="ccba_afternoonclosetime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_mintruckloads]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_mintruckloads]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_mintruckloads]"
+                          name="ccba_mintruckloads"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_maxtruckloads]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_maxtruckloads]"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_maxtruckloads]"
+                          name="ccba_maxtruckloads"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_productpolicyid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_productpolicyid]"
+                          length="10"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_productpolicyid]"
+                          name="ccba_productpolicyid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_accountid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_accountid]"
+                          length="20"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].Columns[ccba_accountid]"
+                          name="ccba_accountid"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_type]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_type" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_accountid]"
+                          dataType="wstr"
+                          length="20"
+                          name="ccba_accountid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_day]"
+                          dataType="wstr"
+                          length="9"
+                          name="ccba_day" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_morningopentime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_morningopentime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_morningclosetime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_morningclosetime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_afternoonopentime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_afternoonopentime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_afternoonclosetime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_afternoonclosetime" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_mintruckloads]"
+                          dataType="i4"
+                          name="ccba_mintruckloads" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_maxtruckloads]"
+                          dataType="i4"
+                          name="ccba_maxtruckloads" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_productpolicyid]"
+                          dataType="wstr"
+                          length="10"
+                          name="ccba_productpolicyid" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_type]"
+                          dataType="wstr"
+                          length="19"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_type]"
+                          name="ccba_type" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_day]"
+                          dataType="wstr"
+                          length="9"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_day]"
+                          name="ccba_day" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_morningopentime]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_morningopentime]"
+                          name="ccba_morningopentime" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_morningclosetime]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_morningclosetime]"
+                          name="ccba_morningclosetime" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_afternoonopentime]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_afternoonopentime]"
+                          name="ccba_afternoonopentime" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_afternoonclosetime]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_afternoonclosetime]"
+                          name="ccba_afternoonclosetime" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_mintruckloads]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_mintruckloads]"
+                          name="ccba_mintruckloads" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_maxtruckloads]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_maxtruckloads]"
+                          name="ccba_maxtruckloads" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_productpolicyid]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_productpolicyid]"
+                          name="ccba_productpolicyid" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_accountid]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_accountid]"
+                          name="ccba_accountid" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+                  endId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+                  endId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\CustomerHours Extraction\Update Processing Flag"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{DD522BED-52B0-4FE8-B7F2-2253852FC5E7}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Processing Flag"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_CustomerHours_SetStatus]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\CustomerHours Extraction.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{38B98F05-8D27-484D-BD83-C4028435E167}"
+          DTS:From="Package\CustomerHours Extraction\Delete CustomerHours Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\CustomerHours Extraction\Retrieving Data From Source to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\CustomerHours Extraction.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{6FFD63B6-7C0E-4332-9E91-48F8974C90E9}"
+          DTS:From="Package\CustomerHours Extraction\Retrieving Data From Source to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\CustomerHours Extraction\Update Processing Flag" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\CustomerHours Extraction.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{9F46B161-ECB1-4171-9907-34FA21D7C7AE}"
+          DTS:From="Package\CustomerHours Extraction\Update Processing Flag"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\CustomerHours Extraction\CustomerHours Trim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CustomerHours Transformation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{21A3D9E8-F51D-4821-8BC5-30667BF321A7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CustomerHours Transformation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\CustomerHours Transformation\CustomerHours Transformation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{8E1A79BF-35FC-4123-BA09-81524BBEDF30}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CustomerHours Transformation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_CustomerHours_Transformation]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6CD7A5D8-F7DD-4FE1-AF49-583FD8FB1163}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{BE8ED6D8-09A7-46F6-B6F0-79C617BCE481}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{712F338B-1C6B-42DF-8CAC-1D313A02E66F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{B4130F37-773D-4A92-93EA-EBCA94C60E60}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A52D2099-5E62-4372-86C7-CAB2A61AED4B}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\CustomerHours Extraction" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{9ED132E8-54E1-4E55-B53A-9E51441AB87A}"
+      DTS:From="Package\CustomerHours Extraction"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\CustomerHours Transformation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{6709D8F0-B402-45C4-804B-0F1537844FB7}"
+      DTS:From="Package\CustomerHours Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{5D8C0D8E-147F-4AF0-888A-A6C6239A17BE}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="177.333333333334,42.6666666666667"
+          Id="Package\CustomerHours Extraction\CustomerHours Trim"
+          TopLeft="31.7916631928336,230.245620088014" />
+        <NodeLayout
+          Size="188,46"
+          Id="Package\CustomerHours Extraction\Delete CustomerHours Data"
+          TopLeft="19.4583259479452,0.881582897868569" />
+        <NodeLayout
+          Size="197.333333333334,49.3333333333334"
+          Id="Package\CustomerHours Extraction\Retrieving Data From Source to Staging"
+          TopLeft="22.7916667442769,76.5758162302709" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\CustomerHours Extraction\Update Processing Flag"
+          TopLeft="25.8020756522506,156.794463640334" />
+        <EdgeLayout
+          Id="Package\CustomerHours Extraction.PrecedenceConstraints[Constraint]"
+          TopLeft="113.458325947945,46.8815828978686">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.00000746299838,29.6942333324023"
+              Start="0,0"
+              End="8.00000746299838,22.1942333324023">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.8471166662011" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.8471166662011"
+                    Point2="0,14.8471166662011"
+                    Point3="4,14.8471166662011" />
+                  <mssgle:LineSegment
+                    End="4.00000746299838,14.8471166662011" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.00000746299838,14.8471166662011"
+                    Point2="8.00000746299838,14.8471166662011"
+                    Point3="8.00000746299838,18.8471166662011" />
+                  <mssgle:LineSegment
+                    End="8.00000746299838,22.1942333324023" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CustomerHours Extraction.PrecedenceConstraints[Constraint 1]"
+          TopLeft="121.96353786493,125.909149563604">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.8853140767298"
+              Start="0,0"
+              End="0,23.3853140767298">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.3853140767298" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CustomerHours Extraction.PrecedenceConstraints[Constraint 2]"
+          TopLeft="121.463536089209,199.461130307001">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.7844897810133"
+              Start="0,0"
+              End="0,23.2844897810133">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.2844897810133" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="234.666666666667,328"
+          Size="234.666666666667,370.666666666667"
+          Id="Package\CustomerHours Extraction"
+          TopLeft="201.364562441439,48.7500009175977" />
+        <NodeLayout
+          Size="166,58.6666666666667"
+          Id="Package\CustomerHours Transformation\CustomerHours Transformation"
+          TopLeft="11.4821427680019,22.6480263105173" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="206,136.666666666667"
+          Size="206,179.333333333334"
+          Id="Package\CustomerHours Transformation"
+          TopLeft="474.632433848168,45.6303179052571" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="513.312493029051,341.155211872058" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="501.241064399083,264.487762469465" />
+        <NodeLayout
+          Size="136.666666666667,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="150,82.6666666666667"
+          Size="150,125.333333333334"
+          Id="Package\Start"
+          TopLeft="20.947916729531,125.750002263407" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="170.947916729531,188.416668930074">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30.416645711908,45.6666653208574"
+              Start="0,0"
+              End="22.916645711908,45.6666653208574">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="11.208322855954,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.208322855954,0"
+                    Point2="15.208322855954,0"
+                    Point3="15.208322855954,4" />
+                  <mssgle:LineSegment
+                    End="15.208322855954,41.6666653208574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.208322855954,41.6666653208574"
+                    Point2="15.208322855954,45.6666653208574"
+                    Point3="19.208322855954,45.6666653208574" />
+                  <mssgle:LineSegment
+                    End="22.916645711908,45.6666653208574" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="436.031229108106,234.083334250931">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38.6012047400623,-98.7863496790073"
+              Start="0,0"
+              End="31.1012047400623,-98.7863496790073">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="15.3006023700311,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.3006023700311,0"
+                    Point2="19.3006023700311,0"
+                    Point3="19.3006023700311,-4" />
+                  <mssgle:LineSegment
+                    End="19.3006023700311,-94.7863496790073" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.3006023700311,-94.7863496790073"
+                    Point2="19.3006023700311,-98.7863496790073"
+                    Point3="23.3006023700311,-98.7863496790073" />
+                  <mssgle:LineSegment
+                    End="31.1012047400623,-98.7863496790073" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="574.770082456959,224.96365123859">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.5241112308746"
+              Start="0,0"
+              End="0,32.0241112308746">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.0241112308746" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="572.776778714067,307.154429136132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.0007827359259"
+              Start="0,0"
+              End="0,26.5007827359259">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5007827359259" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CustomerHours Extraction\Retrieving Data From Source to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="281.333333333334,42.6666666666667"
+          Id="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source"
+          TopLeft="138.749997932465,29.4210531853573" />
+        <NodeLayout
+          Size="238.666666666667,42.6666666666667"
+          Id="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours"
+          TopLeft="160.624997606501,214.157898767834" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Derived Column"
+          TopLeft="205.916666350017,121.245613970696" />
+        <EdgeLayout
+          Id="Package\CustomerHours Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+          TopLeft="281.666665474574,72.087719852024">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.157894118672"
+              Start="0,0"
+              End="0,41.657894118672">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.657894118672" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CustomerHours Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+          TopLeft="281.937498644926,163.912280637363">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.2456181304713"
+              Start="0,0"
+              End="0,42.7456181304713">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.7456181304713" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Reading CustomerHours Data From Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerHours Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerHours">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

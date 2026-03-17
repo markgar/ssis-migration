@@ -1,0 +1,1784 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2021 9:46:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GCNMS-DPL14"
+  DTS:CreatorName="RBEIGCN\CLM1KOR"
+  DTS:DTSID="{0F8E61BB-CF8E-400B-85F4-CF84040CA390}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="ProductPolicyGetDump"
+  DTS:PackageType="5"
+  DTS:VersionBuild="208"
+  DTS:VersionGUID="{62148DB1-F27A-4A78-83FE-AB08ECA31D1D}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E54598A2-AB9B-4E55-ACF2-AD12F6CAFE6F}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">ProductPolicy</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{82AB6568-9678-45DC-9634-383A94B77C86}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{04435912-C735-42C1-9BA2-BB15C4D7F5A5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ProductPolicy Extraction"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{7DDFBE7F-2910-4360-A592-9D5B2A5ECBEF}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ProductPolicy Extraction">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\ProductPolicy Extraction\Delete ProductPolicy Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{4E8A9796-6137-4F68-AEB5-2773C6111496}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete ProductPolicy Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_ProductPolicy_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ProductPolicy Extraction\ProductPolicy Trim"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{11182ac4-3ed3-4539-868a-2d3aaff06533}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ProductPolicy Trim"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC   [dbo].[sp_ProductPolicy_Trim]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{5ab7750b-7e7f-400b-aebb-ff448ac9927f}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Retrieving Data From Source to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Inserting Data to ProductPolicy"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[ProductPolicy]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_liquorlicenceexpirydate]"
+                          cachedDataType="dbDate"
+                          cachedName="ccba_liquorlicenceexpirydate"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_liquorlicenceexpirydate]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_liquorlicenceexpirydate]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_liquorlicencenumber]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="ccba_liquorlicencenumber"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_liquorlicencenumber]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_liquorlicencenumber]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_minimumorderquantity]"
+                          cachedDataType="i4"
+                          cachedName="ccba_minimumorderquantity"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_minimumorderquantity]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_minimumorderquantity]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_ordercutofftime]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="ccba_ordercutofftime"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_ordercutofftime]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_ordercutofftime]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_preferredordercalltimeend]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="ccba_preferredordercalltimeend"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_preferredordercalltimeend]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_preferredordercalltimeend]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_preferredordercalltimestart]"
+                          cachedDataType="wstr"
+                          cachedLength="5"
+                          cachedName="ccba_preferredordercalltimestart"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_preferredordercalltimestart]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_preferredordercalltimestart]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_standardinstructions]"
+                          cachedDataType="wstr"
+                          cachedLength="2000"
+                          cachedName="ccba_standardinstructions"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_standardinstructions]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_standardinstructions]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_accountid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_accountid"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_accountidtext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_accountid]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_contactfordeliveryid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_contactfordeliveryid"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactfordeliveryidtext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactfordeliveryid]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_hasliquorlicence]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="ccba_hasliquorlicence"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_hasliquorlicencetext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_hasliquorlicence]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_maximumvehiclecapcity]"
+                          cachedDataType="wstr"
+                          cachedLength="9"
+                          cachedName="ccba_maximumvehiclecapcity"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_maximumvehiclecapcitytext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_maximumvehiclecapcity]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_modeofdeliveryid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_modeofdeliveryid"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_modeofdeliveryidtext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_modeofdeliveryid]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_contactforordersid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_contactforordersid"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactforordersidtext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactforordersid]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_orderleadtime]"
+                          cachedDataType="wstr"
+                          cachedLength="2"
+                          cachedName="ccba_orderleadtime"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderleadtimetext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderleadtime]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_orderqyantityuom]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="ccba_orderqyantityuom"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderqyantityuomtext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderqyantityuom]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_orderquantityrestrictions]"
+                          cachedDataType="wstr"
+                          cachedLength="12"
+                          cachedName="ccba_orderquantityrestrictions"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderquantityrestrictionstext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderquantityrestrictions]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_redindicator]"
+                          cachedDataType="wstr"
+                          cachedLength="6"
+                          cachedName="ccba_redindicator"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_redindicatortext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_redindicator]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_contactforsalesid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_contactforsalesid"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactforsalesidtext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactforsalesid]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_shippingconditions]"
+                          cachedDataType="wstr"
+                          cachedLength="17"
+                          cachedName="ccba_shippingconditions"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_shippingconditionstext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_shippingconditions]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_genesisqueueid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_genesisqueueid"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_genesisqueueidtext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_genesisqueueid]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[ccba_name]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="ccba_name"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_name]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_name]" />
+                        <inputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].Columns[cdm_companycode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="cdm_companycode"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_accountidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_accountidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_accountid]"
+                          dataType="guid"
+                          name="ccba_accountid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactfordeliveryidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_contactfordeliveryidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactfordeliveryid]"
+                          dataType="guid"
+                          name="ccba_contactfordeliveryid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_deliverylocationidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_deliverylocationidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_deliverylocationid]"
+                          dataType="guid"
+                          name="ccba_deliverylocationid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_functionalproductgroupidtext]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_functionalproductgroupidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_functionalproductgroupid]"
+                          dataType="guid"
+                          name="ccba_functionalproductgroupid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_hasliquorlicencetext]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_hasliquorlicencetext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_hasliquorlicence]"
+                          dataType="bool"
+                          name="ccba_hasliquorlicence" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_liquorlicenceexpirydate]"
+                          dataType="dbDate"
+                          name="ccba_liquorlicenceexpirydate" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_liquorlicencenumber]"
+                          dataType="wstr"
+                          length="20"
+                          name="ccba_liquorlicencenumber" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_maximumvehiclecapcitytext]"
+                          dataType="wstr"
+                          length="9"
+                          name="ccba_maximumvehiclecapcitytext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_maximumvehiclecapcity]"
+                          dataType="i4"
+                          name="ccba_maximumvehiclecapcity" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_minimumorderquantity]"
+                          dataType="i4"
+                          name="ccba_minimumorderquantity" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_modeofdeliveryidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_modeofdeliveryidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_modeofdeliveryid]"
+                          dataType="guid"
+                          name="ccba_modeofdeliveryid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_operationalsiteid]"
+                          dataType="guid"
+                          name="ccba_operationalsiteid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactforordersidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_contactforordersidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactforordersid]"
+                          dataType="guid"
+                          name="ccba_contactforordersid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_ordercutofftime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_ordercutofftime" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderleadtimetext]"
+                          dataType="wstr"
+                          length="2"
+                          name="ccba_orderleadtimetext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderleadtime]"
+                          dataType="i4"
+                          name="ccba_orderleadtime" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderqyantityuomtext]"
+                          dataType="wstr"
+                          length="7"
+                          name="ccba_orderqyantityuomtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderqyantityuom]"
+                          dataType="i4"
+                          name="ccba_orderqyantityuom" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderquantityrestrictionstext]"
+                          dataType="wstr"
+                          length="12"
+                          name="ccba_orderquantityrestrictionstext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_orderquantityrestrictions]"
+                          dataType="bool"
+                          name="ccba_orderquantityrestrictions" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_paymenttermsidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_paymenttermsidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_paymenttermsid]"
+                          dataType="guid"
+                          name="ccba_paymenttermsid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_preferredordercalltimeend]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_preferredordercalltimeend" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_preferredordercalltimestart]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_preferredordercalltimestart" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_name]"
+                          dataType="wstr"
+                          length="10"
+                          name="ccba_name" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_redindicatortext]"
+                          dataType="wstr"
+                          length="6"
+                          name="ccba_redindicatortext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_redindicator]"
+                          dataType="i4"
+                          name="ccba_redindicator" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactforsalesidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_contactforsalesidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_contactforsalesid]"
+                          dataType="guid"
+                          name="ccba_contactforsalesid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_salessectoridtext]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_salessectoridtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_salessectorid]"
+                          dataType="guid"
+                          name="ccba_salessectorid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_shippingconditionstext]"
+                          dataType="wstr"
+                          length="17"
+                          name="ccba_shippingconditionstext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_shippingconditions]"
+                          dataType="i4"
+                          name="ccba_shippingconditions" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_standardinstructions]"
+                          dataType="wstr"
+                          length="2000"
+                          name="ccba_standardinstructions" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_companytext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_companytext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_company]"
+                          dataType="guid"
+                          name="ccba_company" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_genesisqueueidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_genesisqueueidtext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ccba_genesisqueueid]"
+                          dataType="guid"
+                          name="ccba_genesisqueueid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[Processingflag]"
+                          dataType="wstr"
+                          length="11"
+                          name="Processingflag" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[Crmrecordid]"
+                          dataType="guid"
+                          name="Crmrecordid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[ownerid]"
+                          dataType="guid"
+                          name="ownerid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycodetext]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycodetext" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input].ExternalColumns[cdm_companycode]"
+                          dataType="guid"
+                          name="cdm_companycode" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Reading Productpolicy Data From Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[ProductPolicy]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Connections[OleDbConnection]"
+                      connectionManagerID="{9756231E-BC44-4F1E-9515-002B7C56C5C7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_SOURCE_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_accountid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_accountid]"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_accountid]"
+                          name="ccba_accountid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactfordeliveryid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_contactfordeliveryid]"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactfordeliveryid]"
+                          name="ccba_contactfordeliveryid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_hasliquorlicence]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_hasliquorlicence]"
+                          length="3"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_hasliquorlicence]"
+                          name="ccba_hasliquorlicence"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_liquorlicenceexpirydate]"
+                          dataType="dbDate"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_liquorlicenceexpirydate]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_liquorlicenceexpirydate]"
+                          name="ccba_liquorlicenceexpirydate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_liquorlicencenumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_liquorlicencenumber]"
+                          length="20"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_liquorlicencenumber]"
+                          name="ccba_liquorlicencenumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_maximumvehiclecapcity]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_maximumvehiclecapcity]"
+                          length="9"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_maximumvehiclecapcity]"
+                          name="ccba_maximumvehiclecapcity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_minimumorderquantity]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_minimumorderquantity]"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_minimumorderquantity]"
+                          name="ccba_minimumorderquantity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_modeofdeliveryid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_modeofdeliveryid]"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_modeofdeliveryid]"
+                          name="ccba_modeofdeliveryid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactforordersid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_contactforordersid]"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactforordersid]"
+                          name="ccba_contactforordersid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_ordercutofftime]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_ordercutofftime]"
+                          length="5"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_ordercutofftime]"
+                          name="ccba_ordercutofftime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderleadtime]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_orderleadtime]"
+                          length="2"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderleadtime]"
+                          name="ccba_orderleadtime"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderqyantityuom]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_orderqyantityuom]"
+                          length="7"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderqyantityuom]"
+                          name="ccba_orderqyantityuom"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderquantityrestrictions]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_orderquantityrestrictions]"
+                          length="12"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_orderquantityrestrictions]"
+                          name="ccba_orderquantityrestrictions"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_preferredordercalltimeend]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_preferredordercalltimeend]"
+                          length="5"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_preferredordercalltimeend]"
+                          name="ccba_preferredordercalltimeend"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_preferredordercalltimestart]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_preferredordercalltimestart]"
+                          length="5"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_preferredordercalltimestart]"
+                          name="ccba_preferredordercalltimestart"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_redindicator]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_redindicator]"
+                          length="6"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_redindicator]"
+                          name="ccba_redindicator"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactforsalesid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_contactforsalesid]"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_contactforsalesid]"
+                          name="ccba_contactforsalesid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_shippingconditions]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_shippingconditions]"
+                          length="17"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_shippingconditions]"
+                          name="ccba_shippingconditions"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_standardinstructions]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_standardinstructions]"
+                          length="2000"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_standardinstructions]"
+                          name="ccba_standardinstructions"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_genesisqueueid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_genesisqueueid]"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_genesisqueueid]"
+                          name="ccba_genesisqueueid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_name]"
+                          length="10"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[ccba_name]"
+                          name="ccba_name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          length="20"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          name="cdm_companycode"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_accountid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_accountid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_contactfordeliveryid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_contactfordeliveryid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_hasliquorlicence]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_hasliquorlicence" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_liquorlicenceexpirydate]"
+                          dataType="dbDate"
+                          name="ccba_liquorlicenceexpirydate" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_liquorlicencenumber]"
+                          dataType="wstr"
+                          length="20"
+                          name="ccba_liquorlicencenumber" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_maximumvehiclecapcity]"
+                          dataType="wstr"
+                          length="9"
+                          name="ccba_maximumvehiclecapcity" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_minimumorderquantity]"
+                          dataType="i4"
+                          name="ccba_minimumorderquantity" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_modeofdeliveryid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_modeofdeliveryid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_contactforordersid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_contactforordersid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_ordercutofftime]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_ordercutofftime" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_orderleadtime]"
+                          dataType="wstr"
+                          length="2"
+                          name="ccba_orderleadtime" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_orderqyantityuom]"
+                          dataType="wstr"
+                          length="7"
+                          name="ccba_orderqyantityuom" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_orderquantityrestrictions]"
+                          dataType="wstr"
+                          length="12"
+                          name="ccba_orderquantityrestrictions" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_preferredordercalltimeend]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_preferredordercalltimeend" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_preferredordercalltimestart]"
+                          dataType="wstr"
+                          length="5"
+                          name="ccba_preferredordercalltimestart" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_redindicator]"
+                          dataType="wstr"
+                          length="6"
+                          name="ccba_redindicator" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_contactforsalesid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_contactforsalesid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_shippingconditions]"
+                          dataType="wstr"
+                          length="17"
+                          name="ccba_shippingconditions" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_standardinstructions]"
+                          dataType="wstr"
+                          length="2000"
+                          name="ccba_standardinstructions" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_genesisqueueid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_genesisqueueid" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_name]"
+                          dataType="wstr"
+                          length="10"
+                          name="ccba_name" />
+                        <externalMetadataColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycode" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_accountid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_accountid]"
+                          name="ccba_accountid" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_contactfordeliveryid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_contactfordeliveryid]"
+                          name="ccba_contactfordeliveryid" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_hasliquorlicence]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_hasliquorlicence]"
+                          name="ccba_hasliquorlicence" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_liquorlicenceexpirydate]"
+                          dataType="dbDate"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_liquorlicenceexpirydate]"
+                          name="ccba_liquorlicenceexpirydate" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_liquorlicencenumber]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_liquorlicencenumber]"
+                          name="ccba_liquorlicencenumber" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_maximumvehiclecapcity]"
+                          dataType="wstr"
+                          length="9"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_maximumvehiclecapcity]"
+                          name="ccba_maximumvehiclecapcity" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_minimumorderquantity]"
+                          dataType="i4"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_minimumorderquantity]"
+                          name="ccba_minimumorderquantity" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_modeofdeliveryid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_modeofdeliveryid]"
+                          name="ccba_modeofdeliveryid" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_contactforordersid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_contactforordersid]"
+                          name="ccba_contactforordersid" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_ordercutofftime]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_ordercutofftime]"
+                          name="ccba_ordercutofftime" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_orderleadtime]"
+                          dataType="wstr"
+                          length="2"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_orderleadtime]"
+                          name="ccba_orderleadtime" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_orderqyantityuom]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_orderqyantityuom]"
+                          name="ccba_orderqyantityuom" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_orderquantityrestrictions]"
+                          dataType="wstr"
+                          length="12"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_orderquantityrestrictions]"
+                          name="ccba_orderquantityrestrictions" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_preferredordercalltimeend]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_preferredordercalltimeend]"
+                          name="ccba_preferredordercalltimeend" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_preferredordercalltimestart]"
+                          dataType="wstr"
+                          length="5"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_preferredordercalltimestart]"
+                          name="ccba_preferredordercalltimestart" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_redindicator]"
+                          dataType="wstr"
+                          length="6"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_redindicator]"
+                          name="ccba_redindicator" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_contactforsalesid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_contactforsalesid]"
+                          name="ccba_contactforsalesid" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_shippingconditions]"
+                          dataType="wstr"
+                          length="17"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_shippingconditions]"
+                          name="ccba_shippingconditions" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_standardinstructions]"
+                          dataType="wstr"
+                          length="2000"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_standardinstructions]"
+                          name="ccba_standardinstructions" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_genesisqueueid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_genesisqueueid]"
+                          name="ccba_genesisqueueid" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_name]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_name]"
+                          name="ccba_name" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          name="cdm_companycode" />
+                        <outputColumn
+                          refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+                  endId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+                  endId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\ProductPolicy Extraction\Update Processing Flag"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6aac950a-90bd-4871-ad58-a373fa7dc79f}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Processing Flag"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_ProductPolicy_SetStatus]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ProductPolicy Extraction.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{72840CC8-6A40-4C1B-B8B0-ADDE81722721}"
+          DTS:From="Package\ProductPolicy Extraction\Delete ProductPolicy Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ProductPolicy Extraction.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{ADE5AFAD-A3FD-407E-BDDF-74C845251BFC}"
+          DTS:From="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\ProductPolicy Extraction\Update Processing Flag" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\ProductPolicy Extraction.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{473E3D42-38DB-457F-984F-6ABA678B85C0}"
+          DTS:From="Package\ProductPolicy Extraction\Update Processing Flag"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\ProductPolicy Extraction\ProductPolicy Trim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ProductPolicy Transformation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{DA43E82A-014A-4066-AD2E-C6BE36F99815}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ProductPolicy Transformation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\ProductPolicy Transformation\ProductPolicy Transformation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D0A2EAF0-8568-4644-AF4C-BF3F3B71AABC}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="ProductPolicy Transformation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_ProductPolicy_Transformation]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6FDEE56D-0010-498A-8330-A930D4586E98}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{908F3922-B105-4EE0-A4B0-42791EC9C225}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{A61CEF04-E6E0-4DB9-9604-3E3E3A521765}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\ProductPolicy Extraction" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{63084F52-E0EA-4CFD-9DE0-666D397366E0}"
+      DTS:From="Package\ProductPolicy Extraction"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\ProductPolicy Transformation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{4CA7801A-C0BC-4B9F-9F85-4487C192ADF6}"
+      DTS:From="Package\ProductPolicy Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{33893CF1-FF9B-4CBF-8946-2194F9B704E1}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="563.729158944451,277.574541352655" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="563.437492212592,204.517524378671" />
+        <NodeLayout
+          Size="204,42.6666666666667"
+          Id="Package\ProductPolicy Extraction\Delete ProductPolicy Data"
+          TopLeft="27.1458372402313,4.98684613303475" />
+        <NodeLayout
+          Size="169.333333333334,42.6666666666667"
+          Id="Package\ProductPolicy Extraction\ProductPolicy Trim"
+          TopLeft="44.0312466293883,219.01314995188" />
+        <NodeLayout
+          Size="188,42.6666666666667"
+          Id="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging"
+          TopLeft="25.2812469087851,75.3815548397664" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\ProductPolicy Extraction\Update Processing Flag"
+          TopLeft="28.6249999906873,149.333335290875" />
+        <EdgeLayout
+          Id="Package\ProductPolicy Extraction.PrecedenceConstraints[Constraint]"
+          TopLeft="129.145837240231,47.6535127997014">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.86459033144618,27.728042040065"
+              Start="0,0"
+              End="-9.86459033144618,20.228042040065">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,9.86402102003249" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,9.86402102003249"
+                    Point2="0,13.8640210200325"
+                    Point3="-4,13.8640210200325" />
+                  <mssgle:LineSegment
+                    End="-5.86459033144618,13.8640210200325" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.86459033144618,13.8640210200325"
+                    Point2="-9.86459033144618,13.8640210200325"
+                    Point3="-9.86459033144618,17.8640210200325" />
+                  <mssgle:LineSegment
+                    End="-9.86459033144618,20.228042040065" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ProductPolicy Extraction.PrecedenceConstraints[Constraint 1]"
+          TopLeft="122.28645678307,118.048221506433">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.2851137844419"
+              Start="0,0"
+              End="0,23.7851137844419">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.7851137844419" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ProductPolicy Extraction.PrecedenceConstraints[Constraint 2]"
+          TopLeft="126.994789976704,192.000001957542">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,27.0131479943383"
+              Start="0,0"
+              End="0,19.5131479943383">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.5131479943383" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="241.333333333334,286.666666666667"
+          Size="241.333333333334,329.333333333334"
+          Id="Package\ProductPolicy Extraction"
+          TopLeft="242.031246393453,38.942976908697" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\ProductPolicy Transformation\ProductPolicy Transformation"
+          TopLeft="35.4999995529653,8.92105269597178" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="196.666666666667,76"
+          Size="196.666666666667,118.666666666667"
+          Id="Package\ProductPolicy Transformation"
+          TopLeft="542.135409792729,48.7850807917029" />
+        <NodeLayout
+          Size="130,46"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="150,60"
+          Size="150,102.666666666667"
+          Id="Package\Start"
+          TopLeft="24.4895833434225,130.311405858036" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="174.489583343423,181.644739191369">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67.54166305003,21.9649043839943"
+              Start="0,0"
+              End="60.04166305003,21.9649043839943">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.770831525015,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.770831525015,0"
+                    Point2="33.770831525015,0"
+                    Point3="33.770831525015,4" />
+                  <mssgle:LineSegment
+                    End="33.770831525015,17.9649043839943" />
+                  <mssgle:CubicBezierSegment
+                    Point1="33.770831525015,17.9649043839943"
+                    Point2="33.770831525015,21.9649043839943"
+                    Point3="37.770831525015,21.9649043839943" />
+                  <mssgle:LineSegment
+                    End="60.04166305003,21.9649043839943" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="483.364579726786,203.609643575364">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58.7708300659431,-95.4912294503275"
+              Start="0,0"
+              End="51.2708300659431,-95.4912294503275">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="25.3854150329715,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="25.3854150329715,0"
+                    Point2="29.3854150329715,0"
+                    Point3="29.3854150329715,-4" />
+                  <mssgle:LineSegment
+                    End="29.3854150329715,-91.4912294503275" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.3854150329715,-91.4912294503275"
+                    Point2="29.3854150329715,-95.4912294503275"
+                    Point3="33.3854150329715,-95.4912294503275" />
+                  <mssgle:LineSegment
+                    End="51.2708300659431,-95.4912294503275" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="637.28645100266,167.45174745837">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.0657769203016"
+              Start="0,0"
+              End="0,29.5657769203016">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.5657769203016" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="634.104158879258,247.184191045338">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-10.0416666014743,30.3903503073175"
+              Start="0,0"
+              End="-10.0416666014743,22.8903503073175">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.1951751536587" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.1951751536587"
+                    Point2="0,15.1951751536587"
+                    Point3="-4,15.1951751536587" />
+                  <mssgle:LineSegment
+                    End="-6.04166660147428,15.1951751536587" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-6.04166660147428,15.1951751536587"
+                    Point2="-10.0416666014743,15.1951751536587"
+                    Point3="-10.0416666014743,19.1951751536587" />
+                  <mssgle:LineSegment
+                    End="-10.0416666014743,22.8903503073175" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="225.333333333334,42.6666666666667"
+          Id="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy"
+          TopLeft="83.7499987520278,192.263161513614" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Derived Column"
+          TopLeft="118.749998230487,104.000001957543" />
+        <NodeLayout
+          Size="276,42.6666666666667"
+          Id="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source"
+          TopLeft="59.9999991059304,10.2631580879153" />
+        <EdgeLayout
+          Id="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+          TopLeft="197.374998668209,52.929824754582">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.070177202961"
+              Start="0,0"
+              End="0,43.570177202961">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.570177202961" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+          TopLeft="196.583331824591,146.66666862421">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.5964928894043"
+              Start="0,0"
+              End="0,38.0964928894043">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.0964928894043" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Inserting Data to ProductPolicy">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\ProductPolicy Extraction\Retrieving Data From Source to Staging\Reading Productpolicy Data From Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,2849 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/23/2022 12:55:06 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-FCCA3HG"
+  DTS:CreatorName="DESKTOP-FCCA3HG\sai shiva pothu"
+  DTS:DTSID="{DEC6FA14-92F7-4FD2-A0DA-79067C5F1FB3}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="UnitUpdate"
+  DTS:PackageType="5"
+  DTS:VersionBuild="54"
+  DTS:VersionGUID="{7F6BE8E5-8C98-42D3-AF69-2CEC390E7774}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A3C67603-A5D3-44AE-8182-B0963C61821A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">Unit</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{550b5f84-5e5a-4a56-85c6-67b053b81e14}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{e72f9ac4-96a5-4947-8522-803073a8c193}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging_DW] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{6f66ea46-5385-453b-87c3-39b64af078e4}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{cd4c246d-2e41-4782-94cf-b66042b11e64}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Unit Update"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2ABCABD5-CAC2-45C7-AB65-1166E96B1021}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Unit Update">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Unit Update\Delete Unit Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E7CC7530-F83D-47DB-AAF0-BA36ADB4299D}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete Unit Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="Exec [dbo].[sp_Unit_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Unit Update\Get Unit Data"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{5D2960C2-16A6-4804-A7E6-3A8D1D29DE13}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Unit Data"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Unit Update\Get Unit Data\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Unit Update\Get Unit Data\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Unit Update\Get Unit Data\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output].Columns[Operation]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="6"
+                          lineageId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output].Columns[Operation]"
+                          name="Operation"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"Ignore"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"Ignore"</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output].Columns[ProcessingFlag]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="11"
+                          lineageId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output].Columns[ProcessingFlag]"
+                          name="ProcessingFlag"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">"Unprocessed"</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">"Unprocessed"</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Unit Update\Get Unit Data\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Unit Update\Get Unit Data\GET CE Data"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2021 KingswaySoft Inc."
+                  description="Extract data from Microsoft Dynamics 365 CE/CRM."
+                  name="GET CE Data"
+                  usesDispositions="true"
+                  version="3">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of source data from Microsoft Dynamics CRM."
+                      expressionType="Notify"
+                      name="SourceType"
+                      typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.SourceType">1</property>
+                    <property
+                      dataType="System.String"
+                      description="Dynamics CRM entity to retrieve data from."
+                      expressionType="Notify"
+                      name="SourceEntity"></property>
+                    <property
+                      dataType="System.String"
+                      description="FetchXML statement."
+                      expressionType="Notify"
+                      name="FetchXML">&lt;fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false" &gt;
+&lt;entity name="uom" &gt;
+&lt;attribute name="uomid" /&gt;
+&lt;attribute name="ccba_os_unittype" /&gt;
+&lt;attribute name="ccba_int_foid" /&gt;
+&lt;attribute name="baseuom" /&gt;
+&lt;attribute name="ccba_slot_unitcode" /&gt;
+&lt;attribute name="msdyn_symbol" /&gt;
+&lt;attribute name="isschedulebaseuom" /&gt;
+&lt;attribute name="msdyn_decimalprecision" /&gt;
+&lt;attribute name="msdyn_description" /&gt;
+&lt;attribute name="msdyn_isbaseunit" /&gt;
+&lt;attribute name="msdyn_issystemunit" /&gt;
+&lt;attribute name="msdyn_systemofunits" /&gt;
+&lt;attribute name="name" /&gt;
+&lt;attribute name="quantity" /&gt;
+&lt;attribute name="uomscheduleid" /&gt;
+&lt;/entity&gt;
+&lt;/fetch&gt;</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the batch size of the query."
+                      expressionType="Notify"
+                      name="BatchSize">2000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the maximum number of rows to be returned from the Dynamics 365/CRM server (Specify 0 to read all satisfying records)."
+                      expressionType="Notify"
+                      name="MaxRowsReturned">0</property>
+                    <property
+                      dataType="System.Null"
+                      description="The caller to be used for CRM impersonation when reading from CRM server."
+                      expressionType="Notify"
+                      name="ImpersonateAs" />
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the output timezone for CRM datetime fields."
+                      expressionType="Notify"
+                      name="OutputTimezone"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.SourceOutputTimezone" />
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmSourceComponent</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Unit Update\Get Unit Data\GET CE Data.Connections[DynamicsCRM]"
+                      connectionManagerID="{5EE0A524-E239-4EAD-A980-FF15089AA06D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_CONNECTION]"
+                      description="Dynamics CRM Connection Manager"
+                      name="DynamicsCRM" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output]"
+                      name="Primary Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_os_unittype]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_os_unittype]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_os_unittype]"
+                          name="ccba_os_unittype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_os_unittypename]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_os_unittypename]"
+                          length="4000"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_os_unittypename]"
+                          name="ccba_os_unittypename"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_symbol]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_symbol]"
+                          length="10"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_symbol]"
+                          name="msdyn_symbol"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[uomid]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomid]"
+                          name="uomid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[baseuom]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[baseuom]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[baseuom]"
+                          name="baseuom"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[baseuomname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[baseuomname]"
+                          length="100"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[baseuomname]"
+                          name="baseuomname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_int_foid]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_int_foid]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_int_foid]"
+                          name="ccba_int_foid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_slot_unitcode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_slot_unitcode]"
+                          length="100"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_slot_unitcode]"
+                          name="ccba_slot_unitcode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[isschedulebaseuom]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[isschedulebaseuom]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[isschedulebaseuom]"
+                          name="isschedulebaseuom"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[isschedulebaseuomname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[isschedulebaseuomname]"
+                          length="4000"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[isschedulebaseuomname]"
+                          name="isschedulebaseuomname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_decimalprecision]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_decimalprecision]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_decimalprecision]"
+                          name="msdyn_decimalprecision"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_description]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_description]"
+                          length="60"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_description]"
+                          name="msdyn_description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_isbaseunit]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_isbaseunit]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_isbaseunit]"
+                          name="msdyn_isbaseunit"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_isbaseunitname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_isbaseunitname]"
+                          length="4000"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_isbaseunitname]"
+                          name="msdyn_isbaseunitname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_issystemunit]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_issystemunit]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_issystemunit]"
+                          name="msdyn_issystemunit"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_issystemunitname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_issystemunitname]"
+                          length="4000"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_issystemunitname]"
+                          name="msdyn_issystemunitname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_systemofunits]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_systemofunits]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_systemofunits]"
+                          name="msdyn_systemofunits"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_systemofunitsname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_systemofunitsname]"
+                          length="4000"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_systemofunitsname]"
+                          name="msdyn_systemofunitsname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[name]"
+                          length="100"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[quantity]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[quantity]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[quantity]"
+                          name="quantity"
+                          precision="38"
+                          scale="5"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomscheduleid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[uomscheduleid]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomscheduleid]"
+                          name="uomscheduleid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomscheduleidname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[uomscheduleidname]"
+                          length="200"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomscheduleidname]"
+                          name="uomscheduleidname"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_os_unittype]"
+                          dataType="i4"
+                          name="ccba_os_unittype" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_os_unittypename]"
+                          dataType="wstr"
+                          length="4000"
+                          name="ccba_os_unittypename" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_symbol]"
+                          dataType="wstr"
+                          length="10"
+                          name="msdyn_symbol" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[uomid]"
+                          dataType="guid"
+                          name="uomid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[baseuom]"
+                          dataType="guid"
+                          name="baseuom" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[baseuomname]"
+                          dataType="wstr"
+                          length="100"
+                          name="baseuomname" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_int_foid]"
+                          dataType="i4"
+                          name="ccba_int_foid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[ccba_slot_unitcode]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_unitcode" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[isschedulebaseuom]"
+                          dataType="bool"
+                          name="isschedulebaseuom" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[isschedulebaseuomname]"
+                          dataType="wstr"
+                          length="4000"
+                          name="isschedulebaseuomname" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_decimalprecision]"
+                          dataType="i4"
+                          name="msdyn_decimalprecision" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_description]"
+                          dataType="wstr"
+                          length="60"
+                          name="msdyn_description" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_isbaseunit]"
+                          dataType="bool"
+                          name="msdyn_isbaseunit" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_isbaseunitname]"
+                          dataType="wstr"
+                          length="4000"
+                          name="msdyn_isbaseunitname" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_issystemunit]"
+                          dataType="bool"
+                          name="msdyn_issystemunit" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_issystemunitname]"
+                          dataType="wstr"
+                          length="4000"
+                          name="msdyn_issystemunitname" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_systemofunits]"
+                          dataType="i4"
+                          name="msdyn_systemofunits" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[msdyn_systemofunitsname]"
+                          dataType="wstr"
+                          length="4000"
+                          name="msdyn_systemofunitsname" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="100"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[quantity]"
+                          dataType="numeric"
+                          name="quantity"
+                          precision="38"
+                          scale="5" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[uomscheduleid]"
+                          dataType="guid"
+                          name="uomscheduleid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].ExternalColumns[uomscheduleidname]"
+                          dataType="wstr"
+                          length="200"
+                          name="uomscheduleidname" />
+                      </externalMetadataColumns>
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Unit Update\Get Unit Data\Load to Satging"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Load to Satging"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Unit]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Unit Update\Get Unit Data\Load to Satging.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[ccba_os_unittype]"
+                          cachedDataType="i4"
+                          cachedName="ccba_os_unittype"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_unittype]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_os_unittype]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[msdyn_symbol]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="msdyn_symbol"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_symbol]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_symbol]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[uomid]"
+                          cachedDataType="guid"
+                          cachedName="uomid"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[uomid]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomid]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[baseuom]"
+                          cachedDataType="guid"
+                          cachedName="baseuom"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[baseuom]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[baseuom]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[ccba_int_foid]"
+                          cachedDataType="i4"
+                          cachedName="ccba_int_foid"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[ccba_int_foid]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_int_foid]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[ccba_slot_unitcode]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_slot_unitcode"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_unitcode]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[ccba_slot_unitcode]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[isschedulebaseuom]"
+                          cachedDataType="bool"
+                          cachedName="isschedulebaseuom"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[isschedulebaseuom]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[isschedulebaseuom]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[msdyn_decimalprecision]"
+                          cachedDataType="i4"
+                          cachedName="msdyn_decimalprecision"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_decimalprecision]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_decimalprecision]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[msdyn_description]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="msdyn_description"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_description]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_description]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[msdyn_isbaseunit]"
+                          cachedDataType="bool"
+                          cachedName="msdyn_isbaseunit"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_isbaseunit]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_isbaseunit]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[msdyn_issystemunit]"
+                          cachedDataType="bool"
+                          cachedName="msdyn_issystemunit"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_issystemunit]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_issystemunit]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[msdyn_systemofunits]"
+                          cachedDataType="i4"
+                          cachedName="msdyn_systemofunits"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_systemofunits]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[msdyn_systemofunits]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[quantity]"
+                          cachedDataType="numeric"
+                          cachedName="quantity"
+                          cachedPrecision="38"
+                          cachedScale="5"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[quantity]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[uomscheduleid]"
+                          cachedDataType="guid"
+                          cachedName="uomscheduleid"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[uomscheduleid]"
+                          lineageId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output].Columns[uomscheduleid]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[Operation]"
+                          cachedDataType="wstr"
+                          cachedLength="6"
+                          cachedName="Operation"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          lineageId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output].Columns[Operation]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].Columns[ProcessingFlag]"
+                          cachedDataType="wstr"
+                          cachedLength="11"
+                          cachedName="ProcessingFlag"
+                          externalMetadataColumnId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[Processingflag]"
+                          lineageId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output].Columns[ProcessingFlag]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[uomid]"
+                          dataType="guid"
+                          name="uomid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[ccba_os_unittype]"
+                          dataType="i4"
+                          name="ccba_os_unittype" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[ccba_int_foid]"
+                          dataType="r8"
+                          name="ccba_int_foid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[baseuom]"
+                          dataType="guid"
+                          name="baseuom" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[ccba_slot_unitcode]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_unitcode" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_symbol]"
+                          dataType="wstr"
+                          length="10"
+                          name="msdyn_symbol" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[isschedulebaseuom]"
+                          dataType="bool"
+                          name="isschedulebaseuom" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_decimalprecision]"
+                          dataType="r8"
+                          name="msdyn_decimalprecision" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_description]"
+                          dataType="wstr"
+                          length="60"
+                          name="msdyn_description" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_isbaseunit]"
+                          dataType="bool"
+                          name="msdyn_isbaseunit" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_externalunitclassname]"
+                          dataType="wstr"
+                          length="50"
+                          name="msdyn_externalunitclassname" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_issystemunit]"
+                          dataType="bool"
+                          name="msdyn_issystemunit" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_systemofunits]"
+                          dataType="i4"
+                          name="msdyn_systemofunits" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="100"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                          dataType="r8"
+                          name="quantity" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[uomscheduleid]"
+                          dataType="guid"
+                          name="uomscheduleid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input].ExternalColumns[Processingflag]"
+                          dataType="wstr"
+                          length="11"
+                          name="Processingflag" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Get Unit Data\Load to Satging.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Get Unit Data\Load to Satging.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Unit Update\Get Unit Data\Load to Satging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Get Unit Data\Load to Satging.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Unit Update\Get Unit Data.Paths[Derived Column Output]"
+                  endId="Package\Unit Update\Get Unit Data\Load to Satging.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Unit Update\Get Unit Data\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Unit Update\Get Unit Data.Paths[Primary Output]"
+                  endId="Package\Unit Update\Get Unit Data\Derived Column.Inputs[Derived Column Input]"
+                  name="Primary Output"
+                  startId="Package\Unit Update\Get Unit Data\GET CE Data.Outputs[Primary Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Unit Update\Post Load"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{BE18B569-3009-4BB8-AD25-A27C7FA9FF14}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Post Load"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_Unit_PostLoad]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Unit Update\Set Operation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6D970B0F-2910-456E-9998-060026DD10D9}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Operation"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_Unit_Transformation]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Unit Update\Update Unit"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{04AA61EA-4D69-4017-BA6D-D8C57AD17C75}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Unit"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Unit Update\Update Unit\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Unit Update\Update Unit\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Unit Update\Update Unit\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Unit Update\Update Unit\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Unit Update\Update Unit\Get Unit Data"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Get Unit Data"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC dbo.sp_Unit_Load</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Unit Update\Update Unit\Get Unit Data.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[uomid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[uomid]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[uomid]"
+                          name="uomid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_os_unittype]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_unittype]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_os_unittype]"
+                          name="ccba_os_unittype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_int_foid]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_int_foid]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_int_foid]"
+                          name="ccba_int_foid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[baseuom]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[baseuom]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[baseuom]"
+                          name="baseuom"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_slot_unitcode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_unitcode]"
+                          length="100"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_slot_unitcode]"
+                          name="ccba_slot_unitcode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_symbol]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_symbol]"
+                          length="10"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_symbol]"
+                          name="msdyn_symbol"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[isschedulebaseuom]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[isschedulebaseuom]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[isschedulebaseuom]"
+                          name="isschedulebaseuom"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_decimalprecision]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_decimalprecision]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_decimalprecision]"
+                          name="msdyn_decimalprecision"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_description]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_description]"
+                          length="60"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_description]"
+                          name="msdyn_description"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_isbaseunit]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_isbaseunit]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_isbaseunit]"
+                          name="msdyn_isbaseunit"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_externalunitclassname]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_externalunitclassname]"
+                          length="50"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_externalunitclassname]"
+                          name="msdyn_externalunitclassname"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_issystemunit]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_issystemunit]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_issystemunit]"
+                          name="msdyn_issystemunit"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_systemofunits]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_systemofunits]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_systemofunits]"
+                          name="msdyn_systemofunits"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          length="100"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[name]"
+                          name="name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[quantity]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[quantity]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[quantity]"
+                          name="quantity"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[uomscheduleid]"
+                          dataType="guid"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[uomscheduleid]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[uomscheduleid]"
+                          name="uomscheduleid"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[uomid]"
+                          dataType="guid"
+                          name="uomid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_os_unittype]"
+                          dataType="i4"
+                          name="ccba_os_unittype" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_int_foid]"
+                          dataType="r8"
+                          name="ccba_int_foid" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[baseuom]"
+                          dataType="guid"
+                          name="baseuom" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[ccba_slot_unitcode]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_unitcode" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_symbol]"
+                          dataType="wstr"
+                          length="10"
+                          name="msdyn_symbol" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[isschedulebaseuom]"
+                          dataType="bool"
+                          name="isschedulebaseuom" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_decimalprecision]"
+                          dataType="r8"
+                          name="msdyn_decimalprecision" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_description]"
+                          dataType="wstr"
+                          length="60"
+                          name="msdyn_description" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_isbaseunit]"
+                          dataType="bool"
+                          name="msdyn_isbaseunit" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_externalunitclassname]"
+                          dataType="wstr"
+                          length="50"
+                          name="msdyn_externalunitclassname" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_issystemunit]"
+                          dataType="bool"
+                          name="msdyn_issystemunit" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[msdyn_systemofunits]"
+                          dataType="i4"
+                          name="msdyn_systemofunits" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="100"
+                          name="name" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[quantity]"
+                          dataType="r8"
+                          name="quantity" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].ExternalColumns[uomscheduleid]"
+                          dataType="guid"
+                          name="uomscheduleid" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[uomid]"
+                          dataType="guid"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[uomid]"
+                          name="uomid" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ccba_os_unittype]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ccba_os_unittype]"
+                          name="ccba_os_unittype" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ccba_int_foid]"
+                          dataType="r8"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ccba_int_foid]"
+                          name="ccba_int_foid" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[baseuom]"
+                          dataType="guid"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[baseuom]"
+                          name="baseuom" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ccba_slot_unitcode]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ccba_slot_unitcode]"
+                          name="ccba_slot_unitcode" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_symbol]"
+                          dataType="wstr"
+                          length="10"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_symbol]"
+                          name="msdyn_symbol" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[isschedulebaseuom]"
+                          dataType="bool"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[isschedulebaseuom]"
+                          name="isschedulebaseuom" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_decimalprecision]"
+                          dataType="r8"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_decimalprecision]"
+                          name="msdyn_decimalprecision" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_description]"
+                          dataType="wstr"
+                          length="60"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_description]"
+                          name="msdyn_description" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_isbaseunit]"
+                          dataType="bool"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_isbaseunit]"
+                          name="msdyn_isbaseunit" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_externalunitclassname]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_externalunitclassname]"
+                          name="msdyn_externalunitclassname" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_issystemunit]"
+                          dataType="bool"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_issystemunit]"
+                          name="msdyn_issystemunit" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_systemofunits]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[msdyn_systemofunits]"
+                          name="msdyn_systemofunits" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[name]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[name]"
+                          name="name" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[quantity]"
+                          dataType="r8"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[quantity]"
+                          name="quantity" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[uomscheduleid]"
+                          dataType="guid"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[uomscheduleid]"
+                          name="uomscheduleid" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Unit Update\Update Unit\Unit_Error"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Unit_Error"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Unit_Error]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Unit Update\Update Unit\Unit_Error.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errorcolumn]"
+                          lineageId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorColumn]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].Columns[ErrorMessage]"
+                          cachedDataType="wstr"
+                          cachedLength="2048"
+                          cachedName="ErrorMessage"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errordescription]"
+                          lineageId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorMessage]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].Columns[uomid]"
+                          cachedDataType="guid"
+                          cachedName="uomid"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[uomId]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[uomid]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errorcolumn]"
+                          dataType="wstr"
+                          length="300"
+                          name="Errorcolumn" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errordescription]"
+                          dataType="nText"
+                          name="Errordescription" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[Errordatetime]"
+                          dataType="dbTimeStamp"
+                          name="Errordatetime" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[uomId]"
+                          dataType="guid"
+                          name="uomId" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Unit_Error.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Unit_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Unit_Error.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Unit Update\Update Unit\Unit_Sucess"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Unit_Sucess"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[Unit_Success]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Unit Update\Update Unit\Unit_Sucess.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input].Columns[uomid]"
+                          cachedDataType="guid"
+                          cachedName="uomid"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input].ExternalColumns[uomId]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[uomid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input].ExternalColumns[Createddatetime]"
+                          dataType="dbTimeStamp"
+                          name="Createddatetime" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input].ExternalColumns[uomId]"
+                          dataType="guid"
+                          name="uomId" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Unit_Sucess.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Sucess.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Unit_Sucess.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Unit_Sucess.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Unit_Sucess.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Unit Update\Update Unit\Update Unit Data"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2021 KingswaySoft Inc."
+                  description="Populate data into Microsoft Dynamics 365 CE/CRM."
+                  name="Update Unit Data"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Destination entity to write data."
+                      expressionType="Notify"
+                      name="DestinationEntity">uom</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies how data is written to CDS/Dynamics CRM server."
+                      name="ActionType"
+                      typeConverter="KingswaySoft.IntegrationToolkit.DynamicsCrm.DestinationActionType">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the values of CDS/CRM lookup fields should be removed if the reference records cannot be found. "
+                      expressionType="Notify"
+                      name="RemoveUnresolvableReferences">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether duplicate detection should be enabled when creating or updating CDS/CRM records. Duplicate records are determined by the duplicate detection rules and settings defined in CDS or Microsoft Dynamics CRM server."
+                      expressionType="Notify"
+                      name="EnableSystemDuplicateDetection">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the matching criteria to be used when performing an update or upsert. "
+                      expressionType="Notify"
+                      name="RecordMatchingCriteria"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.RecordMatchingCriteria">1</property>
+                    <property
+                      dataType="System.String"
+                      description="Specify the key fields to be used to determine the matching records that exist in CDS/CRM for either Upsert/Update action or source duplicate optimization."
+                      expressionType="Notify"
+                      name="RecordMatchingKeyFields"></property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to ignore those NULL-valued fields."
+                      expressionType="Notify"
+                      name="IgnoreNullValuedFields">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether to ignore those fields that have no value changes in the target system. "
+                      expressionType="Notify"
+                      name="IgnoreUnchangedFields">true</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specify whether to remove those invalid characters before writing to CDS/CRM."
+                      expressionType="Notify"
+                      name="RemoveInvalidCharacters">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specify the flag field(s) that are used to track the source of changes. The field(s) will not posted to CDS/CRM server unless there are changes to other fields if specified. &quot;Ignore Unchange Fields&quot; option is required in order for the specified flag field(s) to work. "
+                      expressionType="Notify"
+                      name="ChangeFlagFields"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies what action will be taken when multiple matches are found with Upsert action."
+                      expressionType="Notify"
+                      name="HandlingOfMultipleMatches"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.HandlingOfMultipleMatches">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify whether to use optimizations when there are duplicate records form the source system."
+                      expressionType="Notify"
+                      name="OptimizationOnSourceDuplicates"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.DynamicsCrm.OptimizationOnSourceDuplicates">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Workflow or action to be executed."
+                      expressionType="Notify"
+                      name="WorkflowAction"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the number of records to be sent to CDS/Dynamics CRM server in each service call."
+                      expressionType="Notify"
+                      name="BatchSize">100</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specify the total number or concurrent threads to write to CDS/CRM server simultaneously. "
+                      expressionType="Notify"
+                      name="ConcurrentWritingThreadsInTotal">20</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether datetime values should be sent to CDS/CRM server in UTC format."
+                      expressionType="Notify"
+                      name="SendDateTimeInUtcFormat">false</property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.DynamicsCrm.CrmDestinationComponent</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Unit Update\Update Unit\Update Unit Data.Connections[DynamicsCRM]"
+                      connectionManagerID="{5EE0A524-E239-4EAD-A980-FF15089AA06D}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_CONNECTION]"
+                      description="Dynamics CRM Connection Manager"
+                      name="DynamicsCRM" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="RedirectRow"
+                      hasSideEffects="true"
+                      name="Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[ccba_int_foid]"
+                          cachedDataType="r8"
+                          cachedName="ccba_int_foid"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[ccba_int_foid]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_int_foid]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[ccba_os_unittype]"
+                          cachedDataType="i4"
+                          cachedName="ccba_os_unittype"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[ccba_os_unittype]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_os_unittype]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[ccba_slot_unitcode]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_slot_unitcode"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[ccba_slot_unitcode]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[ccba_slot_unitcode]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[msdyn_decimalprecision]"
+                          cachedDataType="r8"
+                          cachedName="msdyn_decimalprecision"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_decimalprecision]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_decimalprecision]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[msdyn_description]"
+                          cachedDataType="wstr"
+                          cachedLength="60"
+                          cachedName="msdyn_description"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_description]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_description]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[msdyn_externalunitclassname]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="msdyn_externalunitclassname"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_externalunitclassname]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_externalunitclassname]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[msdyn_isbaseunit]"
+                          cachedDataType="bool"
+                          cachedName="msdyn_isbaseunit"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_isbaseunit]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_isbaseunit]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[msdyn_issystemunit]"
+                          cachedDataType="bool"
+                          cachedName="msdyn_issystemunit"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_issystemunit]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_issystemunit]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[msdyn_symbol]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="msdyn_symbol"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_symbol]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_symbol]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[msdyn_systemofunits]"
+                          cachedDataType="i4"
+                          cachedName="msdyn_systemofunits"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_systemofunits]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[msdyn_systemofunits]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[name]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="name"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[name]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[name]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[quantity]"
+                          cachedDataType="r8"
+                          cachedName="quantity"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[quantity]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[quantity]" />
+                        <inputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].Columns[uomid]"
+                          cachedDataType="guid"
+                          cachedName="uomid"
+                          externalMetadataColumnId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[uomid]"
+                          lineageId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output].Columns[uomid]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[baseuom]"
+                          dataType="guid"
+                          name="baseuom">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">uom</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[ccba_int_foid]"
+                          dataType="i4"
+                          name="ccba_int_foid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[ccba_os_unittype]"
+                          dataType="i4"
+                          name="ccba_os_unittype">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[ccba_slot_unitcode]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_slot_unitcode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[modifiedby]"
+                          dataType="guid"
+                          name="modifiedby">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Lookup</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">systemuser</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_decimalprecision]"
+                          dataType="i4"
+                          name="msdyn_decimalprecision">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_description]"
+                          dataType="wstr"
+                          length="60"
+                          name="msdyn_description">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_externalunitclassname]"
+                          dataType="wstr"
+                          length="50"
+                          name="msdyn_externalunitclassname">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_isbaseunit]"
+                          dataType="bool"
+                          name="msdyn_isbaseunit">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_issystemunit]"
+                          dataType="bool"
+                          name="msdyn_issystemunit">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Boolean</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_symbol]"
+                          dataType="wstr"
+                          length="10"
+                          name="msdyn_symbol">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[msdyn_systemofunits]"
+                          dataType="i4"
+                          name="msdyn_systemofunits">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Picklist</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[name]"
+                          dataType="wstr"
+                          length="100"
+                          name="name">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">String</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[organizationid]"
+                          dataType="guid"
+                          name="organizationid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Uniqueidentifier</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[quantity]"
+                          dataType="numeric"
+                          name="quantity"
+                          precision="38"
+                          scale="5">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Decimal</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[timezoneruleversionnumber]"
+                          dataType="i4"
+                          name="timezoneruleversionnumber">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[uomid]"
+                          dataType="guid"
+                          name="uomid">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Uniqueidentifier</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes">uom</property>
+                          </properties>
+                        </externalMetadataColumn>
+                        <externalMetadataColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input].ExternalColumns[utcconversiontimezonecode]"
+                          dataType="i4"
+                          name="utcconversiontimezonecode">
+                          <properties>
+                            <property
+                              dataType="System.String"
+                              name="FieldType">Integer</property>
+                            <property
+                              dataType="System.String"
+                              name="LookupTypes"></property>
+                          </properties>
+                        </externalMetadataColumn>
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Default Output]"
+                      exclusionGroup="1"
+                      name="Default Output"
+                      synchronousInputId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Default Output].Columns[SavedRecordId]"
+                          dataType="guid"
+                          lineageId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Default Output].Columns[SavedRecordId]"
+                          name="SavedRecordId" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Default Output].Columns[IsNew]"
+                          dataType="bool"
+                          lineageId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Default Output].Columns[IsNew]"
+                          name="IsNew" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Error Output"
+                      synchronousInputId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                        <outputColumn
+                          refId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorMessage]"
+                          dataType="wstr"
+                          length="2048"
+                          lineageId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output].Columns[ErrorMessage]"
+                          name="ErrorMessage" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Unit Update\Update Unit.Paths[Default Output]"
+                  endId="Package\Unit Update\Update Unit\Unit_Sucess.Inputs[OLE DB Destination Input]"
+                  name="Default Output"
+                  startId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Default Output]" />
+                <path
+                  refId="Package\Unit Update\Update Unit.Paths[Derived Column Output]"
+                  endId="Package\Unit Update\Update Unit\Update Unit Data.Inputs[Input]"
+                  name="Derived Column Output"
+                  startId="Package\Unit Update\Update Unit\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Unit Update\Update Unit.Paths[Error Output]"
+                  endId="Package\Unit Update\Update Unit\Unit_Error.Inputs[OLE DB Destination Input]"
+                  name="Error Output"
+                  startId="Package\Unit Update\Update Unit\Update Unit Data.Outputs[Error Output]" />
+                <path
+                  refId="Package\Unit Update\Update Unit.Paths[OLE DB Source Output]"
+                  endId="Package\Unit Update\Update Unit\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\Unit Update\Update Unit\Get Unit Data.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Unit Update.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{1CB01D05-7A27-4601-A67D-D63205ECC076}"
+          DTS:From="Package\Unit Update\Delete Unit Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Unit Update\Get Unit Data" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Unit Update.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{3E2695A6-F3AF-4D30-B903-B9850EDF6951}"
+          DTS:From="Package\Unit Update\Update Unit"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Unit Update\Post Load" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Unit Update.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{0638D8D9-CFE4-42F7-9884-931CADCC6B1D}"
+          DTS:From="Package\Unit Update\Get Unit Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Unit Update\Set Operation" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Unit Update.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{749590FC-BB12-41E2-9A9F-7F22AB038556}"
+          DTS:From="Package\Unit Update\Set Operation"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Unit Update\Update Unit" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{873C1E53-1018-4211-9D50-F89BB8DF7BDA}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Unit Update" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C915A988-A928-484F-973C-6C2F9E2A526B}"
+      DTS:From="Package\Unit Update"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{b7ebf296-d51f-4252-93db-ad65fdc1aa54}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="656.874990211799,330.000005872626" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="652.499990276992,245.157899012526" />
+        <NodeLayout
+          Size="136.666666666667,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="150,82.6666666666667"
+          Size="150,125.333333333334"
+          Id="Package\Start"
+          TopLeft="38.1249994318932,215.78947548721" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Unit Update\Delete Unit Data"
+          TopLeft="64.8749994505197,15.5307034897727" />
+        <NodeLayout
+          Size="144,42.6666666666667"
+          Id="Package\Unit Update\Get Unit Data"
+          TopLeft="72.1354149460481,90.4517575315546" />
+        <NodeLayout
+          Size="145.333333333334,42.6666666666667"
+          Id="Package\Unit Update\Set Operation"
+          TopLeft="73.7395817974273,167.679828445364" />
+        <NodeLayout
+          Size="136,42.6666666666667"
+          Id="Package\Unit Update\Update Unit"
+          TopLeft="76.9166650834184,241.798250604479" />
+        <EdgeLayout
+          Id="Package\Unit Update.PrecedenceConstraints[Constraint]"
+          TopLeft="143.838540531617,58.1973701564394">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.2543873751153"
+              Start="0,0"
+              End="0,24.7543873751153">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.7543873751153" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unit Update.PrecedenceConstraints[Constraint 4]"
+          TopLeft="145.661456773756,210.346495112031">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,31.451755492448"
+              Start="0,0"
+              End="0,23.951755492448">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.951755492448" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="128,42.6666666666667"
+          Id="Package\Unit Update\Post Load"
+          TopLeft="84.8333281055093,320.719303341233" />
+        <EdgeLayout
+          Id="Package\Unit Update.PrecedenceConstraints[Constraint 1]"
+          TopLeft="146.874996594464,284.464917271146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.2543860700874"
+              Start="0,0"
+              End="0,28.7543860700874">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.7543860700874" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unit Update.PrecedenceConstraints[Constraint 2]"
+          TopLeft="145.270831705071,133.118424198221">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.5614042471431"
+              Start="0,0"
+              End="0,27.0614042471431">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.0614042471431" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="302.666666666667,492.666666666667"
+          Size="302.666666666667,535.333333333334"
+          Id="Package\Unit Update"
+          TopLeft="266.249996032565,49.8333252584723" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="188.124999431893,278.456142153877">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="78.1249966006717,39.0438497712623"
+              Start="0,0"
+              End="70.6249966006717,39.0438497712623">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="35.0624983003359,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="35.0624983003359,0"
+                    Point2="39.0624983003359,0"
+                    Point3="39.0624983003359,4" />
+                  <mssgle:LineSegment
+                    End="39.0624983003359,35.0438497712623" />
+                  <mssgle:CubicBezierSegment
+                    Point1="39.0624983003359,35.0438497712623"
+                    Point2="39.0624983003359,39.0438497712623"
+                    Point3="43.0624983003359,39.0438497712623" />
+                  <mssgle:LineSegment
+                    End="70.6249966006717,39.0438497712623" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="568.916662699232,317.499991925139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83.5833275777603,-51.0087595792797"
+              Start="0,0"
+              End="76.0833275777603,-51.0087595792797">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="37.7916637888802,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.7916637888802,0"
+                    Point2="41.7916637888802,0"
+                    Point3="41.7916637888802,-4" />
+                  <mssgle:LineSegment
+                    End="41.7916637888802,-47.0087595792797" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.7916637888802,-47.0087595792797"
+                    Point2="41.7916637888802,-51.0087595792797"
+                    Point3="45.7916637888802,-51.0087595792797" />
+                  <mssgle:LineSegment
+                    End="76.0833275777603,-51.0087595792797" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="720.187490244396,287.824565679193">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,42.1754401934331"
+              Start="0,0"
+              End="0,34.6754401934331">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.6754401934331" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Unit Update\Get Unit Data">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="144,42.6666666666667"
+          Id="Package\Unit Update\Get Unit Data\GET CE Data"
+          TopLeft="284.999995753169,26.0000004893855" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Unit Update\Get Unit Data\Load to Satging"
+          TopLeft="289.999995678663,171.052634798589" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Unit Update\Get Unit Data\Derived Column"
+          TopLeft="285.624995743856,92.368422791238" />
+        <EdgeLayout
+          Id="Package\Unit Update\Get Unit Data.Paths[Primary Output]"
+          TopLeft="360.312495748512,68.6666671560522">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.7017556351858"
+              Start="0,0"
+              End="0,16.2017556351858">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.2017556351858" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unit Update\Get Unit Data.Paths[Derived Column Output]"
+          TopLeft="365.479162377926,135.035089457905">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.0175453406843"
+              Start="0,0"
+              End="0,28.5175453406843">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5175453406843" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unit Update\Get Unit Data\Load to Satging">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Unit Update\Update Unit">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="140,42.6666666666667"
+          Id="Package\Unit Update\Update Unit\Unit_Sucess"
+          TopLeft="387,298" />
+        <NodeLayout
+          Size="161.333333333334,42"
+          Id="Package\Unit Update\Update Unit\Update Unit Data"
+          TopLeft="491.666666666667,188.833333333333" />
+        <NodeLayout
+          Size="128,42.6666666666667"
+          Id="Package\Unit Update\Update Unit\Unit_Error"
+          TopLeft="619,297" />
+        <NodeLayout
+          Size="144,42.6666666666667"
+          Id="Package\Unit Update\Update Unit\Get Unit Data"
+          TopLeft="490,13" />
+        <EdgeLayout
+          Id="Package\Unit Update\Update Unit.Paths[Error Output]"
+          TopLeft="597.888888888889,230.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="85.1111111111112,66.1666666666667"
+              Start="0,0"
+              End="85.1111111111112,58.6666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.8565193671577" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.8565193671577"
+                    Point2="0,26.8565193671577"
+                    Point3="4,26.8565193671577" />
+                  <mssgle:LineSegment
+                    End="81.1111111111112,26.8565193671577" />
+                  <mssgle:CubicBezierSegment
+                    Point1="81.1111111111112,26.8565193671577"
+                    Point2="85.1111111111112,26.8565193671577"
+                    Point3="85.1111111111112,30.8565193671577" />
+                  <mssgle:LineSegment
+                    End="85.1111111111112,58.6666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="14.2191688368056,31.8565193671577,56.6727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unit Update\Update Unit.Paths[Default Output]"
+          TopLeft="546.777777777778,230.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-89.7777777777777,67.1666666666667"
+              Start="0,0"
+              End="-89.7777777777777,59.6666666666667">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.2624113475178" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.2624113475178"
+                    Point2="0,27.2624113475178"
+                    Point3="-4,27.2624113475178" />
+                  <mssgle:LineSegment
+                    End="-85.7777777777777,27.2624113475178" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-85.7777777777777,27.2624113475178"
+                    Point2="-89.7777777777777,27.2624113475178"
+                    Point3="-89.7777777777777,31.2624113475178" />
+                  <mssgle:LineSegment
+                    End="-89.7777777777777,59.6666666666667" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Unit Update\Update Unit\Derived Column"
+          TopLeft="483.833333333333,94.5" />
+        <EdgeLayout
+          Id="Package\Unit Update\Update Unit.Paths[OLE DB Source Output]"
+          TopLeft="561.916666666667,55.6666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.8333333333333"
+              Start="0,0"
+              End="0,31.3333333333333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.3333333333333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Unit Update\Update Unit.Paths[Derived Column Output]"
+          TopLeft="561.833333333333,137.166666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.5,51.6666666666666"
+              Start="0,0"
+              End="10.5,44.1666666666666">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.8333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.8333333333333"
+                    Point2="0,25.8333333333333"
+                    Point3="4,25.8333333333333" />
+                  <mssgle:LineSegment
+                    End="6.5,25.8333333333333" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.5,25.8333333333333"
+                    Point2="10.5,25.8333333333333"
+                    Point3="10.5,29.8333333333333" />
+                  <mssgle:LineSegment
+                    End="10.5,44.1666666666666" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unit Update\Update Unit\Unit_Sucess">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unit Update\Update Unit\Unit_Error">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Unit Update\Update Unit\Get Unit Data">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

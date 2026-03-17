@@ -1,0 +1,1958 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/18/2021 9:46:55 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="GCNMS-DPL14"
+  DTS:CreatorName="RBEIGCN\CLM1KOR"
+  DTS:DTSID="{FB387803-FB9C-4629-814C-F8966B8EB47F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="CustomerAssetGetDump"
+  DTS:PackageType="5"
+  DTS:VersionBuild="227"
+  DTS:VersionGUID="{A185DEC2-63B6-4AEC-8751-A532201A3878}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C9B9A508-6496-4541-BD24-71F959A87747}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="EntityName">
+      <DTS:VariableValue
+        DTS:DataType="8">CustomerAsset</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CustomerAsset Extraction"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{0BCC229F-4238-461F-B395-32CF7ACC26A0}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CustomerAsset Extraction">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\CustomerAsset Extraction\CustomerAsset Trim"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{EF6E6E71-D3E9-432B-A4BC-277ACA8CBA12}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CustomerAsset Trim"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_CustomerAsset_Trim]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\CustomerAsset Extraction\Delete CustomerAsset Data"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{22D29ABF-5728-4264-AD46-43C621077289}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Delete CustomerAsset Data"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_CustomerAsset_Delete]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{A7A3AC34-DA8B-4A5F-85FD-901F7633D663}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Retrieving Data From Source to Staging"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="38"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]"
+                          name="Package_Correlationid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[System::ExecutionInstanceGUID]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[System::ExecutionInstanceGUID]</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="Inserting Data To CustomerAsset"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[CustomerAsset]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">true</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Connections[OleDbConnection]"
+                      connectionManagerID="{F9BA1A12-0151-4B43-B7B1-4740FC256512}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_STAGING_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[Package_Correlationid]"
+                          cachedDataType="wstr"
+                          cachedLength="38"
+                          cachedName="Package_Correlationid"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output].Columns[Package_Correlationid]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_account]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_account"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_accounttext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_account]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_acquisitiondate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="msdyn_acquisitiondate"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_acquisitiondate]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_acquisitiondate]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_activefrom]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="msdyn_activefrom"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_activefrom]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_activefrom]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_activeto]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="msdyn_activeto"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_activeto]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_activeto]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_assetnumber]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="ccba_assetnumber"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_assetnumber]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_assetnumber]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_companytagnumber]"
+                          cachedDataType="wstr"
+                          cachedLength="30"
+                          cachedName="ccba_companytagnumber"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_companytagnumber]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_companytagnumber]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_coolerusage]"
+                          cachedDataType="wstr"
+                          cachedLength="26"
+                          cachedName="ccba_coolerusage"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_coolerusagetext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_coolerusage]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_datelastverified]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="ccba_datelastverified"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_datelastverified]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_datelastverified]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_energymanagementsystem]"
+                          cachedDataType="wstr"
+                          cachedLength="7"
+                          cachedName="ccba_energymanagementsystem"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_energymanagementsystemtext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_energymanagementsystem]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_equipmenttype]"
+                          cachedDataType="wstr"
+                          cachedLength="23"
+                          cachedName="ccba_equipmenttype"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_equipmenttypetext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_equipmenttype]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_evaporator]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_evaporator"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_evaporator]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_evaporator]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_fixedassetid]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="msdyn_fixedassetid"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_fixedassetid]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_fixedassetid]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_latitude]"
+                          cachedDataType="r8"
+                          cachedName="msdyn_latitude"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_latitude]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_latitude]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_longitude]"
+                          cachedDataType="r8"
+                          cachedName="msdyn_longitude"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_longitude]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_longitude]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_lighting]"
+                          cachedDataType="wstr"
+                          cachedLength="17"
+                          cachedName="ccba_lighting"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lightingtext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lighting]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_manufacturer]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_manufacturer"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_manufacturer]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_manufacturer]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_model]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_model"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_modeltext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_model]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_name]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_name"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_name]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_name]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[overriddencreatedon]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="overriddencreatedon"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[overriddencreatedon]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_racking]"
+                          cachedDataType="wstr"
+                          cachedLength="9"
+                          cachedName="ccba_racking"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_rackingtext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_racking]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_sapid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_sapid"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_sapid]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_serialid]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="msdyn_serialid"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serialid]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serialid]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_type]"
+                          cachedDataType="wstr"
+                          cachedLength="19"
+                          cachedName="ccba_type"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_typetext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_product]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="msdyn_product"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_producttext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_product]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[msdyn_functionallocation]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="msdyn_functionallocation"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_functionallocationtext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_functionallocation]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_lcrefrigerator]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_lcrefrigerator"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lcrefrigerator]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lcrefrigerator]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_lkp_agreementid]"
+                          cachedDataType="wstr"
+                          cachedLength="100"
+                          cachedName="ccba_lkp_agreementid"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_agreementidtext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_agreementid]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_customercontract]"
+                          cachedDataType="wstr"
+                          cachedLength="3"
+                          cachedName="ccba_customercontract"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_customercontracttext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_customercontract]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[cdm_companycode]"
+                          cachedDataType="wstr"
+                          cachedLength="20"
+                          cachedName="cdm_companycode"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_companytext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]" />
+                        <inputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].Columns[ccba_brand]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="ccba_brand"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_brandidtext]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_brand]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[statecode]"
+                          dataType="i4"
+                          name="statecode" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[statuscode]"
+                          dataType="i4"
+                          name="statuscode" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[Processingflag]"
+                          dataType="wstr"
+                          length="11"
+                          name="Processingflag" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[Crmrecordid]"
+                          dataType="guid"
+                          name="Crmrecordid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[Operation]"
+                          dataType="wstr"
+                          length="50"
+                          name="Operation" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[CorrelationId]"
+                          dataType="guid"
+                          name="CorrelationId" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_account]"
+                          dataType="guid"
+                          name="msdyn_account" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_accounttext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_accounttext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_acquisitiondate]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_acquisitiondate" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_activefrom]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_activefrom" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_activeto]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_activeto" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_assetnumber]"
+                          dataType="wstr"
+                          length="30"
+                          name="ccba_assetnumber" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_companytext]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_companytext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_company]"
+                          dataType="guid"
+                          name="msdyn_company" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_companytagnumber]"
+                          dataType="wstr"
+                          length="30"
+                          name="ccba_companytagnumber" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_coolerusagetext]"
+                          dataType="wstr"
+                          length="26"
+                          name="ccba_coolerusagetext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_coolerusage]"
+                          dataType="i4"
+                          name="ccba_coolerusage" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_customercontract]"
+                          dataType="bool"
+                          name="ccba_customercontract" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_datelastverified]"
+                          dataType="dbTimeStamp"
+                          name="ccba_datelastverified" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_energymanagementsystemtext]"
+                          dataType="wstr"
+                          length="7"
+                          name="ccba_energymanagementsystemtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_energymanagementsystem]"
+                          dataType="i4"
+                          name="ccba_energymanagementsystem" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_equipmenttypetext]"
+                          dataType="wstr"
+                          length="23"
+                          name="ccba_equipmenttypetext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_equipmenttype]"
+                          dataType="i4"
+                          name="ccba_equipmenttype" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_evaporator]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_evaporator" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_fixedassetid]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_fixedassetid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_latitude]"
+                          dataType="r8"
+                          name="msdyn_latitude" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_longitude]"
+                          dataType="r8"
+                          name="msdyn_longitude" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lightingtext]"
+                          dataType="wstr"
+                          length="17"
+                          name="ccba_lightingtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lighting]"
+                          dataType="i4"
+                          name="ccba_lighting" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_manufacturer]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_manufacturer" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_modeltext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_modeltext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_model]"
+                          dataType="guid"
+                          name="ccba_model" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_name]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_name" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[overriddencreatedon]"
+                          dataType="dbTimeStamp"
+                          name="overriddencreatedon" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_rackingtext]"
+                          dataType="wstr"
+                          length="9"
+                          name="ccba_rackingtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_racking]"
+                          dataType="i4"
+                          name="ccba_racking" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_serialid]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_serialid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_typetext]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_typetext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_type]"
+                          dataType="i4"
+                          name="ccba_type" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_producttext]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_producttext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_product]"
+                          dataType="guid"
+                          name="msdyn_product" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_functionallocationtext]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_functionallocationtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[msdyn_functionallocation]"
+                          dataType="guid"
+                          name="msdyn_functionallocation" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lcrefrigerator]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lcrefrigerator" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_agreementidtext]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lkp_agreementidtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_lkp_agreementid]"
+                          dataType="guid"
+                          name="ccba_lkp_agreementid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_customercontracttext]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_customercontracttext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[owner]"
+                          dataType="guid"
+                          name="owner" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_brandidtext]"
+                          dataType="wstr"
+                          length="50"
+                          name="ccba_brandidtext" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input].ExternalColumns[ccba_brandid]"
+                          dataType="guid"
+                          name="ccba_brandid" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source"
+                  componentClassID="Microsoft.OLEDBSource"
+                  contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+                  description="OLE DB Source"
+                  name="Reading CustomerAsset Data From Source"
+                  usesDispositions="true"
+                  version="7">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[CustomerAsset]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mappings between the parameters in the SQL command and variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Connections[OleDbConnection]"
+                      connectionManagerID="{9756231E-BC44-4F1E-9515-002B7C56C5C7}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CCBA_CE_SOURCE_CONNECTION]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output]"
+                      name="OLE DB Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_account]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_account]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_account]"
+                          name="msdyn_account"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_acquisitiondate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_acquisitiondate]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_acquisitiondate]"
+                          name="msdyn_acquisitiondate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_activefrom]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_activefrom]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_activefrom]"
+                          name="msdyn_activefrom"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_activeto]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_activeto]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_activeto]"
+                          name="msdyn_activeto"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_assetnumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_assetnumber]"
+                          length="30"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_assetnumber]"
+                          name="ccba_assetnumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_companytagnumber]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_companytagnumber]"
+                          length="30"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_companytagnumber]"
+                          name="ccba_companytagnumber"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_coolerusage]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_coolerusage]"
+                          length="26"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_coolerusage]"
+                          name="ccba_coolerusage"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_customercontract]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_customercontract]"
+                          length="3"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_customercontract]"
+                          name="ccba_customercontract"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_datelastverified]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_datelastverified]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_datelastverified]"
+                          name="ccba_datelastverified"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_energymanagementsystem]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_energymanagementsystem]"
+                          length="7"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_energymanagementsystem]"
+                          name="ccba_energymanagementsystem"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_equipmenttype]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_equipmenttype]"
+                          length="23"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_equipmenttype]"
+                          name="ccba_equipmenttype"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_evaporator]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_evaporator]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_evaporator]"
+                          name="ccba_evaporator"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_fixedassetid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_fixedassetid]"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_fixedassetid]"
+                          name="msdyn_fixedassetid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_latitude]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_latitude]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_latitude]"
+                          name="msdyn_latitude"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_longitude]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_longitude]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_longitude]"
+                          name="msdyn_longitude"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lighting]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lighting]"
+                          length="17"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lighting]"
+                          name="ccba_lighting"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_manufacturer]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_manufacturer]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_manufacturer]"
+                          name="ccba_manufacturer"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_model]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_model]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_model]"
+                          name="ccba_model"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_name]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_name]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_name]"
+                          name="msdyn_name"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[overriddencreatedon]"
+                          name="overriddencreatedon"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_racking]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_racking]"
+                          length="9"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_racking]"
+                          name="ccba_racking"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_sapid]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_sapid]"
+                          name="ccba_sapid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serialid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serialid]"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_serialid]"
+                          name="msdyn_serialid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_type]"
+                          length="19"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_type]"
+                          name="ccba_type"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_product]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_product]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_product]"
+                          name="msdyn_product"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_functionallocation]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_functionallocation]"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[msdyn_functionallocation]"
+                          name="msdyn_functionallocation"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lcrefrigerator]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lcrefrigerator]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lcrefrigerator]"
+                          name="ccba_lcrefrigerator"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_agreementid]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_agreementid]"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_lkp_agreementid]"
+                          name="ccba_lkp_agreementid"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[cdm_companycode]"
+                          name="cdm_companycode"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_brand]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_brand]"
+                          length="50"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].Columns[ccba_brand]"
+                          name="ccba_brand"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_account]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_account" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_acquisitiondate]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_acquisitiondate" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_activefrom]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_activefrom" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_activeto]"
+                          dataType="dbTimeStamp"
+                          name="msdyn_activeto" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_assetnumber]"
+                          dataType="wstr"
+                          length="30"
+                          name="ccba_assetnumber" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_companytagnumber]"
+                          dataType="wstr"
+                          length="30"
+                          name="ccba_companytagnumber" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_coolerusage]"
+                          dataType="wstr"
+                          length="26"
+                          name="ccba_coolerusage" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_customercontract]"
+                          dataType="wstr"
+                          length="3"
+                          name="ccba_customercontract" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_datelastverified]"
+                          dataType="dbTimeStamp"
+                          name="ccba_datelastverified" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_energymanagementsystem]"
+                          dataType="wstr"
+                          length="7"
+                          name="ccba_energymanagementsystem" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_equipmenttype]"
+                          dataType="wstr"
+                          length="23"
+                          name="ccba_equipmenttype" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_evaporator]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_evaporator" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_fixedassetid]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_fixedassetid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_latitude]"
+                          dataType="r8"
+                          name="msdyn_latitude" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_longitude]"
+                          dataType="r8"
+                          name="msdyn_longitude" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lighting]"
+                          dataType="wstr"
+                          length="17"
+                          name="ccba_lighting" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_manufacturer]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_manufacturer" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_model]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_model" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_name]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_name" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[overriddencreatedon]"
+                          dataType="dbTimeStamp"
+                          name="overriddencreatedon" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_racking]"
+                          dataType="wstr"
+                          length="9"
+                          name="ccba_racking" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_sapid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_serialid]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_serialid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_type]"
+                          dataType="wstr"
+                          length="19"
+                          name="ccba_type" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_product]"
+                          dataType="wstr"
+                          length="100"
+                          name="msdyn_product" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[msdyn_functionallocation]"
+                          dataType="wstr"
+                          length="20"
+                          name="msdyn_functionallocation" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lcrefrigerator]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lcrefrigerator" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_lkp_agreementid]"
+                          dataType="wstr"
+                          length="100"
+                          name="ccba_lkp_agreementid" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          name="cdm_companycode" />
+                        <externalMetadataColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output].ExternalColumns[ccba_brand]"
+                          dataType="wstr"
+                          length="50"
+                          name="ccba_brand" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output]"
+                      isErrorOut="true"
+                      name="OLE DB Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_account]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_account]"
+                          name="msdyn_account" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_acquisitiondate]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_acquisitiondate]"
+                          name="msdyn_acquisitiondate" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_activefrom]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_activefrom]"
+                          name="msdyn_activefrom" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_activeto]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_activeto]"
+                          name="msdyn_activeto" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_assetnumber]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_assetnumber]"
+                          name="ccba_assetnumber" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_brand]"
+                          dataType="wstr"
+                          length="50"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_brand]"
+                          name="ccba_brand" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[cdm_companycode]"
+                          name="cdm_companycode" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_companytagnumber]"
+                          dataType="wstr"
+                          length="30"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_companytagnumber]"
+                          name="ccba_companytagnumber" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_coolerusage]"
+                          dataType="wstr"
+                          length="26"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_coolerusage]"
+                          name="ccba_coolerusage" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_customercontract]"
+                          dataType="wstr"
+                          length="3"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_customercontract]"
+                          name="ccba_customercontract" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_datelastverified]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_datelastverified]"
+                          name="ccba_datelastverified" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_energymanagementsystem]"
+                          dataType="wstr"
+                          length="7"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_energymanagementsystem]"
+                          name="ccba_energymanagementsystem" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_equipmenttype]"
+                          dataType="wstr"
+                          length="23"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_equipmenttype]"
+                          name="ccba_equipmenttype" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_evaporator]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_evaporator]"
+                          name="ccba_evaporator" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_fixedassetid]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_fixedassetid]"
+                          name="msdyn_fixedassetid" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_latitude]"
+                          dataType="r8"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_latitude]"
+                          name="msdyn_latitude" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_longitude]"
+                          dataType="r8"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_longitude]"
+                          name="msdyn_longitude" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lighting]"
+                          dataType="wstr"
+                          length="17"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lighting]"
+                          name="ccba_lighting" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_manufacturer]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_manufacturer]"
+                          name="ccba_manufacturer" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_model]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_model]"
+                          name="ccba_model" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_name]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_name]"
+                          name="msdyn_name" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                          dataType="dbTimeStamp"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[overriddencreatedon]"
+                          name="overriddencreatedon" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_racking]"
+                          dataType="wstr"
+                          length="9"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_racking]"
+                          name="ccba_racking" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_sapid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_sapid]"
+                          name="ccba_sapid" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serialid]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_serialid]"
+                          name="msdyn_serialid" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_type]"
+                          dataType="wstr"
+                          length="19"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_type]"
+                          name="ccba_type" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_product]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_product]"
+                          name="msdyn_product" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_functionallocation]"
+                          dataType="wstr"
+                          length="20"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[msdyn_functionallocation]"
+                          name="msdyn_functionallocation" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lcrefrigerator]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lcrefrigerator]"
+                          name="ccba_lcrefrigerator" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_agreementid]"
+                          dataType="wstr"
+                          length="100"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ccba_lkp_agreementid]"
+                          name="ccba_lkp_agreementid" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+                  endId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+                  endId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column.Inputs[Derived Column Input]"
+                  name="OLE DB Source Output"
+                  startId="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source.Outputs[OLE DB Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\CustomerAsset Extraction\Update Processing Flag"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{5618ECC5-C9D7-47A7-B761-1358F973A7FD}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Processing Flag"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_CustomerAsset_SetStatus]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\CustomerAsset Extraction.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{6D2A1E1F-3994-46B8-BB7B-AAF5D981B964}"
+          DTS:From="Package\CustomerAsset Extraction\Delete CustomerAsset Data"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\CustomerAsset Extraction.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{01F05627-E22C-4644-BD03-D927493BC0C0}"
+          DTS:From="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\CustomerAsset Extraction\Update Processing Flag" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\CustomerAsset Extraction.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{8E9581D6-1DF6-4CCD-B4DE-9CB9F6B724FA}"
+          DTS:From="Package\CustomerAsset Extraction\Update Processing Flag"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\CustomerAsset Extraction\CustomerAsset Trim" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CustomerAsset Transformation"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{F31F62EA-5355-4964-8D7F-D06534D803E2}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CustomerAsset Transformation">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\CustomerAsset Transformation\CustomerAsset Transformation"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{A614F2DD-416E-4410-9ED4-1F7BF71D018F}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="CustomerAsset Transformation"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC  [dbo].[sp_CustomerAsset_Transformation]&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{389E2055-D65D-49F2-A11A-8934C63E066B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End">
+      <DTS:Variables />
+      <DTS:Executables />
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\End Runtime"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5255A8E4-9599-4D23-A2C6-A3A794AD025B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="End Runtime"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+          SQLTask:SqlStatementSource="EXEC [dbo].[sp_EndRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="System::PackageName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="72"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="2"
+            SQLTask:DtsVariableName="User::EntityName"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="130"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{D51EFC5A-9DB0-4D09-81ED-B2FF7448180B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Start\Initial Runtime"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C112FD77-C7FC-4E47-999B-93A2A03D2627}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Initial Runtime"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{F9BA1A12-0151-4B43-B7B1-4740FC256512}"
+              SQLTask:SqlStatementSource="EXEC [dbo].[sp_InitRuntimeLogging] ?,?,?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="User::EntityName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::ExecutionInstanceGUID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="72"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{65C8CBFA-3392-45CD-9CCF-520A2224BF5F}"
+      DTS:From="Package\Start"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\CustomerAsset Extraction" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{EA38E98C-41D1-4294-8B13-C99256832521}"
+      DTS:From="Package\CustomerAsset Extraction"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\CustomerAsset Transformation" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{54F6BEAB-0326-4FE1-A5C6-92D9F3D903DE}"
+      DTS:From="Package\CustomerAsset Transformation"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\End Runtime" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{2CC9D7C8-2457-4F77-AC84-8CDBEF772385}"
+      DTS:From="Package\End Runtime"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\End" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="177.333333333334,42.6666666666667"
+          Id="Package\CustomerAsset Extraction\CustomerAsset Trim"
+          TopLeft="31.7916631928336,230.245620088014" />
+        <NodeLayout
+          Size="188,46"
+          Id="Package\CustomerAsset Extraction\Delete CustomerAsset Data"
+          TopLeft="19.4583259479452,0.881582897868569" />
+        <NodeLayout
+          Size="197.333333333334,49.3333333333334"
+          Id="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging"
+          TopLeft="21.7500000931323,75.3377210143146" />
+        <NodeLayout
+          Size="193.333333333334,42.6666666666667"
+          Id="Package\CustomerAsset Extraction\Update Processing Flag"
+          TopLeft="26.4270756429374,156.794463640334" />
+        <EdgeLayout
+          Id="Package\CustomerAsset Extraction.PrecedenceConstraints[Constraint]"
+          TopLeft="116.937496353872,46.8815828978686">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.4561381164461"
+              Start="0,0"
+              End="0,20.9561381164461">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.9561381164461" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CustomerAsset Extraction.PrecedenceConstraints[Constraint 1]"
+          TopLeft="121.755204534702,124.671054347648">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.1234092926861"
+              Start="0,0"
+              End="0,24.6234092926861">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.6234092926861" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CustomerAsset Extraction.PrecedenceConstraints[Constraint 2]"
+          TopLeft="121.776036084552,199.461130307001">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30.7844897810133"
+              Start="0,0"
+              End="0,23.2844897810133">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.2844897810133" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="234.666666666667,328"
+          Size="234.666666666667,370.666666666667"
+          Id="Package\CustomerAsset Extraction"
+          TopLeft="201.364562441439,48.7500009175977" />
+        <NodeLayout
+          Size="152,67.3333333333334"
+          Id="Package\CustomerAsset Transformation\CustomerAsset Transformation"
+          TopLeft="12.3749998975546,13.7105264703323" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="184.666666666667,108.666666666667"
+          Size="184.666666666667,151.333333333334"
+          Id="Package\CustomerAsset Transformation"
+          TopLeft="474.632433848168,45.6303179052571" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="False"
+          PanelSize="150,50"
+          Size="120.666666666667,42.6666666666667"
+          Id="Package\End"
+          TopLeft="507.843743110542,311.092712409617" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\End Runtime"
+          TopLeft="501.241064399083,233.612763021553" />
+        <NodeLayout
+          Size="136.666666666667,42.6666666666667"
+          Id="Package\Start\Initial Runtime"
+          TopLeft="5.5,5.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="150,82.6666666666667"
+          Size="150,125.333333333334"
+          Id="Package\Start"
+          TopLeft="20.947916729531,125.750002263407" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="170.947916729531,188.416668930074">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="30.416645711908,45.6666653208574"
+              Start="0,0"
+              End="22.916645711908,45.6666653208574">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="11.208322855954,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="11.208322855954,0"
+                    Point2="15.208322855954,0"
+                    Point3="15.208322855954,4" />
+                  <mssgle:LineSegment
+                    End="15.208322855954,41.6666653208574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.208322855954,41.6666653208574"
+                    Point2="15.208322855954,45.6666653208574"
+                    Point3="19.208322855954,45.6666653208574" />
+                  <mssgle:LineSegment
+                    End="22.916645711908,45.6666653208574" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="436.031229108106,234.083334250931">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="38.6012047400623,-112.786349679007"
+              Start="0,0"
+              End="31.1012047400623,-112.786349679007">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="15.3006023700312,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="15.3006023700312,0"
+                    Point2="19.3006023700312,0"
+                    Point3="19.3006023700312,-4" />
+                  <mssgle:LineSegment
+                    End="19.3006023700312,-108.786349679007" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19.3006023700312,-108.786349679007"
+                    Point2="19.3006023700312,-112.786349679007"
+                    Point3="23.3006023700312,-112.786349679007" />
+                  <mssgle:LineSegment
+                    End="31.1012047400623,-112.786349679007" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="569.436749123625,196.96365123859">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,36.6491117829627"
+              Start="0,0"
+              End="0,29.1491117829627">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.1491117829627" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="570.042403754812,276.27942968822">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.8132827213971"
+              Start="0,0"
+              End="0,27.3132827213971">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.3132827213971" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="285.333333333334,42.6666666666667"
+          Id="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source"
+          TopLeft="138.749997932465,29.4210531853573" />
+        <NodeLayout
+          Size="237.333333333334,42.6666666666667"
+          Id="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset"
+          TopLeft="160.624997606501,214.842109307028" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Derived Column"
+          TopLeft="205.29166635933,121.245613970696" />
+        <EdgeLayout
+          Id="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging.Paths[OLE DB Source Output]"
+          TopLeft="282.354165479231,72.087719852024">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49.1578941186717"
+              Start="0,0"
+              End="0,41.6578941186717">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.6578941186717" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging.Paths[Derived Column Output]"
+          TopLeft="281.291665316249,163.912280637363">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50.9298286696657"
+              Start="0,0"
+              End="0,43.4298286696657">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.4298286696657" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Reading CustomerAsset Data From Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CustomerAsset Extraction\Retrieving Data From Source to Staging\Inserting Data To CustomerAsset">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,1387 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/14/2024 6:22:06 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MOAAZ74"
+  DTS:CreatorName="MOAAZ74\MO3AZ PC"
+  DTS:DTSID="{788EEE18-0359-4158-A040-75ACEF319B83}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{696880AD-0DC9-4AF3-897F-2FFB44B49059}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{D86FD2C5-E589-4E82-8D88-0BA73070495A}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\Courses\ETL ( SSIS )\WiseOwl Training\Ex_5\Million-sellers.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.Wistful]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{618D54C2-0120-497F-AA48-961ADB4883FD}"
+      DTS:ObjectName="localhost.Wistful">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=Wistful;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{618D54C2-0120-497F-AA48-961ADB4883FD}localhost.Wistful;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\transform excel file"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{7ECFEABA-D415-4605-BF36-890075349359}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="transform excel file"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\transform excel file\Excel Source"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'Million-sellers$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\transform excel file\Excel Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Artist]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Artist]"
+                      length="255"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Artist]"
+                      name="Artist"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Rank]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rank]"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Rank]"
+                      name="Rank"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Sales]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Sales]"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Sales]"
+                      name="Sales"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Title]"
+                      length="255"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Year]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Year]"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Year]"
+                      name="Year"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Artist]"
+                      dataType="wstr"
+                      length="255"
+                      name="Artist" />
+                    <externalMetadataColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Rank]"
+                      dataType="r8"
+                      name="Rank" />
+                    <externalMetadataColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Sales]"
+                      dataType="r8"
+                      name="Sales" />
+                    <externalMetadataColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].ExternalColumns[Year]"
+                      dataType="r8"
+                      name="Year" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Artist]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Artist]"
+                      name="Artist" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Rank]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Rank]"
+                      name="Rank" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Sales]"
+                      name="Sales" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Year]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[Year]"
+                      name="Year" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\transform excel file\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\transform excel file\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\transform excel file\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\transform excel file\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\transform excel file\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\transform excel file\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\transform excel file\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\transform excel file\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\transform excel file\Percentage Sampling"
+              componentClassID="Microsoft.PctSampling"
+              contactInfo="Percentage Sampling;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Randomly samples a percentage of rows from an input data flow. For example, use it twice to help create a data mining model: create one sample for training the model and another sample for testing the model."
+              name="Percentage Sampling">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage size of the sample."
+                  expressionType="Notify"
+                  name="SamplingValue">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the seed for the random number generator."
+                  name="SamplingSeed">0</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\transform excel file\Percentage Sampling.Inputs[Percentage Sampling Input 1]"
+                  name="Percentage Sampling Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\transform excel file\Percentage Sampling.Outputs[Sampling Selected Output]"
+                  exclusionGroup="1"
+                  name="Sampling Selected Output"
+                  synchronousInputId="Package\transform excel file\Percentage Sampling.Inputs[Percentage Sampling Input 1]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Output for rows in the sample"
+                      name="Selected">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\transform excel file\Percentage Sampling.Outputs[Sampling Unselected Output]"
+                  exclusionGroup="1"
+                  name="Sampling Unselected Output"
+                  synchronousInputId="Package\transform excel file\Percentage Sampling.Inputs[Percentage Sampling Input 1]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Output for rows in the sample"
+                      name="Selected">false</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\transform excel file\Row Sampling"
+              componentClassID="Microsoft.RowSampling"
+              contactInfo="Row Sampling;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Randomly samples a specific number of rows from an input data flow. For example, use it randomly select products to feature on your Web site."
+              name="Row Sampling">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of rows in the sample."
+                  expressionType="Notify"
+                  name="SamplingValue">3</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the seed for the random number generator."
+                  name="SamplingSeed">0</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\transform excel file\Row Sampling.Inputs[Row Sampling Input 1]"
+                  name="Row Sampling Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\transform excel file\Row Sampling.Inputs[Row Sampling Input 1].Columns[Artist]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Artist"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Artist]" />
+                    <inputColumn
+                      refId="Package\transform excel file\Row Sampling.Inputs[Row Sampling Input 1].Columns[Rank]"
+                      cachedDataType="r8"
+                      cachedName="Rank"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Rank]" />
+                    <inputColumn
+                      refId="Package\transform excel file\Row Sampling.Inputs[Row Sampling Input 1].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Sales]" />
+                    <inputColumn
+                      refId="Package\transform excel file\Row Sampling.Inputs[Row Sampling Input 1].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\transform excel file\Row Sampling.Inputs[Row Sampling Input 1].Columns[Year]"
+                      cachedDataType="r8"
+                      cachedName="Year"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Year]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output]"
+                  name="Sampling Selected Output">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Output for rows in the sample"
+                      name="Selected">true</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Artist]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Artist]"
+                      name="Artist">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Artist]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Rank]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Rank]"
+                      name="Rank">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Rank]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Sales]"
+                      name="Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Sales]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Title]"
+                      name="Title">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Title]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Year]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Year]"
+                      name="Year">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Year]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output]"
+                  name="Sampling Unselected Output">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Output for rows in the sample"
+                      name="Selected">false</property>
+                  </properties>
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Artist]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Artist]"
+                      name="Artist">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Artist]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Rank]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Rank]"
+                      name="Rank">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Rank]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Sales]"
+                      name="Sales">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Sales]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Title]"
+                      name="Title">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Title]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Year]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Unselected Output].Columns[Year]"
+                      name="Year">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Input column lineage ID"
+                          name="InputColumnLineageID">#{Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Year]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\transform excel file\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\transform excel file\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\transform excel file\Sort.Inputs[Sort Input].Columns[Artist]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Artist"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Artist]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Sort.Inputs[Sort Input].Columns[Rank]"
+                      cachedDataType="r8"
+                      cachedName="Rank"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Rank]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Sort.Inputs[Sort Input].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Sales]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">-1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Sort.Inputs[Sort Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Title]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Sort.Inputs[Sort Input].Columns[Year]"
+                      cachedDataType="r8"
+                      cachedName="Year"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Year]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\transform excel file\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Artist]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Artist]"
+                      name="Artist">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Artist]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Rank]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Rank]"
+                      name="Rank">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Rank]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Sales]"
+                      name="Sales"
+                      sortKeyPosition="-1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Sales]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Title]"
+                      name="Title">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Title]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Year]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Year]"
+                      name="Year">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Year]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\transform excel file\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\transform excel file\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 1].Columns[Artist]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Artist"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Artist]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Artist]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 1].Columns[Rank]"
+                      cachedDataType="r8"
+                      cachedName="Rank"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Rank]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Rank]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 1].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Sales]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 1].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 1].Columns[Year]"
+                      cachedDataType="r8"
+                      cachedName="Year"
+                      lineageId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output].Columns[Year]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Year]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\transform excel file\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 2].Columns[Artist]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Artist"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Artist]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Artist]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 2].Columns[Rank]"
+                      cachedDataType="r8"
+                      cachedName="Rank"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Rank]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Rank]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 2].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Sales]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 2].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All.Inputs[Union All Input 2].Columns[Year]"
+                      cachedDataType="r8"
+                      cachedName="Year"
+                      lineageId="Package\transform excel file\Excel Source.Outputs[Excel Source Output].Columns[Year]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Year]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\transform excel file\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\transform excel file\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Artist]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Artist]"
+                      name="Artist" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Rank]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Rank]"
+                      name="Rank" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Sales]"
+                      name="Sales" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Year]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Union All.Outputs[Union All Output 1].Columns[Year]"
+                      name="Year" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\transform excel file\Union All 1"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All 1"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\transform excel file\Union All 1.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All 1.Inputs[Union All Input 1].Columns[Artist]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Artist"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Artist]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Artist]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All 1.Inputs[Union All Input 1].Columns[Rank]"
+                      cachedDataType="r8"
+                      cachedName="Rank"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Rank]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Rank]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All 1.Inputs[Union All Input 1].Columns[Sales]"
+                      cachedDataType="r8"
+                      cachedName="Sales"
+                      cachedSortKeyPosition="-1"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Sales]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Sales]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All 1.Inputs[Union All Input 1].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Title]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Title]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\transform excel file\Union All 1.Inputs[Union All Input 1].Columns[Year]"
+                      cachedDataType="r8"
+                      cachedName="Year"
+                      lineageId="Package\transform excel file\Sort.Outputs[Sort Output].Columns[Year]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Year]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\transform excel file\Union All 1.Inputs[Union All Input 2]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\transform excel file\Union All 1.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Artist]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Artist]"
+                      name="Artist" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Rank]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Rank]"
+                      name="Rank" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Sales]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Sales]"
+                      name="Sales" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Title]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Year]"
+                      dataType="r8"
+                      lineageId="Package\transform excel file\Union All 1.Outputs[Union All Output 1].Columns[Year]"
+                      name="Year" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\transform excel file.Paths[Excel Source Output]"
+              endId="Package\transform excel file\Multicast.Inputs[Multicast Input 1]"
+              name="Excel Source Output"
+              startId="Package\transform excel file\Excel Source.Outputs[Excel Source Output]" />
+            <path
+              refId="Package\transform excel file.Paths[Multicast Output 1]"
+              endId="Package\transform excel file\Row Sampling.Inputs[Row Sampling Input 1]"
+              name="Multicast Output 1"
+              startId="Package\transform excel file\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\transform excel file.Paths[Multicast Output 2]"
+              endId="Package\transform excel file\Percentage Sampling.Inputs[Percentage Sampling Input 1]"
+              name="Multicast Output 2"
+              startId="Package\transform excel file\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\transform excel file.Paths[Sampling Selected Output]"
+              endId="Package\transform excel file\Union All.Inputs[Union All Input 1]"
+              name="Sampling Selected Output"
+              startId="Package\transform excel file\Row Sampling.Outputs[Sampling Selected Output]" />
+            <path
+              refId="Package\transform excel file.Paths[Sampling Selected Output1]"
+              endId="Package\transform excel file\Union All.Inputs[Union All Input 2]"
+              name="Sampling Selected Output"
+              startId="Package\transform excel file\Percentage Sampling.Outputs[Sampling Selected Output]" />
+            <path
+              refId="Package\transform excel file.Paths[Sort Output]"
+              endId="Package\transform excel file\Union All 1.Inputs[Union All Input 1]"
+              name="Sort Output"
+              startId="Package\transform excel file\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\transform excel file.Paths[Union All Output 1]"
+              endId="Package\transform excel file\Sort.Inputs[Sort Input]"
+              name="Union All Output 1"
+              startId="Package\transform excel file\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <AnnotationLayout
+          Text=" Use sampling, sorting, multicast and union all transforms to generate a playlist from a workbook of songs."
+          ParentId="Package"
+          FontInfo="{assembly:Null}"
+          Size="592,60"
+          Id="a89d3e1c-c4f9-4080-a0b0-7a30f8782242"
+          TopLeft="252,120" />
+        <NodeLayout
+          Size="314,57"
+          Id="Package\transform excel file"
+          TopLeft="370,197" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\transform excel file">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="216,52"
+          Id="Package\transform excel file\Excel Source"
+          TopLeft="422,74" />
+        <NodeLayout
+          Size="120,42"
+          Id="Package\transform excel file\Multicast"
+          TopLeft="464,170" />
+        <EdgeLayout
+          Id="Package\transform excel file.Paths[Excel Source Output]"
+          TopLeft="527,126">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="146,42"
+          Id="Package\transform excel file\Row Sampling"
+          TopLeft="208,263" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\transform excel file\Percentage Sampling"
+          TopLeft="687,266" />
+        <EdgeLayout
+          Id="Package\transform excel file.Paths[Multicast Output 1]"
+          TopLeft="505.333333333333,212">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-224.333333333333,51"
+              Start="0,0"
+              End="-224.333333333333,43.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.8026315789474" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.8026315789474"
+                    Point2="0,20.8026315789474"
+                    Point3="-4,20.8026315789474" />
+                  <mssgle:LineSegment
+                    End="-220.333333333333,20.8026315789474" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-220.333333333333,20.8026315789474"
+                    Point2="-224.333333333333,20.8026315789474"
+                    Point3="-224.333333333333,24.8026315789474" />
+                  <mssgle:LineSegment
+                    End="-224.333333333333,43.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\transform excel file.Paths[Multicast Output 2]"
+          TopLeft="542.666666666667,212">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="233.333333333333,54"
+              Start="0,0"
+              End="233.333333333333,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.0263157894737" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.0263157894737"
+                    Point2="0,22.0263157894737"
+                    Point3="4,22.0263157894737" />
+                  <mssgle:LineSegment
+                    End="229.333333333333,22.0263157894737" />
+                  <mssgle:CubicBezierSegment
+                    Point1="229.333333333333,22.0263157894737"
+                    Point2="233.333333333333,22.0263157894737"
+                    Point3="233.333333333333,26.0263157894737" />
+                  <mssgle:LineSegment
+                    End="233.333333333333,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="121,42"
+          Id="Package\transform excel file\Union All"
+          TopLeft="469,374" />
+        <EdgeLayout
+          Id="Package\transform excel file.Paths[Sampling Selected Output]"
+          TopLeft="281,305">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="229.666666666667,69"
+              Start="0,0"
+              End="229.666666666667,61.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.8597063621533" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.8597063621533"
+                    Point2="0,40.8597063621533"
+                    Point3="4,40.8597063621533" />
+                  <mssgle:LineSegment
+                    End="225.666666666667,40.8597063621533" />
+                  <mssgle:CubicBezierSegment
+                    Point1="225.666666666667,40.8597063621533"
+                    Point2="229.666666666667,40.8597063621533"
+                    Point3="229.666666666667,44.8597063621533" />
+                  <mssgle:LineSegment
+                    End="229.666666666667,61.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="56.8912825520833,45.8597063621533,115.8841015625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\transform excel file.Paths[Sampling Selected Output1]"
+          TopLeft="776,308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-227.666666666667,66"
+              Start="0,0"
+              End="-227.666666666667,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.0831973898858" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.0831973898858"
+                    Point2="0,39.0831973898858"
+                    Point3="-4,39.0831973898858" />
+                  <mssgle:LineSegment
+                    End="-223.666666666667,39.0831973898858" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-223.666666666667,39.0831973898858"
+                    Point2="-227.666666666667,39.0831973898858"
+                    Point3="-227.666666666667,43.0831973898858" />
+                  <mssgle:LineSegment
+                    End="-227.666666666667,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-171.775384114583,44.0831973898858,115.8841015625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="98,42"
+          Id="Package\transform excel file\Sort"
+          TopLeft="478,455" />
+        <EdgeLayout
+          Id="Package\transform excel file.Paths[Union All Output 1]"
+          TopLeft="528.25,416">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39"
+              Start="0,0"
+              End="0,31.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="130,42"
+          Id="Package\transform excel file\Union All 1"
+          TopLeft="466,535" />
+        <EdgeLayout
+          Id="Package\transform excel file.Paths[Sort Output]"
+          TopLeft="529,497">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,7.25,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\transform excel file\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
