@@ -3,16 +3,15 @@
   "metadata": {
     "description": "SSIS package analysis plugin — extract control flow, data flows, connections, variables, SQL, scripts, column lineage, and migration assessment",
     "version": "0.1.0",
-    "pluginRoot": "./plugins"
+    "pluginRoot": "."
   },
   "owner": {
-    "name": "Mark Garner",
-    "email": "markgar@github.com"
+    "name": "Mark Garner"
   },
   "plugins": [
     {
       "name": "ssis-analyzer",
-      "source": "ssis-analyzer",
+      "source": ".",
       "description": "Analyze SSIS .dtsx packages — extract control flow, data flows, connections, variables, SQL, scripts, column lineage, and migration assessment.",
       "version": "0.1.0"
     }
