@@ -20,7 +20,7 @@ Then install the plugin:
 
 ### Manual
 
-Copy the `skills/ssis-analyzer/` directory into your agent's skills location.
+Copy the `plugins/ssis-analyzer/` directory into your agent's skills location.
 
 ## What It Does
 
@@ -46,7 +46,7 @@ pip install pytest
 pytest tests/ -q
 
 # Run a command manually
-python skills/ssis-analyzer/scripts/analyze.py <path-to.dtsx> overview
+python plugins/ssis-analyzer/scripts/analyze.py <path-to.dtsx> overview
 ```
 
 ## License
