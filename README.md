@@ -1,4 +1,4 @@
-# ssis-analyzer-skill
+# ssis-migration
 
 A plugin repository for [GitHub Copilot](https://github.com/features/copilot) that provides SQL Server migration analysis capabilities.
 
@@ -12,9 +12,9 @@ A plugin repository for [GitHub Copilot](https://github.com/features/copilot) th
 ## Installation
 
 ```bash
-copilot plugin marketplace add markgar/ssis-analyzer-skill
-copilot plugin install ssis-analyzer@ssis-analyzer-skill
-copilot plugin install dacpac-analyzer@ssis-analyzer-skill
+copilot plugin marketplace add markgar/ssis-migration
+copilot plugin install ssis-analyzer@ssis-migration
+copilot plugin install dacpac-analyzer@ssis-migration
 ```
 
 ## Repository Structure

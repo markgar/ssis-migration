@@ -8,14 +8,14 @@ script code, column lineage, execution order, and migration assessment.
 
 ```bash
 # Using Copilot CLI
-copilot plugin install ssis-analyzer@ssis-analyzer-skill
+copilot plugin install ssis-analyzer@ssis-migration
 ```
 
 Or register the marketplace first:
 
 ```bash
-copilot plugin marketplace add markgar/ssis-analyzer-skill
-copilot plugin install ssis-analyzer@ssis-analyzer-skill
+copilot plugin marketplace add markgar/ssis-migration
+copilot plugin install ssis-analyzer@ssis-migration
 ```
 
 ## What's Included
@@ -57,7 +57,7 @@ copilot plugin install ssis-analyzer@ssis-analyzer-skill
 
 ## Source
 
-This plugin is published from [markgar/ssis-analyzer-skill](https://github.com/markgar/ssis-analyzer-skill).
+This plugin is published from [markgar/ssis-migration](https://github.com/markgar/ssis-migration).
 
 ## License
 

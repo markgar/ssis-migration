@@ -1,4 +1,4 @@
-"""Shared test fixtures for ssis-analyzer-skill."""
+"""Shared test fixtures for ssis-migration."""
 from __future__ import annotations
 
 import sys
