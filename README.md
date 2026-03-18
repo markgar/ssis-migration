@@ -31,16 +31,6 @@ copilot plugin install dacpac-analyzer@ssis-migration
 │       ├── skills/          # Skills bundled with the plugin
 │       ├── scripts/         # Python analysis scripts
 │       └── README.md        # Plugin documentation
-├── tests/                   # Test suite
-└── pyproject.toml           # Python project config
-```
-
-## Development
-
-```bash
-# Run tests
-pip install pytest
-pytest tests/ -q
 ```
 
 ## License
