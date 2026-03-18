@@ -18,6 +18,6 @@
     "azure-data-factory"
   ],
   "skills": [
-    "./plugins/ssis-analyzer"
+    "./skills/ssis-analyzer"
   ]
 }
