@@ -1,0 +1,26 @@
+{
+  "name": "spec-writer",
+  "description": "Generate ETL migration spec sets from SSIS (.ispac/.dtsx) and database (.bacpac/.dacpac) source artifacts. Creates README, CONSTITUTION, and numbered implementation specs for migrating SQL Server ETL to PySpark on Fabric.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Mark Garner"
+  },
+  "repository": "https://github.com/markgar/ssis-migration",
+  "license": "MIT",
+  "keywords": [
+    "ssis",
+    "dacpac",
+    "bacpac",
+    "ispac",
+    "etl",
+    "migration",
+    "pyspark",
+    "fabric",
+    "spec",
+    "specification",
+    "sql-server"
+  ],
+  "skills": [
+    "./skills/spec-writer"
+  ]
+}

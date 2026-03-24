@@ -1,7 +1,7 @@
 {
   "name": "ssis-migration",
   "metadata": {
-    "description": "SQL Server migration analysis plugins — SSIS package analysis and DACPAC/BACPAC schema extraction",
+    "description": "SQL Server migration analysis plugins — SSIS package analysis, DACPAC/BACPAC schema extraction, and ETL migration spec generation",
     "version": "0.1.0",
     "pluginRoot": "./plugins"
   },
@@ -19,6 +19,12 @@
       "name": "dacpac-analyzer",
       "source": "dacpac-analyzer",
       "description": "Analyze SQL Server .dacpac and .bacpac packages — extract tables, views, stored procedures, functions, constraints, indexes, schemas, and full database schema metadata.",
+      "version": "0.1.0"
+    },
+    {
+      "name": "spec-writer",
+      "source": "spec-writer",
+      "description": "Generate ETL migration spec sets from SSIS (.ispac/.dtsx) and database (.bacpac/.dacpac) source artifacts. Creates README, CONSTITUTION, and numbered implementation specs for migrating SQL Server ETL to PySpark on Fabric.",
       "version": "0.1.0"
     }
   ]
