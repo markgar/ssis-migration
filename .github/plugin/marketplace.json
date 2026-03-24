@@ -2,7 +2,7 @@
   "name": "ssis-migration",
   "metadata": {
     "description": "SQL Server migration analysis plugins — SSIS package analysis, DACPAC/BACPAC schema extraction, and ETL migration spec generation",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "pluginRoot": "./plugins"
   },
   "owner": {
