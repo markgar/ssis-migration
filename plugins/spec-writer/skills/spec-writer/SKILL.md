@@ -1,7 +1,10 @@
 ---
 name: spec-writer
 description: "Generate ETL migration spec sets from SSIS (.ispac/.dtsx) and database (.bacpac/.dacpac) source artifacts. Creates README, CONSTITUTION, and numbered implementation specs for migrating SQL Server ETL to PySpark on Fabric. Use when: write specs, create specs, generate specs, spec from ispac, spec from bacpac, migration specs, ETL specs, analyze SSIS for specs."
-compatibility: Requires the ssis-analyzer and dacpac-analyzer skills from this plugin repository. No additional dependencies.
+compatibility: Requires Python 3.10+ and the ssis-analyzer and dacpac-analyzer skills from this plugin repository.
+metadata:
+  author: markgar
+  version: "0.2.0"
 ---
 
 # Spec Writer
@@ -20,6 +23,25 @@ This skill orchestrates two other skills from the same plugin repository:
 | `dacpac-analyzer` | Extracting table schemas, views, stored procedures, functions, indexes, foreign keys, sequences, constraints from `.bacpac` / `.dacpac` files |
 
 **Always use the analyzer skills** — never guess at schemas or procedure logic. The artifacts are the source of truth.
+
+### Failure Protocol
+
+If either analyzer skill cannot be found or loaded:
+
+1. **STOP immediately** — do not attempt to write specs without these skills.
+2. **Report the failure clearly** to the user, naming which skill(s) failed to load and directing them to the [markgar/ssis-migration](https://github.com/markgar/ssis-migration) repo for installation instructions.
+3. **Do not fall back** to reading raw XML or inventing schemas. The analyzer skills are the only sanctioned way to extract artifact metadata.
+
+Both analyzer skills require **Python 3** to run their extraction scripts. Before starting any spec work, verify Python is available by running `python3 --version` (or `python --version`). If Python is not installed or not on the PATH, stop and inform the user — the analyzers will not function without it.
+
+## Source Material
+
+You work from two kinds of artifacts that the user will point you to:
+
+| Artifact | Skill to use | What you extract |
+|----------|--------------|------------------|
+| `.ispac` / `.dtsx` (SSIS packages) | `ssis-analyzer` | Control flow, data flows, execution order, precedence constraints, SQL statements, variables, parameters, connection managers, column lineage |
+| `.bacpac` / `.dacpac` (database packages) | `dacpac-analyzer` | Table schemas, views, stored procedures, functions, indexes, foreign keys, sequences, constraints |
 
 ## Spec Set Structure
 
@@ -160,11 +182,49 @@ Every numbered spec should follow this section flow. Include all sections that a
 
 ## Process
 
-When asked to create a spec set:
+When asked to create a spec set, start by gathering context. Do NOT jump straight into analysis — you need answers first.
 
-1. **Identify source artifacts.** Ask the user to confirm the paths to `.ispac`/`.bacpac` files if not already provided.
+### Step 0 — Information Gathering
 
-2. **Analyze the SSIS package.** Use the `ssis-analyzer` skill to extract:
+Before you can write specs, you need specific information that only the user can provide. Ask for everything you're missing in a single, organized message.
+
+**What you can discover yourself** (from the workspace and artifacts — do NOT ask the user for these):
+- `.ispac`/`.dtsx`/`.bacpac`/`.dacpac` file paths — search the workspace
+- Table schemas, stored procedures, column types — extract from `.bacpac`/`.dacpac` via `dacpac-analyzer`
+- SSIS control flow, data flows, execution order, SQL statements — extract from `.ispac`/`.dtsx` via `ssis-analyzer`
+
+**What you MUST ask the user** (cannot be discovered from artifacts):
+
+| Information | Example |
+|-------------|---------|
+| **Package name** | `daily_etl` |
+| **Target spec directory** | `specs/daily-etl/` |
+| **Source database server** | `sql-prod-01.company.com` |
+| **Source database name** | `WideWorldImporters` |
+| **Fabric workspace name** | `my-fabric-workspace` |
+| **Fabric lakehouse name** | `bronze-lakehouse` |
+| **Fabric SJD name** | `daily-etl-sjd` |
+| **Fabric environment name** | `daily-etl-env` |
+| **PySpark / Python version** | `PySpark 3.5 / Python 3.11` |
+| **Fabric runtime version** | `1.3` |
+| **Auth mechanism (local)** | `SQL auth with env vars` |
+| **Auth mechanism (Fabric)** | `Managed Identity / token provider` |
+
+Present this table and ask the user to fill in the values. If the user doesn't know some values yet, mark them as `TBD` in the CONSTITUTION and proceed with the rest of the spec work.
+
+**If the user just says "help me build a spec"** with no other context:
+1. First, search the workspace for `.ispac`, `.dtsx`, `.bacpac`, and `.dacpac` files
+2. If you find artifacts, list them and ask the user to confirm which ones to use
+3. Then ask for the project-specific values from the table above
+4. Only after you have answers (or explicit TBDs) should you proceed to analysis
+
+### Step 1 — Identify Source Artifacts
+
+Ask the user to confirm the paths to `.ispac`/`.bacpac` files if not already provided.
+
+### Step 2 — Analyze the SSIS package
+
+Use the `ssis-analyzer` skill to extract:
    - The main control flow and execution order
    - Each sequence container and its inner tasks
    - All data flows with column lineage
@@ -172,21 +232,37 @@ When asked to create a spec set:
    - Connection managers and their targets
    - Variables and parameters
 
-3. **Analyze the database schemas.** Use the `dacpac-analyzer` skill to extract:
+#### Multi-package `.ispac` handling
+
+An `.ispac` may contain multiple `.dtsx` packages. After initial analysis, determine whether the packages form **one orchestrated process** (a master package that calls child packages via Execute Package tasks) or **independent processes** that don't reference each other.
+
+- **Orchestrated** — treat the master package as the control flow and produce a single spec set that covers the full pipeline.
+- **Independent** — produce a **separate spec set** (separate directory, separate README/CONSTITUTION) for each independent package.
+- **Unclear** — if the relationship between packages is ambiguous, present your findings to the user and ask for clarification before proceeding.
+
+### Step 3 — Analyze the database schemas
+
+Use the `dacpac-analyzer` skill to extract:
    - All tables referenced by the SSIS package (source and destination)
    - Stored procedures called by the SSIS package (extraction procs, merge procs)
    - Views, functions, and sequences used in the ETL
    - Foreign key relationships for understanding joins
 
-4. **Plan the spec set.** Based on the SSIS analysis:
+### Step 4 — Plan the spec set
+
+Based on the SSIS analysis:
    - Identify each distinct load (dimension, fact, prerequisite)
    - Determine the execution order from SSIS precedence constraints
    - Group related tasks into numbered specs
    - Use the todo tool to lay out your plan and get confirmation
 
-5. **Write the CONSTITUTION first.** Fill in every applicable section. Leave nothing ambiguous about the project-level facts. The user will need to provide some values (server names, workspace names, package name) — ask for them.
+### Step 5 — Write the CONSTITUTION first
 
-6. **Write each numbered spec.** Work through them in order. For each:
+Fill in every applicable section using the values gathered in Step 0. Leave nothing ambiguous about the project-level facts. If any values were marked TBD, note them clearly.
+
+### Step 6 — Write each numbered spec
+
+Work through them in order. For each:
    - Start with the SSIS lineage section — trace the exact execution flow
    - Document every source table schema from the `.bacpac`
    - Reproduce the extraction procedure logic from the `.bacpac` or `.ispac`
@@ -196,7 +272,9 @@ When asked to create a spec set:
    - Flag any bugs in the original procedure
    - Write the testing section
 
-7. **Write the README last.** It summarizes what you've already written.
+### Step 7 — Write the README last
+
+It summarizes what you've already written.
 
 ## Constraints
 

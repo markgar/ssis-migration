@@ -2,6 +2,9 @@
 name: dacpac-analyzer
 description: Analyze SQL Server .dacpac and .bacpac package files. Use when users need to understand, document, or audit a database schema captured in a DACPAC or BACPAC. Extracts tables, views, stored procedures, functions, constraints, indexes, schemas, sequences, table types, roles, permissions, and all SQL body scripts. Provides object-level detail including column types, nullability, parameters, foreign key relationships, and index definitions.
 compatibility: Requires Python 3.10+. Uses only Python standard library (no pip install needed). Works with .dacpac (schema-only) and .bacpac (schema + data) files.
+metadata:
+  author: markgar
+  version: "0.1.0"
 ---
 
 # DACPAC Analyzer

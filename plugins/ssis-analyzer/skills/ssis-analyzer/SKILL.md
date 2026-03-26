@@ -2,6 +2,9 @@
 name: ssis-analyzer
 description: Analyze SQL Server Integration Services (SSIS) .dtsx package files. Use when users need to understand, document, audit, or plan migration of SSIS packages. Extracts control flow, data flows, connections, variables, parameters, SQL statements, script code, column lineage, and execution order. Provides migration assessment for Azure Data Factory / Fabric.
 compatibility: Requires Python 3.10+. Uses only Python standard library (no pip install needed). Works with SSIS package files (.dtsx) in XML format.
+metadata:
+  author: markgar
+  version: "0.1.0"
 ---
 
 # SSIS Package Analyzer
