@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import json
 import sys
+from dataclasses import asdict
 from pathlib import Path
 
 # Ensure scripts/ is on the path so imports resolve
@@ -37,6 +38,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from cross_reference import build_variable_references
 from knowledge import format_knowledge, lookup_component, list_categories
 from loader import load_package
+from lookups import resolve_ole_variant_type
 from models import Executable, ParsedPackage
 from ordering import detect_parallel_branches, topological_sort
 
@@ -76,7 +78,7 @@ def cmd_execution_order(pkg: ParsedPackage) -> None:
     if branches:
         print("\n## Parallel Branches")
         for branch in branches:
-            print(f"- [{', '.join(branch.task_names)}]")
+            print(f"- [{', '.join(branch.tasks)}]")
 
 
 def cmd_list_connections(pkg: ParsedPackage) -> None:
@@ -157,6 +159,18 @@ def cmd_task_detail(pkg: ParsedPackage, name: str) -> None:
         print(f"- Init: {fl.init_expression or 'N/A'}")
         print(f"- Eval: {fl.eval_expression or 'N/A'}")
         print(f"- Assign: {fl.assign_expression or 'N/A'}")
+    if task.expression_task_expression:
+        print(f"- Expression:\n```\n{task.expression_task_expression}\n```")
+    if task.children:
+        child_order = topological_sort(task.children, task.precedence_constraints)
+        print(f"- Children ({len(task.children)}):")
+        for i, child_name in enumerate(child_order, 1):
+            print(f"  {i}. {child_name}")
+        if task.precedence_constraints:
+            print(f"- Inner Constraints:")
+            for pc in task.precedence_constraints:
+                expr = f" [{pc.expression}]" if pc.expression else ""
+                print(f"  - {pc.from_task} → {pc.to_task} ({pc.value}{expr})")
     if task.variables:
         print(f"- Local Variables: {len(task.variables)}")
         for v in task.variables:
@@ -211,6 +225,15 @@ def cmd_component_detail(pkg: ParsedPackage, flow_name: str, comp_name: str) -> 
         print("- Connections:")
         for cc in comp.connections:
             print(f"  - {cc.name}: {cc.connection_manager_name}")
+    if comp.properties:
+        sql_props = {k: v for k, v in comp.properties.items() if v and "sql" in k.lower()}
+        if sql_props:
+            print("- SQL Properties:")
+            for k, v in sql_props.items():
+                if len(v) > 500:
+                    print(f"  - {k} (truncated, run `extract-sql` for full query):\n```sql\n{v[:500]}...\n```")
+                else:
+                    print(f"  - {k}:\n```sql\n{v}\n```")
     if comp.outputs:
         for out in comp.outputs:
             print(f"- Output '{out.name}': {len(out.columns)} columns")
@@ -251,7 +274,8 @@ def cmd_list_variables(pkg: ParsedPackage) -> None:
     print("|-----------|------|------|-------|------------|-------|")
     for v in pkg.variables:
         expr = v.expression or ""
-        print(f"| {v.namespace} | {v.name} | {v.data_type} | {v.value or ''} | {expr} | {v.scope or 'Package'} |")
+        vtype = resolve_ole_variant_type(v.data_type)
+        print(f"| {v.namespace} | {v.name} | {vtype} | {v.value or ''} | {expr} | {v.scope or 'Package'} |")
 
 
 def cmd_list_parameters(pkg: ParsedPackage) -> None:
@@ -298,7 +322,7 @@ def cmd_extract_scripts(pkg: ParsedPackage) -> None:
         if e.script_task and e.script_task.source_code:
             st = e.script_task
             print(f"\n## {e.name} (Script Task)")
-            print(f"- Language: {st.language or 'C#'}")
+            print(f"- Language: {st.script_language or 'C#'}")
             print(f"```csharp\n{st.source_code}\n```")
         if e.data_flow:
             for c in e.data_flow.components:
@@ -360,14 +384,211 @@ def cmd_list_known_components() -> None:
             print(f"- {c}")
 
 
+# ---------------------------------------------------------------------------
+# JSON output helpers
+# ---------------------------------------------------------------------------
+
+_SQL_TRUNCATE_LEN = 500
+
+
+def _json_overview(pkg: ParsedPackage) -> dict:
+    m = pkg.metadata
+    df_count = sum(1 for e in _all_executables(pkg) if e.data_flow is not None)
+    return {
+        "name": m.name, "format_version": m.format_version,
+        "creator": m.creator or None, "description": m.description or None,
+        "protection_level": m.protection_level, "deployment_model": pkg.deployment_model or "Package",
+        "counts": {
+            "connections": len(pkg.connections), "variables": len(pkg.variables),
+            "parameters": len(pkg.parameters), "tasks": len(pkg.executables),
+            "data_flows": df_count,
+        },
+    }
+
+
+def _json_execution_order(pkg: ParsedPackage) -> dict:
+    order = topological_sort(pkg.executables, pkg.root_precedence_constraints)
+    branches = detect_parallel_branches(pkg.executables, pkg.root_precedence_constraints)
+    return {
+        "order": order,
+        "parallel_branches": [{"tasks": b.tasks, "shared_predecessor": b.shared_predecessor} for b in branches] if branches else [],
+    }
+
+
+def _json_list_connections(pkg: ParsedPackage) -> list:
+    return [{"name": c.name, "type": c.creation_name or None, "project_level": c.is_project_level} for c in pkg.connections]
+
+
+def _json_connection_detail(pkg: ParsedPackage, name: str) -> dict | None:
+    conn = next((c for c in pkg.connections if c.name.lower() == name.lower()), None)
+    if not conn:
+        return {"error": f"Connection '{name}' not found."}
+    return asdict(conn)
+
+
+def _json_task_tree(exes: list[Executable]) -> list:
+    result = []
+    for e in exes:
+        node = {"name": e.name, "type": e.creation_name}
+        if e.children:
+            node["children"] = _json_task_tree(e.children)
+        result.append(node)
+    return result
+
+
+def _json_list_tasks(pkg: ParsedPackage) -> list:
+    return _json_task_tree(pkg.executables)
+
+
+def _json_task_detail(pkg: ParsedPackage, name: str) -> dict | None:
+    task = next((e for e in _all_executables(pkg) if e.name.lower() == name.lower()), None)
+    if not task:
+        return {"error": f"Task '{name}' not found."}
+    d = asdict(task)
+    # Replace children with summary to avoid huge recursive output
+    if task.children:
+        child_order = topological_sort(task.children, task.precedence_constraints)
+        d["child_execution_order"] = child_order
+        d["children"] = [{"name": c.name, "type": c.creation_name} for c in task.children]
+    return d
+
+
+def _json_list_constraints(pkg: ParsedPackage) -> list:
+    return [asdict(pc) for pc in pkg.root_precedence_constraints]
+
+
+def _json_list_data_flows(pkg: ParsedPackage) -> list:
+    return [
+        {"name": e.name, "components": len(e.data_flow.components), "paths": len(e.data_flow.paths)}
+        for e in _all_executables(pkg) if e.data_flow
+    ]
+
+
+def _json_data_flow_detail(pkg: ParsedPackage, name: str) -> dict | None:
+    task = next((e for e in _all_executables(pkg) if e.name.lower() == name.lower() and e.data_flow), None)
+    if not task:
+        return {"error": f"Data Flow '{name}' not found."}
+    return {"name": task.name, "data_flow": asdict(task.data_flow)}
+
+
+def _json_component_detail(pkg: ParsedPackage, flow_name: str, comp_name: str) -> dict | None:
+    task = next((e for e in _all_executables(pkg) if e.name.lower() == flow_name.lower() and e.data_flow), None)
+    if not task:
+        return {"error": f"Data Flow '{flow_name}' not found."}
+    comp = next((c for c in task.data_flow.components if c.name.lower() == comp_name.lower()), None)
+    if not comp:
+        return {"error": f"Component '{comp_name}' not found in '{flow_name}'."}
+    return asdict(comp)
+
+
+def _json_column_lineage(pkg: ParsedPackage, flow_name: str) -> dict | None:
+    task = next((e for e in _all_executables(pkg) if e.name.lower() == flow_name.lower() and e.data_flow), None)
+    if not task:
+        return {"error": f"Data Flow '{flow_name}' not found."}
+    df = task.data_flow
+    lineage_map: dict[int, tuple[str, str]] = {}
+    for c in df.components:
+        for out in c.outputs:
+            for col in out.columns:
+                if col.lineage_id is not None:
+                    lineage_map[col.lineage_id] = (c.name, col.name)
+    mappings = []
+    for c in df.components:
+        if c.inputs:
+            for inp in c.inputs:
+                for col in inp.columns:
+                    src = lineage_map.get(col.lineage_id, ("?", "?"))
+                    mappings.append({"target_component": c.name, "target_input": inp.name,
+                                     "target_column": col.name or f"LineageID={col.lineage_id}",
+                                     "source_component": src[0], "source_column": src[1]})
+    return {"flow": task.name, "lineage": mappings}
+
+
+def _json_list_variables(pkg: ParsedPackage) -> list:
+    return [
+        {"namespace": v.namespace, "name": v.name, "type": resolve_ole_variant_type(v.data_type),
+         "value": v.value or None, "expression": v.expression, "scope": v.scope or "Package"}
+        for v in pkg.variables
+    ]
+
+
+def _json_list_parameters(pkg: ParsedPackage) -> list:
+    return [asdict(p) for p in pkg.parameters]
+
+
+def _json_variable_refs(pkg: ParsedPackage, name: str | None = None) -> list:
+    refs = pkg.variable_references or []
+    if name:
+        refs = [r for r in refs if name.lower() in r.variable_name.lower()]
+    return [asdict(r) for r in refs]
+
+
+def _json_extract_sql(pkg: ParsedPackage) -> list:
+    results = []
+    for e in _all_executables(pkg):
+        if e.execute_sql and e.execute_sql.sql_statement:
+            results.append({"task": e.name, "type": "Execute SQL Task", "sql": e.execute_sql.sql_statement})
+        if e.data_flow:
+            for c in e.data_flow.components:
+                if c.properties:
+                    for k, v in c.properties.items():
+                        if "sql" in k.lower() and v:
+                            results.append({"task": e.name, "component": c.name, "property": k, "sql": v})
+    return results
+
+
+def _json_extract_scripts(pkg: ParsedPackage) -> list:
+    results = []
+    for e in _all_executables(pkg):
+        if e.script_task and e.script_task.source_code:
+            results.append({"task": e.name, "type": "Script Task", "language": e.script_task.script_language, "source": e.script_task.source_code})
+        if e.data_flow:
+            for c in e.data_flow.components:
+                if c.script_data and c.script_data.source_files:
+                    results.append({"task": e.name, "component": c.name, "type": "Script Component", "source": c.script_data.source_files})
+    return results
+
+
+def _json_find(pkg: ParsedPackage, term: str) -> dict:
+    term_lower = term.lower()
+    results: dict[str, list] = {"connections": [], "tasks": [], "components": [], "variables": [], "parameters": []}
+    for c in pkg.connections:
+        if term_lower in c.name.lower():
+            results["connections"].append({"name": c.name, "type": c.creation_name})
+    for e in _all_executables(pkg):
+        if term_lower in e.name.lower():
+            results["tasks"].append({"name": e.name, "type": e.creation_name})
+        if e.data_flow:
+            for c in e.data_flow.components:
+                if term_lower in c.name.lower():
+                    results["components"].append({"name": c.name, "flow": e.name})
+    for v in pkg.variables:
+        if term_lower in v.name.lower():
+            results["variables"].append({"namespace": v.namespace, "name": v.name})
+    for p in pkg.parameters:
+        if term_lower in p.name.lower():
+            results["parameters"].append({"name": p.name})
+    return results
+
+
 def main() -> None:
     if len(sys.argv) < 3:
         print(__doc__)
         sys.exit(1)
 
-    dtsx_path = sys.argv[1]
-    command = sys.argv[2]
-    args = sys.argv[3:]
+    # Parse --json flag (can appear anywhere after the dtsx path)
+    raw_args = sys.argv[1:]
+    json_mode = "--json" in raw_args
+    if json_mode:
+        raw_args.remove("--json")
+
+    if len(raw_args) < 2:
+        print(__doc__)
+        sys.exit(1)
+
+    dtsx_path = raw_args[0]
+    command = raw_args[1]
+    args = raw_args[2:]
 
     # Commands that don't need a loaded package
     if command == "explain":
@@ -390,6 +611,34 @@ def main() -> None:
         sys.exit(1)
 
     pkg = load_package(path)
+
+    if json_mode:
+        json_commands = {
+            "overview": lambda: _json_overview(pkg),
+            "execution-order": lambda: _json_execution_order(pkg),
+            "list-connections": lambda: _json_list_connections(pkg),
+            "connection-detail": lambda: _json_connection_detail(pkg, " ".join(args)),
+            "list-tasks": lambda: _json_list_tasks(pkg),
+            "task-detail": lambda: _json_task_detail(pkg, " ".join(args)),
+            "list-constraints": lambda: _json_list_constraints(pkg),
+            "list-data-flows": lambda: _json_list_data_flows(pkg),
+            "data-flow-detail": lambda: _json_data_flow_detail(pkg, " ".join(args)),
+            "component-detail": lambda: _json_component_detail(pkg, args[0], " ".join(args[1:])) if len(args) >= 2 else {"error": "Usage: ... component-detail <flow> <component>"},
+            "column-lineage": lambda: _json_column_lineage(pkg, " ".join(args)),
+            "list-variables": lambda: _json_list_variables(pkg),
+            "list-parameters": lambda: _json_list_parameters(pkg),
+            "variable-refs": lambda: _json_variable_refs(pkg, " ".join(args) if args else None),
+            "extract-sql": lambda: _json_extract_sql(pkg),
+            "extract-scripts": lambda: _json_extract_scripts(pkg),
+            "find": lambda: _json_find(pkg, " ".join(args)),
+        }
+        if command not in json_commands:
+            print(f"Unknown command: {command}", file=sys.stderr)
+            print(__doc__)
+            sys.exit(1)
+        result = json_commands[command]()
+        print(json.dumps(result, indent=2, default=str))
+        return
 
     commands = {
         "overview": lambda: cmd_overview(pkg),

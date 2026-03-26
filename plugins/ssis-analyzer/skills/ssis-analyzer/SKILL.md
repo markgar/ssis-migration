@@ -4,7 +4,7 @@ description: Analyze SQL Server Integration Services (SSIS) .dtsx package files.
 compatibility: Requires Python 3.10+. Uses only Python standard library (no pip install needed). Works with SSIS package files (.dtsx) in XML format.
 metadata:
   author: markgar
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # SSIS Package Analyzer
@@ -20,6 +20,32 @@ python scripts/analyze.py <path-to-dtsx-file> <command> [args...]
 ```
 
 **IMPORTANT**: Always use the full path to `analyze.py` based on where this skill is installed. The script uses only Python stdlib — no dependencies to install.
+
+### JSON Output
+
+Append `--json` to any command to get structured JSON instead of Markdown:
+
+```bash
+python scripts/analyze.py package.dtsx list-tasks --json
+python scripts/analyze.py package.dtsx task-detail "Load Customers" --json
+```
+
+JSON output is useful when:
+- Piping output to another tool or script for post-processing
+- Building diagrams or visualizations programmatically
+- Comparing two packages or tracking changes across versions
+- Feeding structured data into another agent or automation
+
+For direct agent consumption during analysis, the default Markdown output is preferred — it uses fewer tokens and is equally readable.
+
+### Verbose Warnings
+
+By default, warnings about missing optional properties (common in many packages) are suppressed. To see all warnings, set:
+
+```bash
+export SSIS_ANALYZER_VERBOSE=1
+python scripts/analyze.py package.dtsx overview
+```
 
 ## Available Commands
 
@@ -48,7 +74,7 @@ python scripts/analyze.py package.dtsx list-tasks
 python scripts/analyze.py package.dtsx task-detail "Load Customers"
 python scripts/analyze.py package.dtsx list-constraints
 ```
-Tree view of all tasks/containers, detailed task info (SQL, script code, loop config), and precedence constraints.
+Tree view of all tasks/containers, detailed task info (SQL, script code, loop config, expression task expressions), and precedence constraints. `task-detail` on a Sequence Container shows child execution order and inner precedence constraints.
 
 ### Data Flow
 ```bash
@@ -57,7 +83,7 @@ python scripts/analyze.py package.dtsx data-flow-detail "Load Data"
 python scripts/analyze.py package.dtsx component-detail "Load Data" "OLE DB Source"
 python scripts/analyze.py package.dtsx column-lineage "Load Data"
 ```
-List data flows, inspect components and paths, get full column specifications, and trace column lineage.
+List data flows, inspect components and paths, get full column specifications, and trace column lineage. `component-detail` shows SQL properties inline (truncated at 500 chars — use `extract-sql` for full queries).
 
 ### Variables & Parameters
 ```bash

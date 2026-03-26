@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 import sys
 from typing import TYPE_CHECKING
@@ -15,6 +16,8 @@ DTS_NAMESPACE = "www.microsoft.com/SqlServer/Dts"
 _NS_PREFIX = f"{{{DTS_NAMESPACE}}}"
 
 SSIS_BOOL_TRUTHY = frozenset({"1", "-1", "True"})
+
+_VERBOSE = os.environ.get("SSIS_ANALYZER_VERBOSE", "").lower() in ("1", "true", "yes")
 
 # Regex for detecting braced GUIDs (e.g., {F5DC126A-...})
 BRACED_GUID_RE = re.compile(
@@ -73,19 +76,21 @@ def resolve_connection_ref(
         for cm in connection_map.values():
             if cm.name == bracket_name:
                 return cm.name
-        print(
-            f"Warning: connection reference {ref!r} not found in "
-            f"Connection Map; using extracted name {bracket_name!r}",
-            file=sys.stderr,
-        )
+        if _VERBOSE:
+            print(
+                f"Warning: connection reference {ref!r} not found in "
+                f"Connection Map; using extracted name {bracket_name!r}",
+                file=sys.stderr,
+            )
         return bracket_name
 
     if ref:
-        print(
-            f"Warning: connection reference {ref!r} not found in "
-            f"Connection Map",
-            file=sys.stderr,
-        )
+        if _VERBOSE:
+            print(
+                f"Warning: connection reference {ref!r} not found in "
+                f"Connection Map",
+                file=sys.stderr,
+            )
 
     # Wrap raw GUIDs in [unresolved: ...] to prevent them from appearing
     # as raw GUIDs in user-facing output (spec §6: no raw GUIDs)

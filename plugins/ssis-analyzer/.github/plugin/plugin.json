@@ -1,7 +1,7 @@
 {
   "name": "ssis-analyzer",
   "description": "Analyze SSIS .dtsx packages — extract control flow, data flows, connections, variables, SQL, scripts, column lineage, and migration assessment.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Mark Garner"
   },

@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import os
 import sys
 import xml.etree.ElementTree as ET
 
 from models import PackageMetadata, ParsedPackage
 from xml_helpers import get_property
+
+_VERBOSE = os.environ.get("SSIS_ANALYZER_VERBOSE", "").lower() in ("1", "true", "yes")
 
 _ENABLE_CONFIG_TRUTHY = frozenset({"1", "-1", "True"})
 
@@ -20,10 +23,11 @@ def _get_or_default(
     """Read a property, returning *default* if absent. Logs missing properties."""
     value = get_property(root, name, format_version)
     if value is None:
-        print(
-            f"Warning: property '{name}' not found, using default",
-            file=sys.stderr,
-        )
+        if _VERBOSE:
+            print(
+                f"Warning: property '{name}' not found, using default",
+                file=sys.stderr,
+            )
         return default
     return value
 
@@ -37,10 +41,11 @@ def _get_int(
     """Read a property as int, returning *default* if absent or non-numeric."""
     raw = get_property(root, name, format_version)
     if raw is None:
-        print(
-            f"Warning: property '{name}' not found, using default {default}",
-            file=sys.stderr,
-        )
+        if _VERBOSE:
+            print(
+                f"Warning: property '{name}' not found, using default {default}",
+                file=sys.stderr,
+            )
         return default
     try:
         return int(raw)
@@ -71,20 +76,22 @@ def _compose_version(
                 zip(["VersionMajor", "VersionMinor", "VersionBuild"], parts)
                 if val is not None]
     if not present:
-        print(
-            "Warning: no version properties found, using empty version",
-            file=sys.stderr,
-        )
+        if _VERBOSE:
+            print(
+                "Warning: no version properties found, using empty version",
+                file=sys.stderr,
+            )
         return ""
 
     missing = [name for name, val in
                zip(["VersionMajor", "VersionMinor", "VersionBuild"], parts)
                if val is None]
     for name in missing:
-        print(
-            f"Warning: property '{name}' not found for version composition",
-            file=sys.stderr,
-        )
+        if _VERBOSE:
+            print(
+                f"Warning: property '{name}' not found for version composition",
+                file=sys.stderr,
+            )
 
     return ".".join(val if val is not None else "0" for val in parts)
 
@@ -96,11 +103,12 @@ def _detect_deployment_model(
     """Detect deployment model from PackageType property."""
     raw = get_property(root, "PackageType", format_version)
     if raw is None:
-        print(
-            "Warning: property 'PackageType' not found, "
-            "defaulting to Package deployment model",
-            file=sys.stderr,
-        )
+        if _VERBOSE:
+            print(
+                "Warning: property 'PackageType' not found, "
+                "defaulting to Package deployment model",
+                file=sys.stderr,
+            )
         return "Package"
     if raw == "5":
         return "Project"

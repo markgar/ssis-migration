@@ -110,6 +110,39 @@ def resolve_component_class(
 
 
 # ---------------------------------------------------------------------------
+# OLE Automation variant type codes (used for SSIS variables)
+# ---------------------------------------------------------------------------
+
+_OLE_VARIANT_MAP: dict[int, str] = {
+    0: "Empty",
+    2: "Int16",
+    3: "Int32",
+    4: "Single",
+    5: "Double",
+    6: "Currency",
+    7: "DateTime",
+    8: "String",
+    11: "Boolean",
+    12: "Object",
+    13: "Object",
+    16: "SByte",
+    17: "Byte",
+    18: "UInt16",
+    19: "UInt32",
+    20: "Int64",
+    21: "UInt64",
+}
+
+
+def resolve_ole_variant_type(code: int) -> str:
+    """Resolve an OLE variant type code to a human-readable name."""
+    display = _OLE_VARIANT_MAP.get(code)
+    if display is not None:
+        return display
+    return f"type_{code}"
+
+
+# ---------------------------------------------------------------------------
 # SSIS data type map
 # ---------------------------------------------------------------------------
 
