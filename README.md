@@ -37,7 +37,15 @@ copilot plugin install spec-writer@ssis-migration
 │       ├── .github/plugin/  # Plugin manifest
 │       ├── skills/          # Skills bundled with the plugin
 │       └── README.md        # Plugin documentation
+├── examples/
+│   └── wide-world-importers/ # Matching OLTP, DW, and SSIS ETL sample
 ```
+
+## Examples
+
+The [Wide World Importers example](examples/wide-world-importers/) includes the
+official Microsoft source and data warehouse BACPACs plus the complete SSIS
+Daily ETL project. The BACPAC files are stored with Git LFS.
 
 ## License
 
